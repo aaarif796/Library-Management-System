@@ -3,7 +3,7 @@ create database lms;
 use lms;
 show tables;
 
-
+-- creating Library_Collection table
 create table library_col (
 library_id int AUTO_INCREMENT PRIMARY KEY,
 l_name varchar(30) not null,
@@ -23,3 +23,49 @@ INSERT INTO library_col (l_name, campus_location, contact_email, phone_number) V
 ('EFLU', 'EFLU Campus', 'lirary@eflu.edu', '1234567777'),
 ('Banglore Library', 'Bangalore', 'library@bu.edu', '3214567898'),
 ('Tech Library', 'Online', 'techno@tech.edu', '1234567889');
+
+
+-- create Book table
+create table Book(
+book_id int auto_increment primary key,
+title varchar(30) not null,
+isbn varchar(20) not null,
+publication_date datetime not null,
+total_copies smallint unsigned,
+available_copies int unsigned,
+library_id int,
+foreign key (library_id) references library_col(library_id) on update cascade
+);
+
+INSERT INTO Book (title, isbn, publication_date, total_copies, available_copies, library_id) VALUES
+('Data Structures', '978-0131103627', '2018-01-15', 10, 4, 1),
+('Introduction to Algorithms', '978-0262033848', '2020-05-21', 8, 5, 2),
+('Operating Systems', '978-0073529409', '2019-09-10', 12, 7, NULL),
+('Database Systems', '978-0133970777', '2017-02-28', 15, 10, 3),
+('Computer Networks', '978-0132126953', '2016-03-12', 9, 3, NULL),
+('Machine Learning Basics', '978-1492032649', '2021-07-01', 5, 2, 4),
+('Artificial Intelligence', '978-0136042594', '2022-01-18', 6, 1, 5),
+('Python Programming', '978-0596007973', '2020-08-25', 11, 6, NULL),
+('Digital Design', '978-0131989245', '2015-11-15', 7, 2, 6),
+('Modern Physics', '978-1133954057', '2019-06-20', 10, 5, 7);
+
+select * from Book;
+
+
+-- Create Author Table
+create table Author(
+	author_id int auto_increment primary key,
+    first_name varchar(15) not null,
+    last_name varchar(15),
+    birth_date datetime,
+    nationality varchar(30),
+    biography varchar(200)
+);
+
+create table BookAuthor(
+	book_id int not null,
+    author_id int not null,
+    primary key(book_id, author_id),
+    foreign key (book_id) references Book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    foreign key (author_id) references Author(author_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
