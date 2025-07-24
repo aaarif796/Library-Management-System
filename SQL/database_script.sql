@@ -62,6 +62,28 @@ create table Author(
     biography varchar(200)
 );
 
+insert into Author
+(first_name, last_name, birth_date, nationality, biography)
+values
+("Amit", "Ghimire","2001-10-08","Indian","He is born and brought from poor family");
+
+insert into Author
+(first_name, last_name, birth_date, nationality, biography)
+values
+("Arman", "Ghimire","2001-10-08","Indian","He is born and brought from poor family"),
+("Aswad", "Ghimire","1998-10-08","Indian","He is one of the great person"),
+("Alexender", "Ghimire","1999-08-02","Indian","He is consider as great writer of Nation"),
+("Abeshek", "Sheresta","1992-10-08","Indian","He is leagend writer ever born in the world"),
+("Amar", "Tripathi","1993-10-08","Indian","He is bookish person"),
+("Ashan", "Bhujel","1995-10-08","Indian","He is fight like a real fighter for himself."),
+("Aryan", "Sheikh","1996-10-08","German","He is the person become voice for voiceles people"),
+("Ankit", "Dhakal","1998-10-08","American","He is expertize of Novol"),
+("Aniket", "Basnet","1988-10-08","British","He is great writer of histor"),
+("Akshat", "Yadav","1994-10-08","Nepali","He is the voice of tribral people");
+
+
+select * from Author;
+
 create table BookAuthor(
 	book_id int not null,
     author_id int not null,
@@ -70,12 +92,42 @@ create table BookAuthor(
     foreign key (author_id) references Author(author_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+desc BookAuthor;
+select * from Book;
+select * from Author;
+
+insert into BookAuthor
+values
+(1,1),
+(2,2),
+(3,3),
+(4,4),
+(5,5),
+(6,6),
+(7,7),
+(8,8),
+(8,9),
+(9,9),
+(10,10),
+(10,11),
+(8,11);
+select * from BookAuthor;
+
 show tables;
+
 create table Category(
 	category_id int auto_increment primary key,
     name varchar(30) not null,
     description varchar(100)
 );
+insert into Category
+(name,description)
+values 
+("University Book","Used to study for formal education"),
+("Sci-Fi Book", "Science and Frictional type of books"),
+("History Book","Best place to know about the past"),
+("Novel","It's one of the book read by rich people to proof they are rich");
+
 create table BookCategory(
 	book_id int not null,
 	category_id int not null,
@@ -83,6 +135,20 @@ create table BookCategory(
     foreign key (book_id) references Book(book_id) on delete restrict on update cascade,
     foreign key (category_id) references Category(category_id) on delete restrict on update cascade
 );
+
+INSERT INTO BookCategory (book_id, category_id) VALUES
+(1, 1), 
+(1,2),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 2),
+(6, 1),
+(7, 2),
+(8, 4),
+(8, 3),
+(9, 1),
+(10, 3);
 
 
 create table Members(
@@ -94,6 +160,17 @@ create table Members(
     member_type varchar(10),
     registration_date datetime
 );
+INSERT INTO Members (first_name, last_name, email, phone, member_type, registration_date) VALUES
+('Ravi', 'Verma', 'ravi1@gmail.com', '9990010001', 'student', '2023-01-15'),
+('Sneha', 'Kumar', 'sneha.k@gamil.com', '9990010002', 'staff', '2023-02-12'),
+('Aarav', 'Sharma', 'aarav.s@gmail.com', '9990010003', 'student', '2023-03-10'),
+('Meera', 'Yadav', 'meera.y@gmail.com', '9990010004', 'faculty', '2023-04-18'),
+('Aditya', 'Singh', 'aditya.s@gmail.com', '9990010005', 'student', '2023-05-05'),
+('Nisha', 'Rao', 'nisha.r@gmail.com', '9990010006', 'staff', '2023-06-22'),
+('Karan', 'Patel', 'karan.p@gmail.com', '9990010007', 'student', '2023-07-11'),
+('Priya', 'Joshi', 'priya.j@gmail.com', '9990010008', 'faculty', '2023-08-19'),
+('Ishaan', 'Malhotra', 'ishaan.m@gmail.com', '9990010009', 'student', '2023-09-03'),
+('Diya', 'Bansal', 'diya.b@gmail.com', '9990010010', 'staff', '2023-10-01');
 
 create table Borrowing(
 	borrowing_id int auto_increment primary key,
@@ -106,6 +183,18 @@ create table Borrowing(
     foreign key (member_id) references Members(member_id) ON UPDATE CASCADE,
     foreign key (book_id) references Book(book_id) ON UPDATE CASCADE
 );
+INSERT INTO Borrowing (member_id, book_id, borrow_date, due_date, return_date, late_fee) VALUES
+(1, 1, '2024-01-01', '2024-01-15', '2024-01-14', 0),
+(2, 2, '2024-01-10', '2024-01-25', '2024-01-28', 30),
+(3, 3, '2024-02-05', '2024-02-20', NULL, NULL),
+(4, 4, '2024-03-01', '2024-03-15', '2024-03-15', 0),
+(5, 5, '2024-03-10', '2024-03-25', '2024-04-01', 50),
+(6, 6, '2024-04-01', '2024-04-15', NULL, NULL),
+(7, 7, '2024-04-10', '2024-04-25', '2024-04-24', 0),
+(8, 8, '2024-05-05', '2024-05-20', '2024-05-19', 0),
+(9, 9, '2024-06-01', '2024-06-15', NULL, NULL),
+(10, 10, '2024-06-10', '2024-06-25', '2024-06-28', 30);
+
 
 create table Review(
 	review_id int auto_increment primary key,
@@ -117,5 +206,22 @@ create table Review(
     foreign key (member_id) references Members(member_id) ON UPDATE CASCADE,
     foreign key (book_id) references Book(book_id) ON UPDATE CASCADE
 );
+INSERT INTO Review (member_id, book_id, rating, comments, review_data) VALUES
+(1, 1, 5, 'Excellent', 'Great for beginners'),
+(2, 2, 4, 'Very Good', 'Well structured'),
+(3, 3, 3, 'Average', 'Okay content'),
+(4, 4, 5, 'Loved it', 'Helpful for exams'),
+(5, 5, 2, 'Not clear', 'Confusing examples'),
+(6, 6, 4, 'Nice', 'Good introduction'),
+(7, 7, 5, 'Awesome', 'Very detailed'),
+(8, 8, 4, 'Useful', 'Practical examples'),
+(9, 9, 3, 'Decent', 'Needs improvement'),
+(10, 10, 5, 'Amazing', 'Highly recommended');
 
 show tables;
+
+
+select * from book;
+select * from author;
+
+
