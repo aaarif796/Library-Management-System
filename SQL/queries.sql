@@ -67,11 +67,20 @@ SET GLOBAL sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_
 
 
 -- Books available in each library with stock levels
-	select l.l_name, sum(b.available_copies), sum(b.total_copies),
-    floor((sum(b.available_copies)/sum(b.total_copies))*100) as Percentage_of_Stock_Present
-    from Book b join Library_col l
-    on b.library_id = l.library_id
-    group by l.library_id;
+	with stock_percentage as(
+		select l.l_name as Lib_name, 
+        sum(b.available_copies) as Available_Copies,
+        floor((sum(b.available_copies)/sum(b.total_copies))*100) as Stock_Percentage
+        from Book b join Library_Col l on b.library_id=l.library_id
+        group by l.library_id
+    )
+    select Lib_name, Available_Copies,
+    case
+		when Stock_Percentage>75 then "High"
+        when Stock_Percentage>50 then "Medium"
+        else "Low"
+	end as Stock_Level
+    from stock_percentage;
 
 
 
