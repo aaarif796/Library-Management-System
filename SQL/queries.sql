@@ -67,7 +67,11 @@ SET GLOBAL sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_
 
 
 -- Books available in each library with stock levels
-
+	select l.l_name, sum(b.available_copies), sum(b.total_copies),
+    floor((sum(b.available_copies)/sum(b.total_copies))*100) as Percentage_of_Stock_Present
+    from Book b join Library_col l
+    on b.library_id = l.library_id
+    group by l.library_id;
 
 
 
@@ -105,7 +109,20 @@ SET GLOBAL sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_
     inner join Book b on b.book_id=ba.book_id
     group by a.author_id
     order by count(b.book_id) desc;
+
+-- Total late fee remaining in the HCU library
+	select sum(br.late_fee) 
+    from borrowing br
+    join book b on b.book_id = br.book_id
+    join library_col l on l.library_id = b.library_id
+    where l_name = "HCU" ;
     
     
+-- Subqueries and Common Table Expressions (CTEs)
+	
+
+
+
+desc library_col;    
 select * from Library_col;
 select * from book;
