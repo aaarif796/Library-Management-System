@@ -1,0 +1,1404 @@
+openapi: 3.0.3
+info:
+  title: Library Management System API
+  description: |
+    API for the Library Management System that allows basic CRUD operations for libraries, books, authors, categories, members, borrowings, and reviews.
+  version: 1.0.0
+  
+servers:
+  - url: http://localhost:8000/api
+    description: Development server
+
+components:
+  schemas:
+    Library:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        name:
+          type: string
+          example: "Main Campus Library"
+        campus_location:
+          type: string
+          example: "North Campus"
+        contact_email:
+          type: string
+          format: email
+          example: "library@university.edu"
+        phone_number:
+          type: string
+          example: "+1-555-123-4567"
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - name
+        - campus_location
+        - contact_email
+    
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        title:
+          type: string
+          example: "Introduction to Database Systems"
+        isbn:
+          type: string
+          example: "978-0321197849"
+        publication_date:
+          type: string
+          format: date
+          example: "2020-01-15"
+        total_copies:
+          type: integer
+          example: 5
+        available_copies:
+          type: integer
+          example: 3
+        library_id:
+          type: integer
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - title
+        - isbn
+        - publication_date
+        - total_copies
+        - available_copies
+        - library_id
+    
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        first_name:
+          type: string
+          example: "John"
+        last_name:
+          type: string
+          example: "Doe"
+        birth_date:
+          type: string
+          format: date
+          example: "1975-05-20"
+        nationality:
+          type: string
+          example: "American"
+        biography:
+          type: string
+          example: "John Doe is a renowned computer scientist..."
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - first_name
+        - last_name
+    
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        name:
+          type: string
+          example: "Computer Science"
+        description:
+          type: string
+          example: "Books related to computer science and programming"
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - name
+    
+    Member:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        first_name:
+          type: string
+          example: "Jane"
+        last_name:
+          type: string
+          example: "Smith"
+        email:
+          type: string
+          format: email
+          example: "jane.smith@example.com"
+        phone:
+          type: string
+          example: "+1-555-987-6543"
+        member_type:
+          type: string
+          enum: [student, faculty]
+          example: "student"
+        registration_date:
+          type: string
+          format: date
+          example: "2023-01-10"
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - first_name
+        - last_name
+        - email
+        - member_type
+    
+    Borrowing:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        member_id:
+          type: integer
+          format: int64
+        book_id:
+          type: integer
+          format: int64
+        borrow_date:
+          type: string
+          format: date
+          example: "2023-05-15"
+        due_date:
+          type: string
+          format: date
+          example: "2023-05-29"
+        return_date:
+          type: string
+          format: date
+          nullable: true
+          example: null
+        late_fee:
+          type: number
+          format: float
+          nullable: true
+          example: null
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - member_id
+        - book_id
+        - borrow_date
+        - due_date
+    
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        member_id:
+          type: integer
+          format: int64
+        book_id:
+          type: integer
+          format: int64
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+          example: 4
+        comment:
+          type: string
+          example: "Great book for beginners!"
+        review_date:
+          type: string
+          format: date
+          example: "2023-06-10"
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - member_id
+        - book_id
+        - rating
+    
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+          example: "Resource not found."
+        status_code:
+          type: integer
+          example: 404
+      required:
+        - detail
+
+paths:
+  # Library CRUD endpoints
+  /libraries/:
+    get:
+      summary: List all libraries
+      description: Returns a list of all libraries
+      operationId: listLibraries
+      tags:
+        - libraries
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of libraries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Library'
+    post:
+      summary: Create a new library
+      description: Creates a new library
+      operationId: createLibrary
+      tags:
+        - libraries
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Library'
+      responses:
+        '201':
+          description: Library created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Library'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /libraries/{id}/:
+    get:
+      summary: Get library by ID
+      description: Returns a single library
+      operationId: getLibrary
+      tags:
+        - libraries
+      parameters:
+        - name: id
+          in: path
+          description: ID of the library to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Library found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Library'
+        '404':
+          description: Library not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update library
+      description: Updates an existing library
+      operationId: updateLibrary
+      tags:
+        - libraries
+      parameters:
+        - name: id
+          in: path
+          description: ID of the library to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Library'
+      responses:
+        '200':
+          description: Library updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Library'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Library not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete library
+      description: Deletes a library
+      operationId: deleteLibrary
+      tags:
+        - libraries
+      parameters:
+        - name: id
+          in: path
+          description: ID of the library to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Library deleted successfully
+        '404':
+          description: Library not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  # Book CRUD endpoints
+  /books/:
+    get:
+      summary: List all books
+      description: Returns a list of all books
+      operationId: listBooks
+      tags:
+        - books
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of books
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
+    post:
+      summary: Create a new book
+      description: Creates a new book
+      operationId: createBook
+      tags:
+        - books
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: Book created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /books/{id}/:
+    get:
+      summary: Get book by ID
+      description: Returns a single book
+      operationId: getBook
+      tags:
+        - books
+      parameters:
+        - name: id
+          in: path
+          description: ID of the book to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Book found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update book
+      description: Updates an existing book
+      operationId: updateBook
+      tags:
+        - books
+      parameters:
+        - name: id
+          in: path
+          description: ID of the book to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: Book updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete book
+      description: Deletes a book
+      operationId: deleteBook
+      tags:
+        - books
+      parameters:
+        - name: id
+          in: path
+          description: ID of the book to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Book deleted successfully
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  # Author CRUD endpoints
+  /authors/:
+    get:
+      summary: List all authors
+      description: Returns a list of all authors
+      operationId: listAuthors
+      tags:
+        - authors
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of authors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Author'
+    post:
+      summary: Create a new author
+      description: Creates a new author
+      operationId: createAuthor
+      tags:
+        - authors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '201':
+          description: Author created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /authors/{id}/:
+    get:
+      summary: Get author by ID
+      description: Returns a single author
+      operationId: getAuthor
+      tags:
+        - authors
+      parameters:
+        - name: id
+          in: path
+          description: ID of the author to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Author found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        '404':
+          description: Author not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update author
+      description: Updates an existing author
+      operationId: updateAuthor
+      tags:
+        - authors
+      parameters:
+        - name: id
+          in: path
+          description: ID of the author to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '200':
+          description: Author updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Author not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete author
+      description: Deletes an author
+      operationId: deleteAuthor
+      tags:
+        - authors
+      parameters:
+        - name: id
+          in: path
+          description: ID of the author to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Author deleted successfully
+        '404':
+          description: Author not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  # Category CRUD endpoints
+  /categories/:
+    get:
+      summary: List all categories
+      description: Returns a list of all categories
+      operationId: listCategories
+      tags:
+        - categories
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of categories
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Category'
+    post:
+      summary: Create a new category
+      description: Creates a new category
+      operationId: createCategory
+      tags:
+        - categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          description: Category created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /categories/{id}/:
+    get:
+      summary: Get category by ID
+      description: Returns a single category
+      operationId: getCategory
+      tags:
+        - categories
+      parameters:
+        - name: id
+          in: path
+          description: ID of the category to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Category found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: Category not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update category
+      description: Updates an existing category
+      operationId: updateCategory
+      tags:
+        - categories
+      parameters:
+        - name: id
+          in: path
+          description: ID of the category to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: Category updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Category not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete category
+      description: Deletes a category
+      operationId: deleteCategory
+      tags:
+        - categories
+      parameters:
+        - name: id
+          in: path
+          description: ID of the category to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Category deleted successfully
+        '404':
+          description: Category not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  # Member CRUD endpoints
+  /members/:
+    get:
+      summary: List all members
+      description: Returns a list of all members
+      operationId: listMembers
+      tags:
+        - members
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of members
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Member'
+    post:
+      summary: Create a new member
+      description: Creates a new member
+      operationId: createMember
+      tags:
+        - members
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '201':
+          description: Member created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /members/{id}/:
+    get:
+      summary: Get member by ID
+      description: Returns a single member
+      operationId: getMember
+      tags:
+        - members
+      parameters:
+        - name: id
+          in: path
+          description: ID of the member to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Member found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '404':
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update member
+      description: Updates an existing member
+      operationId: updateMember
+      tags:
+        - members
+      parameters:
+        - name: id
+          in: path
+          description: ID of the member to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '200':
+          description: Member updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete member
+      description: Deletes a member
+      operationId: deleteMember
+      tags:
+        - members
+      parameters:
+        - name: id
+          in: path
+          description: ID of the member to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Member deleted successfully
+        '404':
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  # Borrowing CRUD endpoints
+  /borrowings/:
+    get:
+      summary: List all borrowings
+      description: Returns a list of all borrowings
+      operationId: listBorrowings
+      tags:
+        - borrowings
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of borrowings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Borrowing'
+    post:
+      summary: Create a new borrowing
+      description: Creates a new borrowing
+      operationId: createBorrowing
+      tags:
+        - borrowings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Borrowing'
+      responses:
+        '201':
+          description: Borrowing created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Borrowing'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /borrowings/{id}/:
+    get:
+      summary: Get borrowing by ID
+      description: Returns a single borrowing
+      operationId: getBorrowing
+      tags:
+        - borrowings
+      parameters:
+        - name: id
+          in: path
+          description: ID of the borrowing to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Borrowing found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Borrowing'
+        '404':
+          description: Borrowing not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update borrowing
+      description: Updates an existing borrowing
+      operationId: updateBorrowing
+      tags:
+        - borrowings
+      parameters:
+        - name: id
+          in: path
+          description: ID of the borrowing to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Borrowing'
+      responses:
+        '200':
+          description: Borrowing updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Borrowing'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Borrowing not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete borrowing
+      description: Deletes a borrowing
+      operationId: deleteBorrowing
+      tags:
+        - borrowings
+      parameters:
+        - name: id
+          in: path
+          description: ID of the borrowing to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Borrowing deleted successfully
+        '404':
+          description: Borrowing not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  # Review CRUD endpoints
+  /reviews/:
+    get:
+      summary: List all reviews
+      description: Returns a list of all reviews
+      operationId: listReviews
+      tags:
+        - reviews
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of reviews
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Review'
+    post:
+      summary: Create a new review
+      description: Creates a new review
+      operationId: createReview
+      tags:
+        - reviews
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+      responses:
+        '201':
+          description: Review created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /reviews/{id}/:
+    get:
+      summary: Get review by ID
+      description: Returns a single review
+      operationId: getReview
+      tags:
+        - reviews
+      parameters:
+        - name: id
+          in: path
+          description: ID of the review to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Review found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '404':
+          description: Review not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update review
+      description: Updates an existing review
+      operationId: updateReview
+      tags:
+        - reviews
+      parameters:
+        - name: id
+          in: path
+          description: ID of the review to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+      responses:
+        '200':
+          description: Review updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Review not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete review
+      description: Deletes a review
+      operationId: deleteReview
+      tags:
+        - reviews
+      parameters:
+        - name: id
+          in: path
+          description: ID of the review to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Review deleted successfully
+        '404':
+          description: Review not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
