@@ -1,4 +1,5 @@
 create database lms;
+show databases;
 
 use lms;
 show tables;
