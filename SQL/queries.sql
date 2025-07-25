@@ -128,8 +128,51 @@ SET GLOBAL sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_
     
     
 -- Subqueries and Common Table Expressions (CTEs)
-	
+-- find the titles of books that have higher average rating than overll average raing of the books
+	select b.title 
+    from Book b
+    join Review r on r.book_id = b.book_id
+    where r.rating>(select avg(r.rating) from Review r);
 
+    
+-- use cte, find top 3 most borrowed books 
+	with borrowed_book as (
+	select b.book_id as book_id, count(br.borrowing_id) as no_of_borrowing
+    from Borrowing br
+    join Book b on b.book_id = br.book_id
+    group by b.book_id
+	) 
+    select book_id, no_of_borrowing
+    from borrowed_book
+    order by no_of_borrowing desc limit 3;
+    
+
+-- window function
+-- rank book based on their average rating from highest to lowest
+	select b.title, avg(r.rating),
+    dense_rank() over (order by avg(r.rating) desc)
+    from Book b
+    join Review r on r.book_id = b.book_id
+    group by b.book_id;
+
+
+-- calculating the running borrow of book on each day
+	select borrow_date, count(book_id) over(order by borrow_date) as Running_total
+	from Borrowing;
+    
+
+-- Transaction management
+-- start transaction to update books available copes after a borrow and roll back if the book is not avialable
+select * from Book;
+START TRANSACTION;
+
+UPDATE Book
+SET available_copies = available_copies + 1
+WHERE book_id = 1 AND available_copies > 0;
+rollback; -- reduce by one as it will go one step back
+-- COMMIT to save
+ 
+select * from Book;
 
 
 desc library_col;    
