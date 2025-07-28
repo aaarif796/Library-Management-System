@@ -33,7 +33,7 @@ SET GLOBAL sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_
 	c.name
 	from book b
 	inner join bookauthor ba on ba.book_id = b.book_id
-	inner join author a on a.author_id = ba.book_id
+	inner join author a on a.author_id = ba.author_id
 	inner join bookcategory bc on b.book_id = bc.book_id
 	inner join category c on c.category_id = bc.category_id;
 
