@@ -1,3 +1,6 @@
 django_api
 api_spec
 .venv
+.idea/
+__pycache__/
+*.pyc
