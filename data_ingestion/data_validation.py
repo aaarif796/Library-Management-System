@@ -1,11 +1,11 @@
-from pydantic import BaseModel, EmailStr, Field, field_validator,ValidationError, ValidationInfo
+from pydantic import BaseModel, EmailStr, Field, field_validator,ValidationError, ValidationInfo, model_validator
 import json
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Self
 from datetime import date
 import re
 import json
 
-
+# Book Model
 class Book(BaseModel):
     book_id: int
     library_id: int
@@ -56,7 +56,7 @@ class Book(BaseModel):
     @field_validator("isbn")
     def validate_isbn(cls, v:str) ->str:
         """
-            Validationg the isbn where isbn will contain either 10 or 13 digits
+            Validating the isbn where isbn will contain either 10 or 13 digits
         :param v:
         :return:
         """
@@ -89,6 +89,9 @@ class Book(BaseModel):
             raise ValidationError("It's not possible to give the future date")
         return v
 
+
+
+# Library Model
 class Library(BaseModel):
     library_id: int
     Name: str
@@ -148,6 +151,7 @@ class Library(BaseModel):
         return v
 
 
+# Author Model
 class Author(BaseModel):
     author_id: int
     first_name: str
@@ -156,6 +160,65 @@ class Author(BaseModel):
     nationality: str
     biography: str
 
+    @field_validator('author_id')
+    def validate_author_id(cls, v: int) -> int:
+        """
+        Validating the author id which must be more than 0
+        :param v:
+        :return:
+        """
+        if v < 1:
+            raise ValidationError("Primary id should not be 0 or less than it")
+        return v
+
+    @field_validator('last_name')
+    def validate_last_name(cls, v: str) -> str:
+        """
+            It's used to keep the last name in proper format
+        :param v:
+        :return:
+        """
+        trimmed = v.strip()
+        if len(trimmed.split())>1:
+            raise ValidationError("Surname should be of only word")
+        return trimmed.capitalize()
+
+    @field_validator('first_name')
+    def validate_first_name(cls, v: str) -> str:
+        """
+            It's used to keep the first name in proper format
+        :param v:
+        :return:
+        """
+        trimmed = v.strip()
+        split_name = trimmed.split()
+        capitalized = [name.capitalize() for name in split_name]
+        first_name = ' '.join(capitalized)
+        return first_name
+
+    @field_validator("birth_date")
+    def validate_birth_date(cls, v: date) -> date:
+        """
+            It's used to validate the date
+        :param v:
+        :return:
+        """
+        if v > date.today():
+            raise ValidationError("It's invalid birth date")
+        return v
+
+    @field_validator("nationality")
+    def validate_nationality(cls, v: str)-> str:
+        """
+        It's used to validate and reformat the nationality in proper way
+        :param v:
+        :return:
+        """
+        trimmed = v.strip()
+        split_name = trimmed.split()
+        capitalized = [name.capitalize() for name in split_name]
+        nationality = ' '.join(capitalized)
+        return nationality
 
 class Borrowing(BaseModel):
     borrowing_id: int
@@ -164,7 +227,54 @@ class Borrowing(BaseModel):
     borrow_date: date
     due_date: date
     return_date: date
-    late_fee: date
+    late_fee: int
+
+    @field_validator('borrowing_id')
+    def validate_borrowing_id(cls, v: int) -> int:
+        """
+        Validating the primary key
+        :param v:
+        :return:
+        """
+        if v<1:
+            raise ValidationError("Primary key should not be 0 or less than it")
+        return v
+
+    @field_validator('book_id')
+    def validate_book_id(cls, v: int) -> int:
+        """
+        Validating the primary key
+        :param v:
+        :return:
+        """
+        if v < 1:
+            raise ValidationError("Primary key should not be 0 or less than it")
+        return v
+
+    @field_validator('member_id')
+    def validate_member_id(cls, v: int) -> int:
+        """
+        Validating the primary key
+        :param v:
+        :return:
+        """
+        if v < 1:
+            raise ValidationError("Primary key should not be 0 or less than it")
+        return v
+
+    @model_validator(mode = "after")
+    def validate_date(self):
+        borrow_d = self.borrow_date
+        due_d = self.due_date
+        if borrow_d > due_d:
+            raise ValidationError("Data Error borrow date is before than due date")
+        return self
+
+    @field_validator('late_fee')
+    def validate_late_fee(cls, v: int) -> int:
+        if v is None:
+            return 0
+        return v
 
 class Member(BaseModel):
     member_id: int
@@ -174,6 +284,42 @@ class Member(BaseModel):
     phone: int
     member_type: str
     registration_date: date
+
+    @field_validator('member_id')
+    def validate_member_id(cls, v: int) -> int:
+        """
+        Validating the author id which must be more than 0
+        :param v:
+        :return:
+        """
+        if v < 1:
+            raise ValidationError("Primary id should not be 0 or less than it")
+        return v
+
+    @field_validator('last_name')
+    def validate_last_name(cls, v: str) -> str:
+        """
+            It's used to keep the last name in proper format
+        :param v:
+        :return:
+        """
+        trimmed = v.strip()
+        if len(trimmed.split()) > 1:
+            raise ValidationError("Surname should be of only word")
+        return trimmed.capitalize()
+
+    @field_validator('first_name')
+    def validate_first_name(cls, v: str) -> str:
+        """
+            It's used to keep the first name in proper format
+        :param v:
+        :return:
+        """
+        trimmed = v.strip()
+        split_name = trimmed.split()
+        capitalized = [name.capitalize() for name in split_name]
+        first_name = ' '.join(capitalized)
+        return first_name
 
     @field_validator('email')
     def validate_contact_email(cls, v: str) -> str:
@@ -195,6 +341,8 @@ class Member(BaseModel):
             raise ValidationError("Invalid Member type")
         return v
 
+
+
 class Review(BaseModel):
     review_id: int
     book_id: int
@@ -203,17 +351,75 @@ class Review(BaseModel):
     comment: str
     review_date: date
 
+    @field_validator('review_id')
+    def validate_review_id(cls, v: int) -> int:
+        """
+        Check is there any negative number of 0 is there or not in primary key
+        :param v:
+        :return:
+        """
+        if v<= 0:
+            raise ValidationError("Invalid review id")
+        return v
+
+    @field_validator('book_id')
+    def validate_book_id(cls, v: int) -> int:
+        """
+        Check is there any negative number of 0 is there or not in primary key
+        :param v:
+        :return:
+        """
+        if v <= 0:
+            raise ValidationError("Invalid book_id")
+        return v
+
+    @field_validator('member_id')
+    def validate_member_id(cls, v: int) -> int:
+        """
+        Check is there any negative number of 0 is there or not in primary key
+        :param v:
+        :return:
+        """
+        if v <= 0:
+            raise ValidationError("Invalid member_id")
+        return v
+
     @field_validator('rating')
     def validate_rating(cls, rating: int) -> int:
         if rating < 1 or rating > 5:
             raise ValidationError("Rating should be between 1-5")
         return rating
 
+
+
+
 class Category(BaseModel):
     category_id: int
     name: str
     description: str
 
+    @field_validator('category_id')
+    def validate_category_id(cls, v):
+        """
+        Check is there any negative number of 0 is there or not in primary key
+        :param v:
+        :return:
+        """
+        if v <= 0:
+            raise ValidationError("Invalid member_id")
+        return v
 
+    @field_validator("name")
+    def validate_name(cls, v):
+        """
+        It's used to validate the name in first capital letter and proper spacing
+        :param v:
+        :return:
+        """
+        trimmed = v.strip()
+        split_name = trimmed.split()
+        capitalized = [name.capitalize() for name in split_name]
+        name = ' '.join(capitalized)
+        return name
 
 
