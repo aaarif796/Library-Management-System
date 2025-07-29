@@ -1,0 +1,974 @@
+[
+    {
+        "book_id": 2,
+        "title": "Remember dream position",
+        "author": "Melissa White",
+        "isbn": "9780631040590",
+        "available_copies": 0,
+        "total_copies": 5,
+        "publication": "2002-02-03"
+    },
+    {
+        "book_id": 3,
+        "title": "Recent into young any",
+        "author": "Lisa Durham",
+        "isbn": "9781066341252",
+        "available_copies": 0,
+        "total_copies": 4,
+        "publication": "2011-05-28"
+    },
+    {
+        "book_id": 4,
+        "title": "Seek wait debate as heart",
+        "author": "Dr. Mary Page MD",
+        "isbn": "9781101338278",
+        "available_copies": 8,
+        "total_copies": 11,
+        "publication": "2012-01-19"
+    },
+    {
+        "book_id": 5,
+        "title": "Either goal Democrat",
+        "author": "Brittany Cochran",
+        "isbn": "9780287377453",
+        "available_copies": 5,
+        "total_copies": 7,
+        "publication": "2002-11-25"
+    },
+    {
+        "book_id": 6,
+        "title": "Within far close",
+        "author": "Katelyn Townsend DDS",
+        "isbn": "9780854899951",
+        "available_copies": 9,
+        "total_copies": 9,
+        "publication": "2013-07-26"
+    },
+    {
+        "book_id": 7,
+        "title": "Source environmental four",
+        "author": "Alexander Lee",
+        "isbn": "9780390043566",
+        "available_copies": 8,
+        "total_copies": 10,
+        "publication": "2009-07-04"
+    },
+    {
+        "book_id": 8,
+        "title": "Well why",
+        "author": "Elizabeth Carlson",
+        "isbn": "9781237786769",
+        "available_copies": 6,
+        "total_copies": 10,
+        "publication": "2022-05-28"
+    },
+    {
+        "book_id": 9,
+        "title": "I large large",
+        "author": "Amanda Sullivan",
+        "isbn": "9781814009915",
+        "available_copies": 3,
+        "total_copies": 6,
+        "publication": "2010-02-22"
+    },
+    {
+        "book_id": 10,
+        "title": "Even draw high",
+        "author": "Caitlin Weeks",
+        "isbn": "9780357805169",
+        "available_copies": 3,
+        "total_copies": 8,
+        "publication": "2009-09-18"
+    },
+    {
+        "book_id": 12,
+        "title": "Exist star sing worker church",
+        "author": "Matthew Jacobs",
+        "isbn": "9781551528908",
+        "available_copies": 9,
+        "total_copies": 9,
+        "publication": "2002-06-09"
+    },
+    {
+        "book_id": 13,
+        "title": "Get human nature",
+        "author": "Carlos Jones",
+        "isbn": "9781777520052",
+        "available_copies": 4,
+        "total_copies": 6,
+        "publication": "2020-07-10"
+    },
+    {
+        "book_id": 14,
+        "title": "Side beat today nothing remain",
+        "author": "Lisa Smith",
+        "isbn": "9780967378886",
+        "available_copies": 0,
+        "total_copies": 0,
+        "publication": "2015-05-19"
+    },
+    {
+        "book_id": 15,
+        "title": "Message itself financial job",
+        "author": "Janet Rivera",
+        "isbn": "9780023465017",
+        "available_copies": 5,
+        "total_copies": 5,
+        "publication": "2002-12-20"
+    },
+    {
+        "book_id": 16,
+        "title": "Take chance wait",
+        "author": "Edward Johnson",
+        "isbn": "9781906446338",
+        "available_copies": 2,
+        "total_copies": 7,
+        "publication": "2017-01-10"
+    },
+    {
+        "book_id": 17,
+        "title": "Everybody admit college",
+        "author": "Jody Vincent",
+        "isbn": "9780022520328",
+        "available_copies": 3,
+        "total_copies": 7,
+        "publication": "2003-12-03"
+    },
+    {
+        "book_id": 18,
+        "title": "Our work teach necessary",
+        "author": "Jack Mckenzie",
+        "isbn": "9780124419940",
+        "available_copies": 10,
+        "total_copies": 15,
+        "publication": "2002-08-12"
+    },
+    {
+        "book_id": 19,
+        "title": "Economic other should by",
+        "author": "Malik Mccarthy",
+        "isbn": "9781572879720",
+        "available_copies": 2,
+        "total_copies": 5,
+        "publication": "2008-04-20"
+    },
+    {
+        "book_id": 20,
+        "title": "Size security",
+        "author": "Jason Scott",
+        "isbn": "9780440129073",
+        "available_copies": 8,
+        "total_copies": 9,
+        "publication": "2022-10-05"
+    },
+    {
+        "book_id": 22,
+        "title": "Task in experience",
+        "author": "Jordan Green",
+        "isbn": "9780637623087",
+        "available_copies": 9,
+        "total_copies": 14,
+        "publication": "2018-09-24"
+    },
+    {
+        "book_id": 23,
+        "title": "South somebody eye media",
+        "author": "Amanda Pruitt",
+        "isbn": "9780748282357",
+        "available_copies": 7,
+        "total_copies": 9,
+        "publication": "2015-09-07"
+    },
+    {
+        "book_id": 24,
+        "title": "Ok receive military",
+        "author": "Jacob Gates",
+        "isbn": "9780549265184",
+        "available_copies": 5,
+        "total_copies": 8,
+        "publication": "2011-03-28"
+    },
+    {
+        "book_id": 25,
+        "title": "Light administration",
+        "author": "Anthony White",
+        "isbn": "9780165052250",
+        "available_copies": 1,
+        "total_copies": 5,
+        "publication": "2006-03-11"
+    },
+    {
+        "book_id": 26,
+        "title": "Decide boy available generation",
+        "author": "Destiny Joseph",
+        "isbn": "9780267771479",
+        "available_copies": 4,
+        "total_copies": 7,
+        "publication": "2019-04-01"
+    },
+    {
+        "book_id": 27,
+        "title": "Move impact none",
+        "author": "Joel Palmer",
+        "isbn": "9780111415368",
+        "available_copies": 9,
+        "total_copies": 11,
+        "publication": "2021-05-16"
+    },
+    {
+        "book_id": 28,
+        "title": "Edge new",
+        "author": "Mary Ramsey",
+        "isbn": "9780852498798",
+        "available_copies": 2,
+        "total_copies": 6,
+        "publication": "2004-10-17"
+    },
+    {
+        "book_id": 29,
+        "title": "Value product step",
+        "author": "Sarah Tucker",
+        "isbn": "9780935235296",
+        "available_copies": 10,
+        "total_copies": 15,
+        "publication": "2009-05-19"
+    },
+    {
+        "book_id": 30,
+        "title": "Price themselves music those",
+        "author": "Brandon Wyatt",
+        "isbn": "9780642410863",
+        "available_copies": 3,
+        "total_copies": 5,
+        "publication": "2023-08-14"
+    },
+    {
+        "book_id": 32,
+        "title": "True happy better culture protect",
+        "author": "Thomas Parker",
+        "isbn": "9781550385823",
+        "available_copies": 0,
+        "total_copies": 4,
+        "publication": "2017-01-30"
+    },
+    {
+        "book_id": 33,
+        "title": "Company reveal including sure",
+        "author": "Amy Johnson",
+        "isbn": "9780646311319",
+        "available_copies": 7,
+        "total_copies": 7,
+        "publication": "2012-07-13"
+    },
+    {
+        "book_id": 34,
+        "title": "Bring view visit",
+        "author": "Kristina Shea",
+        "isbn": "9781236336279",
+        "available_copies": 1,
+        "total_copies": 3,
+        "publication": "2018-12-29"
+    },
+    {
+        "book_id": 35,
+        "title": "Could TV",
+        "author": "Kimberly Perkins",
+        "isbn": "9781640064713",
+        "available_copies": 9,
+        "total_copies": 14,
+        "publication": "2011-01-29"
+    },
+    {
+        "book_id": 36,
+        "title": "Any before staff project this",
+        "author": "Karen Newman",
+        "isbn": "9781440992520",
+        "available_copies": 3,
+        "total_copies": 8,
+        "publication": "2003-05-17"
+    },
+    {
+        "book_id": 37,
+        "title": "Either assume",
+        "author": "Philip Harris",
+        "isbn": "9780833239426",
+        "available_copies": 9,
+        "total_copies": 11,
+        "publication": "2022-08-09"
+    },
+    {
+        "book_id": 38,
+        "title": "Stand place analysis such",
+        "author": "Angela Smith",
+        "isbn": "9781864186697",
+        "available_copies": 0,
+        "total_copies": 4,
+        "publication": "2010-04-12"
+    },
+    {
+        "book_id": 39,
+        "title": "Allow step past",
+        "author": "Warren Price",
+        "isbn": "9781708191726",
+        "available_copies": 7,
+        "total_copies": 7,
+        "publication": "2024-10-02"
+    },
+    {
+        "book_id": 40,
+        "title": "Debate control environmental",
+        "author": "Richard Shah",
+        "isbn": "9780929912240",
+        "available_copies": 7,
+        "total_copies": 12,
+        "publication": "2006-08-20"
+    },
+    {
+        "book_id": 42,
+        "title": "Newspaper create difference note",
+        "author": "Lisa Mueller",
+        "isbn": "9780368149610",
+        "available_copies": 8,
+        "total_copies": 10,
+        "publication": "2012-09-11"
+    },
+    {
+        "book_id": 43,
+        "title": "Discover thank",
+        "author": "Robert Grant",
+        "isbn": "9780379940787",
+        "available_copies": 1,
+        "total_copies": 6,
+        "publication": "2015-07-20"
+    },
+    {
+        "book_id": 44,
+        "title": "Politics blood trial claim end",
+        "author": "Kristie Stevenson",
+        "isbn": "9780016750069",
+        "available_copies": 7,
+        "total_copies": 9,
+        "publication": "2017-09-11"
+    },
+    {
+        "book_id": 45,
+        "title": "Approach police give site",
+        "author": "Julie Delgado",
+        "isbn": "9780121502645",
+        "available_copies": 1,
+        "total_copies": 1,
+        "publication": "2018-09-24"
+    },
+    {
+        "book_id": 46,
+        "title": "Physical their",
+        "author": "Nicole Valdez",
+        "isbn": "9780035656922",
+        "available_copies": 5,
+        "total_copies": 5,
+        "publication": "2022-03-21"
+    },
+    {
+        "book_id": 47,
+        "title": "Candidate nice environment traditional",
+        "author": "Paul Combs",
+        "isbn": "9780357146002",
+        "available_copies": 0,
+        "total_copies": 3,
+        "publication": "2006-08-09"
+    },
+    {
+        "book_id": 48,
+        "title": "Base act kitchen least offer",
+        "author": "Sabrina Russell",
+        "isbn": "9781643100241",
+        "available_copies": 7,
+        "total_copies": 11,
+        "publication": "2023-08-28"
+    },
+    {
+        "book_id": 49,
+        "title": "Information simply foreign daughter Democrat",
+        "author": "Allison Brooks",
+        "isbn": "9781634540575",
+        "available_copies": 7,
+        "total_copies": 12,
+        "publication": "2025-03-02"
+    },
+    {
+        "book_id": 50,
+        "title": "Return kid sense",
+        "author": "Matthew Lewis PhD",
+        "isbn": "9780259355045",
+        "available_copies": 6,
+        "total_copies": 7,
+        "publication": "2016-06-05"
+    },
+    {
+        "book_id": 52,
+        "title": "Trouble stay home tonight foreign",
+        "author": "Wayne Fields",
+        "isbn": "9781287920182",
+        "available_copies": 1,
+        "total_copies": 5,
+        "publication": "2010-12-29"
+    },
+    {
+        "book_id": 53,
+        "title": "Check message environmental",
+        "author": "Jennifer White",
+        "isbn": "9780648400691",
+        "available_copies": 10,
+        "total_copies": 13,
+        "publication": "2013-02-16"
+    },
+    {
+        "book_id": 54,
+        "title": "Very safe must",
+        "author": "John Dennis",
+        "isbn": "9780715000281",
+        "available_copies": 5,
+        "total_copies": 9,
+        "publication": "2017-12-28"
+    },
+    {
+        "book_id": 55,
+        "title": "Probably mother food not heavy",
+        "author": "Tiffany Higgins",
+        "isbn": "9781990746437",
+        "available_copies": 1,
+        "total_copies": 1,
+        "publication": "2008-03-15"
+    },
+    {
+        "book_id": 56,
+        "title": "Audience information",
+        "author": "Kenneth Choi",
+        "isbn": "9781119634645",
+        "available_copies": 6,
+        "total_copies": 11,
+        "publication": "2000-05-02"
+    },
+    {
+        "book_id": 57,
+        "title": "Paper commercial its",
+        "author": "Jennifer Thompson",
+        "isbn": "9781972949290",
+        "available_copies": 7,
+        "total_copies": 9,
+        "publication": "2008-09-26"
+    },
+    {
+        "book_id": 58,
+        "title": "Respond our generation",
+        "author": "Richard Taylor",
+        "isbn": "9780571338153",
+        "available_copies": 0,
+        "total_copies": 1,
+        "publication": "2010-08-17"
+    },
+    {
+        "book_id": 59,
+        "title": "Practice upon a right future",
+        "author": "Janice Everett",
+        "isbn": "9780579567692",
+        "available_copies": 6,
+        "total_copies": 10,
+        "publication": "2007-12-21"
+    },
+    {
+        "book_id": 60,
+        "title": "Phone product into",
+        "author": "Oscar Roth",
+        "isbn": "9780261258099",
+        "available_copies": 3,
+        "total_copies": 6,
+        "publication": "2023-10-17"
+    },
+    {
+        "book_id": 62,
+        "title": "Second another owner fall",
+        "author": "Eileen Willis",
+        "isbn": "9780963173317",
+        "available_copies": 7,
+        "total_copies": 11,
+        "publication": "2020-01-31"
+    },
+    {
+        "book_id": 63,
+        "title": "Look notice expect",
+        "author": "Cynthia Davis",
+        "isbn": "9781754934032",
+        "available_copies": 6,
+        "total_copies": 9,
+        "publication": "2016-04-25"
+    },
+    {
+        "book_id": 64,
+        "title": "Old thought after author",
+        "author": "Christina Cuevas",
+        "isbn": "9781429332224",
+        "available_copies": 0,
+        "total_copies": 0,
+        "publication": "2010-12-22"
+    },
+    {
+        "book_id": 65,
+        "title": "Have like bed",
+        "author": "Christopher Booth",
+        "isbn": "9780129622048",
+        "available_copies": 7,
+        "total_copies": 8,
+        "publication": "2013-04-09"
+    },
+    {
+        "book_id": 66,
+        "title": "Friend but evening",
+        "author": "Marcus Lang",
+        "isbn": "9781596804661",
+        "available_copies": 2,
+        "total_copies": 4,
+        "publication": "2010-12-15"
+    },
+    {
+        "book_id": 67,
+        "title": "Discover east foot law science",
+        "author": "Kimberly Munoz",
+        "isbn": "9781595628251",
+        "available_copies": 7,
+        "total_copies": 11,
+        "publication": "2003-08-12"
+    },
+    {
+        "book_id": 68,
+        "title": "Cover child",
+        "author": "Dawn Reid",
+        "isbn": "9781519680907",
+        "available_copies": 9,
+        "total_copies": 13,
+        "publication": "2022-09-11"
+    },
+    {
+        "book_id": 69,
+        "title": "Word factor finish security",
+        "author": "Steve Weaver",
+        "isbn": "9780420592262",
+        "available_copies": 3,
+        "total_copies": 3,
+        "publication": "2018-03-16"
+    },
+    {
+        "book_id": 70,
+        "title": "Available lay sign",
+        "author": "Michael York",
+        "isbn": "9780671824211",
+        "available_copies": 5,
+        "total_copies": 10,
+        "publication": "2005-08-07"
+    },
+    {
+        "book_id": 72,
+        "title": "Current song risk side affect",
+        "author": "Jennifer Weber",
+        "isbn": "9781462954933",
+        "available_copies": 3,
+        "total_copies": 7,
+        "publication": "2003-09-23"
+    },
+    {
+        "book_id": 73,
+        "title": "Dream relate area",
+        "author": "William Cobb",
+        "isbn": "9780239095374",
+        "available_copies": 9,
+        "total_copies": 13,
+        "publication": "2000-06-10"
+    },
+    {
+        "book_id": 74,
+        "title": "See black science environmental",
+        "author": "Karen Jackson",
+        "isbn": "9780931428968",
+        "available_copies": 2,
+        "total_copies": 3,
+        "publication": "2009-12-31"
+    },
+    {
+        "book_id": 75,
+        "title": "For when person",
+        "author": "Joseph Barker",
+        "isbn": "9780242141181",
+        "available_copies": 5,
+        "total_copies": 10,
+        "publication": "2000-01-21"
+    },
+    {
+        "book_id": 76,
+        "title": "Practice you dark finally quite",
+        "author": "Danielle Wang",
+        "isbn": "9781020021145",
+        "available_copies": 2,
+        "total_copies": 7,
+        "publication": "2017-03-05"
+    },
+    {
+        "book_id": 77,
+        "title": "Final child",
+        "author": "Donald Johnson",
+        "isbn": "9780026506502",
+        "available_copies": 4,
+        "total_copies": 6,
+        "publication": "2008-01-23"
+    },
+    {
+        "book_id": 78,
+        "title": "Knowledge low receive focus head",
+        "author": "Victor Alexander",
+        "isbn": "9781327219238",
+        "available_copies": 5,
+        "total_copies": 7,
+        "publication": "2002-08-30"
+    },
+    {
+        "book_id": 79,
+        "title": "Find city agent",
+        "author": "Adam Green",
+        "isbn": "9781993283069",
+        "available_copies": 10,
+        "total_copies": 15,
+        "publication": "2010-03-03"
+    },
+    {
+        "book_id": 80,
+        "title": "Measure wall list must",
+        "author": "Thomas Bailey",
+        "isbn": "9780913689196",
+        "available_copies": 4,
+        "total_copies": 6,
+        "publication": "2018-10-18"
+    },
+    {
+        "book_id": 82,
+        "title": "Conference however worker management",
+        "author": "Eileen Martin",
+        "isbn": "9781981941032",
+        "available_copies": 3,
+        "total_copies": 3,
+        "publication": "2015-12-28"
+    },
+    {
+        "book_id": 83,
+        "title": "Individual lead discuss",
+        "author": "Xavier Hernandez",
+        "isbn": "9780750785341",
+        "available_copies": 5,
+        "total_copies": 6,
+        "publication": "2017-12-03"
+    },
+    {
+        "book_id": 84,
+        "title": "Born economy figure book",
+        "author": "Michelle Richardson",
+        "isbn": "9781323349298",
+        "available_copies": 3,
+        "total_copies": 3,
+        "publication": "2024-10-31"
+    },
+    {
+        "book_id": 85,
+        "title": "While though",
+        "author": "Tara Moore",
+        "isbn": "9781175038678",
+        "available_copies": 3,
+        "total_copies": 6,
+        "publication": "2010-09-26"
+    },
+    {
+        "book_id": 86,
+        "title": "Wear west pretty sit face",
+        "author": "Denise Hobbs",
+        "isbn": "9780319329665",
+        "available_copies": 10,
+        "total_copies": 12,
+        "publication": "2017-05-10"
+    },
+    {
+        "book_id": 87,
+        "title": "Usually attention writer do",
+        "author": "Rachel Garcia",
+        "isbn": "9780550037404",
+        "available_copies": 1,
+        "total_copies": 4,
+        "publication": "2012-02-06"
+    },
+    {
+        "book_id": 88,
+        "title": "Five approach",
+        "author": "Miguel Tucker",
+        "isbn": "9781332824977",
+        "available_copies": 7,
+        "total_copies": 10,
+        "publication": "2015-10-26"
+    },
+    {
+        "book_id": 89,
+        "title": "Deep art brother data source",
+        "author": "Jeffrey Mays",
+        "isbn": "9780077869960",
+        "available_copies": 9,
+        "total_copies": 11,
+        "publication": "2022-08-21"
+    },
+    {
+        "book_id": 90,
+        "title": "Look production inside several",
+        "author": "Jacob Proctor",
+        "isbn": "9780790044927",
+        "available_copies": 8,
+        "total_copies": 11,
+        "publication": "2023-03-22"
+    },
+    {
+        "book_id": 92,
+        "title": "Even nation",
+        "author": "Harry Owens",
+        "isbn": "9780762525560",
+        "available_copies": 2,
+        "total_copies": 7,
+        "publication": "2019-08-06"
+    },
+    {
+        "book_id": 93,
+        "title": "Data would start important",
+        "author": "Brandon Stewart",
+        "isbn": "9780292673106",
+        "available_copies": 4,
+        "total_copies": 5,
+        "publication": "2001-09-23"
+    },
+    {
+        "book_id": 94,
+        "title": "Two evening happy",
+        "author": "Peter Medina",
+        "isbn": "9781671555792",
+        "available_copies": 10,
+        "total_copies": 14,
+        "publication": "2024-07-11"
+    },
+    {
+        "book_id": 95,
+        "title": "Serve board",
+        "author": "Erin Gomez",
+        "isbn": "9781850942276",
+        "available_copies": 5,
+        "total_copies": 8,
+        "publication": "2022-09-18"
+    },
+    {
+        "book_id": 96,
+        "title": "End about natural",
+        "author": "Dawn Bailey",
+        "isbn": "9781877242533",
+        "available_copies": 9,
+        "total_copies": 11,
+        "publication": "2016-01-09"
+    },
+    {
+        "book_id": 97,
+        "title": "Prove which",
+        "author": "Kristopher Finley",
+        "isbn": "9780880757201",
+        "available_copies": 7,
+        "total_copies": 7,
+        "publication": "2011-10-31"
+    },
+    {
+        "book_id": 98,
+        "title": "Game contain necessary",
+        "author": "Paul Miller",
+        "isbn": "9780638378405",
+        "available_copies": 9,
+        "total_copies": 11,
+        "publication": "2010-09-17"
+    },
+    {
+        "book_id": 99,
+        "title": "Strategy practice as relationship",
+        "author": "Kim Guerrero",
+        "isbn": "9780025201712",
+        "available_copies": 4,
+        "total_copies": 4,
+        "publication": "2011-02-11"
+    },
+    {
+        "book_id": 100,
+        "title": "Land western tree meet police",
+        "author": "Javier Brewer",
+        "isbn": "9780739188965",
+        "available_copies": 0,
+        "total_copies": 2,
+        "publication": "2007-11-08"
+    },
+    {
+        "book_id": 102,
+        "title": "Born still light recognize",
+        "author": "Michael Olson",
+        "isbn": "9780389820987",
+        "available_copies": 3,
+        "total_copies": 7,
+        "publication": "2005-04-21"
+    },
+    {
+        "book_id": 103,
+        "title": "Remember toward choose",
+        "author": "Lauren Cooper",
+        "isbn": "9781736135884",
+        "available_copies": 9,
+        "total_copies": 12,
+        "publication": "2000-12-26"
+    },
+    {
+        "book_id": 104,
+        "title": "Than series ground speech",
+        "author": "Jose Patterson",
+        "isbn": "9781714053063",
+        "available_copies": 10,
+        "total_copies": 11,
+        "publication": "2016-01-02"
+    },
+    {
+        "book_id": 105,
+        "title": "Character large education",
+        "author": "Christopher Smith",
+        "isbn": "9781633413191",
+        "available_copies": 0,
+        "total_copies": 3,
+        "publication": "2000-08-07"
+    },
+    {
+        "book_id": 106,
+        "title": "Population good",
+        "author": "Denise Jordan",
+        "isbn": "9781501190131",
+        "available_copies": 4,
+        "total_copies": 7,
+        "publication": "2012-04-17"
+    },
+    {
+        "book_id": 107,
+        "title": "Avoid boy country",
+        "author": "Eric Thomas",
+        "isbn": "9780643377394",
+        "available_copies": 4,
+        "total_copies": 9,
+        "publication": "2021-02-20"
+    },
+    {
+        "book_id": 108,
+        "title": "Key participant space",
+        "author": "Cynthia Miller",
+        "isbn": "9781473230521",
+        "available_copies": 1,
+        "total_copies": 2,
+        "publication": "2016-07-30"
+    },
+    {
+        "book_id": 109,
+        "title": "Door business reason store design",
+        "author": "Christine Hall",
+        "isbn": "9781754477959",
+        "available_copies": 6,
+        "total_copies": 8,
+        "publication": "2011-12-18"
+    },
+    {
+        "book_id": 110,
+        "title": "Other city game",
+        "author": "Lori Good",
+        "isbn": "9780305146603",
+        "available_copies": 6,
+        "total_copies": 9,
+        "publication": "2016-09-23"
+    },
+    {
+        "book_id": 112,
+        "title": "Produce spring lose TV",
+        "author": "Marie Martin",
+        "isbn": "9780205373369",
+        "available_copies": 10,
+        "total_copies": 12,
+        "publication": "2023-10-18"
+    },
+    {
+        "book_id": 113,
+        "title": "Population successful sometimes road hundred",
+        "author": "Christopher Rogers",
+        "isbn": "9780073388847",
+        "available_copies": 4,
+        "total_copies": 9,
+        "publication": "2018-12-19"
+    },
+    {
+        "book_id": 114,
+        "title": "System use",
+        "author": "William Mooney",
+        "isbn": "9780379961812",
+        "available_copies": 7,
+        "total_copies": 11,
+        "publication": "2009-10-13"
+    },
+    {
+        "book_id": 115,
+        "title": "Audience ten similar public decade",
+        "author": "Katherine Fisher",
+        "isbn": "9781043650865",
+        "available_copies": 8,
+        "total_copies": 8,
+        "publication": "2015-04-22"
+    },
+    {
+        "book_id": 116,
+        "title": "Art or test mission",
+        "author": "John Wagner",
+        "isbn": "9780629948723",
+        "available_copies": 9,
+        "total_copies": 12,
+        "publication": "2004-01-09"
+    },
+    {
+        "book_id": 117,
+        "title": "Model deal child",
+        "author": "Martha Braun",
+        "isbn": "9781348848073",
+        "available_copies": 8,
+        "total_copies": 8,
+        "publication": "2002-08-25"
+    },
+    {
+        "book_id": 118,
+        "title": "Piece involve treat",
+        "author": "Cesar Schneider",
+        "isbn": "9781147531817",
+        "available_copies": 6,
+        "total_copies": 7,
+        "publication": "2004-12-07"
+    },
+    {
+        "book_id": 119,
+        "title": "Magazine draw",
+        "author": "Audrey Sullivan",
+        "isbn": "9780392083577",
+        "available_copies": 5,
+        "total_copies": 10,
+        "publication": "2019-04-10"
+    },
+    {
+        "book_id": 120,
+        "title": "Work traditional major case",
+        "author": "Nicole Bryant MD",
+        "isbn": "9781748843968",
+        "available_copies": 2,
+        "total_copies": 6,
+        "publication": "2019-06-23"
+    }
+]

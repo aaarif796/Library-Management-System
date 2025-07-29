@@ -1,0 +1,127 @@
+[
+    {
+        "record": {
+            "book_id": 11,
+            "title": null,
+            "author": "Jessica Miller",
+            "isbn": "978-0-668-17173-1",
+            "available_copies": 10,
+            "total_copies": null,
+            "publication": "2023-10-10"
+        },
+        "error": "2 validation errors for Book\ntitle\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type\ntotal_copies\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/int_type"
+    },
+    {
+        "record": {
+            "book_id": 21,
+            "title": null,
+            "author": "Melanie Thompson",
+            "isbn": "978-0-7227-3917-4",
+            "available_copies": 1,
+            "total_copies": null,
+            "publication": "2009-02-02"
+        },
+        "error": "2 validation errors for Book\ntitle\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type\ntotal_copies\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/int_type"
+    },
+    {
+        "record": {
+            "book_id": 31,
+            "title": null,
+            "author": "Robert Gonzales",
+            "isbn": "978-0-370-42633-4",
+            "available_copies": 7,
+            "total_copies": null,
+            "publication": "2019-10-07"
+        },
+        "error": "2 validation errors for Book\ntitle\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type\ntotal_copies\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/int_type"
+    },
+    {
+        "record": {
+            "book_id": 41,
+            "title": null,
+            "author": "James Knight",
+            "isbn": "978-1-56495-173-1",
+            "available_copies": 8,
+            "total_copies": null,
+            "publication": "2020-02-24"
+        },
+        "error": "2 validation errors for Book\ntitle\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type\ntotal_copies\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/int_type"
+    },
+    {
+        "record": {
+            "book_id": 51,
+            "title": "Board number growth",
+            "available_copies": 10,
+            "publication": "2017-08-22"
+        },
+        "error": "3 validation errors for Book\nauthor\n  Field required [type=missing, input_value={'book_id': 51, 'title': ...lication': '2017-08-22'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nisbn\n  Field required [type=missing, input_value={'book_id': 51, 'title': ...lication': '2017-08-22'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\ntotal_copies\n  Field required [type=missing, input_value={'book_id': 51, 'title': ...lication': '2017-08-22'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+    },
+    {
+        "record": {
+            "author": "Kelly Riley",
+            "isbn": "978-0-945479-77-2",
+            "available_copies": 8,
+            "total_copies": 12,
+            "publication": "2025-03-08"
+        },
+        "error": "2 validation errors for Book\nbook_id\n  Field required [type=missing, input_value={'author': 'Kelly Riley',...lication': '2025-03-08'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\ntitle\n  Field required [type=missing, input_value={'author': 'Kelly Riley',...lication': '2025-03-08'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+    },
+    {
+        "record": {
+            "book_id": "71",
+            "title": 12345,
+            "author": "Ernest Wilson",
+            "isbn": "978-1-193-34806-3",
+            "available_copies": "five",
+            "total_copies": 4,
+            "publication": "2018-01-02"
+        },
+        "error": "2 validation errors for Book\ntitle\n  Input should be a valid string [type=string_type, input_value=12345, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type\navailable_copies\n  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='five', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/int_parsing"
+    },
+    {
+        "record": {
+            "book_id": "81",
+            "title": 12345,
+            "author": "Joshua Jensen",
+            "isbn": "978-1-02-775822-8",
+            "available_copies": "five",
+            "total_copies": 12,
+            "publication": "2001-11-21"
+        },
+        "error": "2 validation errors for Book\ntitle\n  Input should be a valid string [type=string_type, input_value=12345, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type\navailable_copies\n  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='five', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/int_parsing"
+    },
+    {
+        "record": {
+            "book_id": 91,
+            "title": null,
+            "author": "Gregory Griffin",
+            "isbn": "978-0-88930-703-2",
+            "available_copies": 8,
+            "total_copies": null,
+            "publication": "2023-05-18"
+        },
+        "error": "2 validation errors for Book\ntitle\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type\ntotal_copies\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/int_type"
+    },
+    {
+        "record": {
+            "book_id": 101,
+            "title": null,
+            "author": "Sharon Robinson",
+            "isbn": "978-0-88504-968-4",
+            "available_copies": 0,
+            "total_copies": null,
+            "publication": "2024-06-19"
+        },
+        "error": "2 validation errors for Book\ntitle\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type\ntotal_copies\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/int_type"
+    },
+    {
+        "record": {
+            "book_id": 111,
+            "title": "Analysis foreign",
+            "author": "Shawn Johnson",
+            "isbn": "978-0-684-09010-8",
+            "total_copies": 3
+        },
+        "error": "2 validation errors for Book\navailable_copies\n  Field required [type=missing, input_value={'book_id': 111, 'title':...0-8', 'total_copies': 3}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\npublication\n  Field required [type=missing, input_value={'book_id': 111, 'title':...0-8', 'total_copies': 3}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+    }
+]
