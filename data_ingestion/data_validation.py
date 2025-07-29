@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field, field_validator,ValidationError, ValidationInfo, model_validator
+from pydantic import BaseModel, EmailStr, Field, field_validator, ValidationInfo, model_validator
 import json
 from typing import List, Dict, Any, Self
 from datetime import date
@@ -23,7 +23,7 @@ class Book(BaseModel):
         :return:
         """
         if v<1:
-            raise ValidationError("Book id cannot be negative")
+            raise ValueError("Book id cannot be negative")
         return v
 
     @field_validator('library_id')
@@ -75,7 +75,7 @@ class Book(BaseModel):
         :return:
         """
         if v <= 0:
-            raise ValidationError("Available copies won't be less than 0")
+            raise ValueError("Available copies won't be less than 0")
         return v
 
     @field_validator("publication_date")
@@ -86,7 +86,7 @@ class Book(BaseModel):
         :return:
         """
         if v > date.today():
-            raise ValidationError("It's not possible to give the future date")
+            raise ValueError("It's not possible to give the future date")
         return v
 
 
@@ -97,7 +97,7 @@ class Library(BaseModel):
     Name: str
     campus_location: str
     contact_email: str
-    phone_number = str
+    phone_number: str
 
     @field_validator('library_id')
     def validate_library_id(cls, v: int) -> int:
@@ -107,7 +107,7 @@ class Library(BaseModel):
         :return:
         """
         if v<1:
-            raise ValidationError("Primary id should not be 0 or less than it")
+            raise ValueError("Primary id should not be 0 or less than it")
         return v
 
     @field_validator('Name')
@@ -135,7 +135,7 @@ class Library(BaseModel):
         """
         pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
         if not re.match(pattern, v):
-            raise ValidationError("Invalid Email Address")
+            raise ValueError("Invalid Email Address")
         return str.lower(v)
 
     @field_validator('phone_number')
@@ -147,7 +147,7 @@ class Library(BaseModel):
         """
         pattern = "^[+0-9]+[-\s]*[0-9]+$"
         if not re.match(pattern, v) or len(v)<10:
-            raise ValidationError("Invalid Phone number")
+            raise ValueError("Invalid Phone number")
         return v
 
 
@@ -168,7 +168,7 @@ class Author(BaseModel):
         :return:
         """
         if v < 1:
-            raise ValidationError("Primary id should not be 0 or less than it")
+            raise ValueError("Primary id should not be 0 or less than it")
         return v
 
     @field_validator('last_name')
@@ -180,7 +180,7 @@ class Author(BaseModel):
         """
         trimmed = v.strip()
         if len(trimmed.split())>1:
-            raise ValidationError("Surname should be of only word")
+            raise ValueError("Surname should be of only word")
         return trimmed.capitalize()
 
     @field_validator('first_name')
@@ -204,7 +204,7 @@ class Author(BaseModel):
         :return:
         """
         if v > date.today():
-            raise ValidationError("It's invalid birth date")
+            raise ValueError("It's invalid birth date")
         return v
 
     @field_validator("nationality")
@@ -240,7 +240,7 @@ class Borrowing(BaseModel):
         :return:
         """
         if v<1:
-            raise ValidationError("Primary key should not be 0 or less than it")
+            raise ValueError("Primary key should not be 0 or less than it")
         return v
 
     @field_validator('book_id')
@@ -251,7 +251,7 @@ class Borrowing(BaseModel):
         :return:
         """
         if v < 1:
-            raise ValidationError("Primary key should not be 0 or less than it")
+            raise ValueError("Primary key should not be 0 or less than it")
         return v
 
     @field_validator('member_id')
@@ -262,7 +262,7 @@ class Borrowing(BaseModel):
         :return:
         """
         if v < 1:
-            raise ValidationError("Primary key should not be 0 or less than it")
+            raise ValueError("Primary key should not be 0 or less than it")
         return v
 
     @model_validator(mode = "after")
@@ -270,7 +270,7 @@ class Borrowing(BaseModel):
         borrow_d = self.borrow_date
         due_d = self.due_date
         if borrow_d > due_d:
-            raise ValidationError("Data Error borrow date is before than due date")
+            raise ValueError("Data Error borrow date is before than due date")
         return self
 
     @field_validator('late_fee')
@@ -286,7 +286,7 @@ class Member(BaseModel):
     first_name: str
     last_name: str
     email: str
-    phone: int
+    phone: str
     member_type: str
     registration_date: date
 
@@ -298,7 +298,7 @@ class Member(BaseModel):
         :return:
         """
         if v < 1:
-            raise ValidationError("Primary id should not be 0 or less than it")
+            raise ValueError("Primary id should not be 0 or less than it")
         return v
 
     @field_validator('last_name')
@@ -310,7 +310,7 @@ class Member(BaseModel):
         """
         trimmed = v.strip()
         if len(trimmed.split()) > 1:
-            raise ValidationError("Surname should be of only word")
+            raise ValueError("Surname should be of only word")
         return trimmed.capitalize()
 
     @field_validator('first_name')
@@ -330,20 +330,20 @@ class Member(BaseModel):
     def validate_contact_email(cls, v: str) -> str:
         pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
         if not re.match(pattern, v):
-            raise ValidationError("Invalid Email Address")
+            raise ValueError("Invalid Email Address")
         return str.lower(v)
 
     @field_validator('phone')
-    def validate_phone_number(cls, v: str) -> str:
+    def validate_phone(cls, v: str) -> str:
         pattern = "^[+0-9]+[-\s]*[0-9]+$"
         if not re.match(pattern, v) or len(v) < 10:
-            raise ValidationError("Invalid Phone number")
+            raise ValueError("Invalid Phone number")
         return v
 
     @field_validator('member_type')
     def validate_member_type(cls, v: str) -> str:
         if v.lower() != "student" or v.lower() != "faculty":
-            raise ValidationError("Invalid Member type")
+            raise ValueError("Invalid Member type")
         return v
 
 
@@ -365,7 +365,7 @@ class Review(BaseModel):
         :return:
         """
         if v<= 0:
-            raise ValidationError("Invalid review id")
+            raise ValueError("Invalid review id")
         return v
 
     @field_validator('book_id')
@@ -376,7 +376,7 @@ class Review(BaseModel):
         :return:
         """
         if v <= 0:
-            raise ValidationError("Invalid book_id")
+            raise ValueError("Invalid book_id")
         return v
 
     @field_validator('member_id')
@@ -387,13 +387,13 @@ class Review(BaseModel):
         :return:
         """
         if v <= 0:
-            raise ValidationError("Invalid member_id")
+            raise ValueError("Invalid member_id")
         return v
 
     @field_validator('rating')
     def validate_rating(cls, rating: int) -> int:
         if rating < 1 or rating > 5:
-            raise ValidationError("Rating should be between 1-5")
+            raise ValueError("Rating should be between 1-5")
         return rating
 
 
@@ -412,7 +412,7 @@ class Category(BaseModel):
         :return:
         """
         if v <= 0:
-            raise ValidationError("Invalid member_id")
+            raise ValueError("Invalid member_id")
         return v
 
     @field_validator("name")
