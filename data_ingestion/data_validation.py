@@ -151,6 +151,7 @@ class Library(BaseModel):
         return v
 
 
+
 # Author Model
 class Author(BaseModel):
     author_id: int
@@ -220,6 +221,9 @@ class Author(BaseModel):
         nationality = ' '.join(capitalized)
         return nationality
 
+
+
+# Borrowing Model
 class Borrowing(BaseModel):
     borrowing_id: int
     book_id: int
@@ -276,6 +280,8 @@ class Borrowing(BaseModel):
             return 0
         return v
 
+
+# Member Model
 class Member(BaseModel):
     member_id: int
     first_name: str
@@ -343,6 +349,7 @@ class Member(BaseModel):
 
 
 
+# Review Model
 class Review(BaseModel):
     review_id: int
     book_id: int
@@ -392,7 +399,7 @@ class Review(BaseModel):
 
 
 
-
+# Category Model
 class Category(BaseModel):
     category_id: int
     name: str
