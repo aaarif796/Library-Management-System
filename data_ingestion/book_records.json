@@ -1,0 +1,452 @@
+[
+  {
+    "book_id": 1,
+    "library_id": 5,
+    "title": "single reality",
+    "isbn": "3815086140107",
+    "total_copies": 11,
+    "publication_date": "2012-08-09",
+    "available_copies": 17
+  },
+  {
+    "book_id": 2,
+    "library_id": 2,
+    "title": "class rule position reveal",
+    "isbn": "7063328183",
+    "total_copies": 42,
+    "publication_date": "2023-02-20",
+    "available_copies": 39
+  },
+  {
+    "book_id": 3,
+    "library_id": 2,
+    "title": "cultural wait",
+    "isbn": "4100377665899",
+    "total_copies": 63,
+    "publication_date": "2018-10-09",
+    "available_copies": 17
+  },
+  {
+    "book_id": 4,
+    "library_id": 3,
+    "title": "art begin surface specific",
+    "isbn": "8944740781",
+    "total_copies": 20,
+    "publication_date": "2021-08-19",
+    "available_copies": 1
+  },
+  {
+    "book_id": 5,
+    "library_id": 5,
+    "title": "leg nearly assume interview",
+    "isbn": "2983007268204",
+    "total_copies": 30,
+    "publication_date": "2013-01-04",
+    "available_copies": 29
+  },
+  {
+    "book_id": 6,
+    "library_id": 5,
+    "title": "father eat",
+    "isbn": "1482544245063",
+    "total_copies": 86,
+    "publication_date": "2025-08-31",
+    "available_copies": 48
+  },
+  {
+    "book_id": 7,
+    "library_id": 2,
+    "title": "dog",
+    "isbn": "5934147579042",
+    "total_copies": 69,
+    "publication_date": "2025-09-02",
+    "available_copies": 20
+  },
+  {
+    "book_id": 8,
+    "library_id": 2,
+    "title": "understand since white as",
+    "isbn": "4318413405",
+    "total_copies": 64,
+    "publication_date": "2020-04-08",
+    "available_copies": 6
+  },
+  {
+    "book_id": 9,
+    "library_id": 1,
+    "title": "politics",
+    "isbn": "bad-isbn",
+    "total_copies": 57,
+    "publication_date": "2023-09-15",
+    "available_copies": 22
+  },
+  {
+    "book_id": 10,
+    "library_id": -1,
+    "title": "yourself right",
+    "isbn": "5091159879",
+    "total_copies": 75,
+    "publication_date": "2012-12-03",
+    "available_copies": 3
+  },
+  {
+    "book_id": 11,
+    "library_id": 3,
+    "title": "scene",
+    "isbn": "3282169746661",
+    "total_copies": 100,
+    "publication_date": "2022-09-15",
+    "available_copies": 37
+  },
+  {
+    "book_id": 12,
+    "library_id": 5,
+    "title": "few method despite interview",
+    "isbn": "4384459516",
+    "total_copies": 46,
+    "publication_date": "2014-06-24",
+    "available_copies": 4
+  },
+  {
+    "book_id": 13,
+    "library_id": 2,
+    "title": "Traditional   ",
+    "isbn": "6533085531707",
+    "total_copies": 64,
+    "publication_date": "2021-04-03",
+    "available_copies": 13
+  },
+  {
+    "book_id": 14,
+    "library_id": 1,
+    "title": "skill wall create",
+    "isbn": "3802562226",
+    "total_copies": 63,
+    "publication_date": "2025-10-05",
+    "available_copies": 5
+  },
+  {
+    "book_id": 15,
+    "library_id": 5,
+    "title": "hotel unit",
+    "isbn": "1091873684326",
+    "total_copies": 53,
+    "publication_date": "2012-01-04",
+    "available_copies": 0
+  },
+  {
+    "book_id": 16,
+    "library_id": 2,
+    "title": "second night me",
+    "isbn": "4713557516",
+    "total_copies": 89,
+    "publication_date": "2021-06-06",
+    "available_copies": 28
+  },
+  {
+    "book_id": 17,
+    "library_id": 4,
+    "title": "operation himself",
+    "isbn": "9577627988",
+    "total_copies": 20,
+    "publication_date": "2017-02-23",
+    "available_copies": 19
+  },
+  {
+    "book_id": -18,
+    "library_id": 3,
+    "title": "democratic safe read",
+    "isbn": "8344697044411",
+    "total_copies": 63,
+    "publication_date": "2024-07-28",
+    "available_copies": 48
+  },
+  {
+    "book_id": 19,
+    "library_id": -1,
+    "title": "cold accept",
+    "isbn": "4812224333713",
+    "total_copies": 75,
+    "publication_date": "2022-07-09",
+    "available_copies": 0
+  },
+  {
+    "book_id": 20,
+    "library_id": 5,
+    "title": "sort material",
+    "isbn": "8535876463018",
+    "total_copies": 99,
+    "publication_date": "2017-08-22",
+    "available_copies": 23
+  },
+  {
+    "book_id": 21,
+    "library_id": 3,
+    "title": "enough",
+    "isbn": "4018175119206",
+    "total_copies": 40,
+    "publication_date": "2011-12-06",
+    "available_copies": 40
+  },
+  {
+    "book_id": -22,
+    "library_id": 3,
+    "title": "later candidate partner adult",
+    "isbn": "7667827319",
+    "total_copies": 48,
+    "publication_date": "2017-01-02",
+    "available_copies": 21
+  },
+  {
+    "book_id": 23,
+    "library_id": 4,
+    "title": "expert forget simple safe",
+    "isbn": "bad-isbn",
+    "total_copies": 49,
+    "publication_date": "2019-06-08",
+    "available_copies": 13
+  },
+  {
+    "book_id": 24,
+    "library_id": 2,
+    "title": "wrong rule type record",
+    "isbn": "5813200959",
+    "total_copies": 28,
+    "publication_date": "2019-08-02",
+    "available_copies": 12
+  },
+  {
+    "book_id": 25,
+    "library_id": 2,
+    "title": "short heart catch family",
+    "isbn": "2186095878",
+    "total_copies": 7,
+    "publication_date": "2016-05-01",
+    "available_copies": 0
+  },
+  {
+    "book_id": 26,
+    "library_id": 4,
+    "title": "pressure",
+    "isbn": "0133361867",
+    "total_copies": 93,
+    "publication_date": "2023-11-20",
+    "available_copies": 32
+  },
+  {
+    "book_id": 27,
+    "library_id": 3,
+    "title": "writer security",
+    "isbn": "5702928976225",
+    "total_copies": 98,
+    "publication_date": "2018-11-03",
+    "available_copies": 23
+  },
+  {
+    "book_id": 28,
+    "library_id": 1,
+    "title": "trial participant suggest",
+    "isbn": "8874967026707",
+    "total_copies": 9,
+    "publication_date": "2013-10-23",
+    "available_copies": 40
+  },
+  {
+    "book_id": 29,
+    "library_id": 3,
+    "title": "Money Business Black   ",
+    "isbn": "4600787922675",
+    "total_copies": 28,
+    "publication_date": "2015-05-24",
+    "available_copies": 18
+  },
+  {
+    "book_id": 30,
+    "library_id": 1,
+    "title": "beautiful",
+    "isbn": "8086002336",
+    "total_copies": 94,
+    "publication_date": "2025-10-01",
+    "available_copies": 50
+  },
+  {
+    "book_id": 31,
+    "library_id": 2,
+    "title": "process around",
+    "isbn": "9589007602",
+    "total_copies": 6,
+    "publication_date": "2017-10-15",
+    "available_copies": 34
+  },
+  {
+    "book_id": 32,
+    "library_id": 1,
+    "title": "sense final poor doctor",
+    "isbn": "8680131019691",
+    "total_copies": 15,
+    "publication_date": "2018-03-27",
+    "available_copies": 16
+  },
+  {
+    "book_id": 33,
+    "library_id": 5,
+    "title": "wish range son",
+    "isbn": "8334751339019",
+    "total_copies": 95,
+    "publication_date": "2021-12-10",
+    "available_copies": 0
+  },
+  {
+    "book_id": -34,
+    "library_id": 4,
+    "title": "tv green your enter",
+    "isbn": "1236832643",
+    "total_copies": 49,
+    "publication_date": "2025-08-20",
+    "available_copies": 46
+  },
+  {
+    "book_id": 35,
+    "library_id": -1,
+    "title": "mouth",
+    "isbn": "0738382140018",
+    "total_copies": 38,
+    "publication_date": "2024-06-04",
+    "available_copies": 0
+  },
+  {
+    "book_id": 36,
+    "library_id": 2,
+    "title": "production number each",
+    "isbn": "5727737050",
+    "total_copies": 89,
+    "publication_date": "2020-10-20",
+    "available_copies": 1
+  },
+  {
+    "book_id": -37,
+    "library_id": 5,
+    "title": "event",
+    "isbn": "0010115955655",
+    "total_copies": 85,
+    "publication_date": "2022-05-30",
+    "available_copies": 18
+  },
+  {
+    "book_id": 38,
+    "library_id": -1,
+    "title": "north throw dark reason",
+    "isbn": "3196315192",
+    "total_copies": 61,
+    "publication_date": "2012-07-02",
+    "available_copies": 9
+  },
+  {
+    "book_id": 39,
+    "library_id": 2,
+    "title": "media",
+    "isbn": "7149718470",
+    "total_copies": 10,
+    "publication_date": "2021-09-12",
+    "available_copies": 33
+  },
+  {
+    "book_id": 40,
+    "library_id": 5,
+    "title": "call activity away",
+    "isbn": "5964900266",
+    "total_copies": 35,
+    "publication_date": "2012-09-17",
+    "available_copies": 36
+  },
+  {
+    "book_id": 41,
+    "library_id": 5,
+    "title": "production another eat plan",
+    "isbn": "9953513071554",
+    "total_copies": 47,
+    "publication_date": "2012-11-19",
+    "available_copies": 25
+  },
+  {
+    "book_id": 42,
+    "library_id": 5,
+    "title": "sound decade wait have",
+    "isbn": "8987283600",
+    "total_copies": 48,
+    "publication_date": "2025-01-26",
+    "available_copies": 14
+  },
+  {
+    "book_id": 43,
+    "library_id": 2,
+    "title": "Cold Whether Minute Those   ",
+    "isbn": "5252327897",
+    "total_copies": 10,
+    "publication_date": "2013-08-26",
+    "available_copies": 27
+  },
+  {
+    "book_id": -44,
+    "library_id": 5,
+    "title": "land gun option",
+    "isbn": "bad-isbn",
+    "total_copies": 67,
+    "publication_date": "2014-09-28",
+    "available_copies": 25
+  },
+  {
+    "book_id": 45,
+    "library_id": 5,
+    "title": "happy",
+    "isbn": "5135856126",
+    "total_copies": 85,
+    "publication_date": "2025-08-09",
+    "available_copies": 28
+  },
+  {
+    "book_id": -46,
+    "library_id": 2,
+    "title": "Behavior   ",
+    "isbn": "3665559335",
+    "total_copies": 46,
+    "publication_date": "2020-10-01",
+    "available_copies": 27
+  },
+  {
+    "book_id": 47,
+    "library_id": 2,
+    "title": "watch sea between student",
+    "isbn": "1262933612817",
+    "total_copies": 24,
+    "publication_date": "2024-02-29",
+    "available_copies": 42
+  },
+  {
+    "book_id": 48,
+    "library_id": 3,
+    "title": "key increase",
+    "isbn": "0304756208167",
+    "total_copies": 80,
+    "publication_date": "2016-05-10",
+    "available_copies": 45
+  },
+  {
+    "book_id": 49,
+    "library_id": -1,
+    "title": "find",
+    "isbn": "6467661390031",
+    "total_copies": 68,
+    "publication_date": "2011-12-20",
+    "available_copies": 0
+  },
+  {
+    "book_id": -50,
+    "library_id": 4,
+    "title": "sister",
+    "isbn": "7405382979",
+    "total_copies": 46,
+    "publication_date": "2016-01-30",
+    "available_copies": 0
+  }
+]
