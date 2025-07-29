@@ -5,13 +5,7 @@ from datetime import date
 import re
 import json
 
-# "book_id": 2,
-# "title": "Remember dream position",
-# "author": "Melissa White",
-# "isbn": "978-0-631-04059-0",
-# "available_copies": 0,
-# "total_copies": 5,
-# "publication": "2002-02-03"
+
 class Book(BaseModel):
     book_id: int
     title: str
@@ -35,4 +29,30 @@ class Book(BaseModel):
         if v <= 0:
             raise ValidationError("Available copies won't be less than 0")
         return v
+
+class Library(BaseModel):
+    library_id: int
+    Name: str
+    campus_location: str
+    contact_email: str
+    phone_number = int
+
+    @field_validator('contact_email')
+    def validate_contact_email(cls, v: str) -> str:
+        pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        if not re.match(pattern, v):
+            raise ValidationError("Invalid Email Address")
+        return v
+
+    @field_validator('phone_number')
+    def validate_phone_number(cls, v:str) -> str:
+        pattern = "^[+0-9]+[-\s]*[0-9]+$"
+        if not re.match(pattern, v) or len(v)<10:
+            raise ValidationError("Invalid Phone number")
+        return v
+
+
+
+
+
 
