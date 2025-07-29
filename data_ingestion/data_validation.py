@@ -97,7 +97,7 @@ class Library(BaseModel):
     Name: str
     campus_location: str
     contact_email: str
-    phone_number = int
+    phone_number = str
 
     @field_validator('library_id')
     def validate_library_id(cls, v: int) -> int:
@@ -149,7 +149,6 @@ class Library(BaseModel):
         if not re.match(pattern, v) or len(v)<10:
             raise ValidationError("Invalid Phone number")
         return v
-
 
 
 # Author Model
