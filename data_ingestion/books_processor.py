@@ -1,8 +1,10 @@
 import json
+import sys
+
 from data_validation import Book
 from typing import List, Dict, Any
 
-file_path: str = "sample_data_of_book.json"
+file_path: str = sys.argv[1]
 
 with open(file_path, 'r') as f:
     books_raw: List[Dict[str, Any]] = json.load(f)
@@ -29,3 +31,5 @@ with open(valid_path,"w") as f:
 with open(invalid_path, "w") as f:
     json.dump(invalid_books, f, indent = 4)
 
+# To run it we have to use
+# python data_ingestion\books_processor.py data_ingestion\book_records.json
