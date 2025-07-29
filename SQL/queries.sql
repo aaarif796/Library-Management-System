@@ -169,7 +169,9 @@ START TRANSACTION;
 UPDATE Book
 SET available_copies = available_copies + 1
 WHERE book_id = 1 AND available_copies > 0;
-rollback; -- reduce by one as it will go one step back
+rollback; 
+
+-- reduce by one as it will go one step back
 -- COMMIT to save
  
 select * from Book;
