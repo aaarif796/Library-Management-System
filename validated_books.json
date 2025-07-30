@@ -45,6 +45,24 @@
         "available_copies": 29
     },
     {
+        "book_id": 6,
+        "library_id": 5,
+        "title": "Father Eat",
+        "isbn": "1482544245063",
+        "total_copies": 86,
+        "publication_date": "2010-10-10",
+        "available_copies": 48
+    },
+    {
+        "book_id": 7,
+        "library_id": 2,
+        "title": "Dog",
+        "isbn": "5934147579042",
+        "total_copies": 69,
+        "publication_date": "2010-10-10",
+        "available_copies": 20
+    },
+    {
         "book_id": 8,
         "library_id": 2,
         "title": "Understand Since White As",
@@ -52,6 +70,15 @@
         "total_copies": 64,
         "publication_date": "2020-04-08",
         "available_copies": 6
+    },
+    {
+        "book_id": 9,
+        "library_id": 1,
+        "title": "Politics",
+        "isbn": "000000badisbn",
+        "total_copies": 57,
+        "publication_date": "2023-09-15",
+        "available_copies": 22
     },
     {
         "book_id": 11,
@@ -79,6 +106,24 @@
         "total_copies": 64,
         "publication_date": "2021-04-03",
         "available_copies": 13
+    },
+    {
+        "book_id": 14,
+        "library_id": 1,
+        "title": "Skill Wall Create",
+        "isbn": "3802562226",
+        "total_copies": 63,
+        "publication_date": "2010-10-10",
+        "available_copies": 5
+    },
+    {
+        "book_id": 15,
+        "library_id": 5,
+        "title": "Hotel Unit",
+        "isbn": "1091873684326",
+        "total_copies": 53,
+        "publication_date": "2012-01-04",
+        "available_copies": 100
     },
     {
         "book_id": 16,
@@ -117,6 +162,15 @@
         "available_copies": 40
     },
     {
+        "book_id": 23,
+        "library_id": 4,
+        "title": "Expert Forget Simple Safe",
+        "isbn": "000000badisbn",
+        "total_copies": 49,
+        "publication_date": "2019-06-08",
+        "available_copies": 13
+    },
+    {
         "book_id": 24,
         "library_id": 2,
         "title": "Wrong Rule Type Record",
@@ -124,6 +178,15 @@
         "total_copies": 28,
         "publication_date": "2019-08-02",
         "available_copies": 12
+    },
+    {
+        "book_id": 25,
+        "library_id": 2,
+        "title": "Short Heart Catch Family",
+        "isbn": "2186095878",
+        "total_copies": 7,
+        "publication_date": "2016-05-01",
+        "available_copies": 100
     },
     {
         "book_id": 26,
@@ -162,6 +225,15 @@
         "available_copies": 18
     },
     {
+        "book_id": 30,
+        "library_id": 1,
+        "title": "Beautiful",
+        "isbn": "8086002336",
+        "total_copies": 94,
+        "publication_date": "2010-10-10",
+        "available_copies": 50
+    },
+    {
         "book_id": 31,
         "library_id": 2,
         "title": "Process Around",
@@ -178,6 +250,15 @@
         "total_copies": 15,
         "publication_date": "2018-03-27",
         "available_copies": 16
+    },
+    {
+        "book_id": 33,
+        "library_id": 5,
+        "title": "Wish Range Son",
+        "isbn": "8334751339019",
+        "total_copies": 95,
+        "publication_date": "2021-12-10",
+        "available_copies": 100
     },
     {
         "book_id": 36,
@@ -232,6 +313,15 @@
         "total_copies": 10,
         "publication_date": "2013-08-26",
         "available_copies": 27
+    },
+    {
+        "book_id": 45,
+        "library_id": 5,
+        "title": "Happy",
+        "isbn": "5135856126",
+        "total_copies": 85,
+        "publication_date": "2010-10-10",
+        "available_copies": 28
     },
     {
         "book_id": 47,
