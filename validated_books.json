@@ -1,0 +1,254 @@
+[
+    {
+        "book_id": 1,
+        "library_id": 5,
+        "title": "Single Reality",
+        "isbn": "3815086140107",
+        "total_copies": 11,
+        "publication_date": "2012-08-09",
+        "available_copies": 17
+    },
+    {
+        "book_id": 2,
+        "library_id": 2,
+        "title": "Class Rule Position Reveal",
+        "isbn": "7063328183",
+        "total_copies": 42,
+        "publication_date": "2023-02-20",
+        "available_copies": 39
+    },
+    {
+        "book_id": 3,
+        "library_id": 2,
+        "title": "Cultural Wait",
+        "isbn": "4100377665899",
+        "total_copies": 63,
+        "publication_date": "2018-10-09",
+        "available_copies": 17
+    },
+    {
+        "book_id": 4,
+        "library_id": 3,
+        "title": "Art Begin Surface Specific",
+        "isbn": "8944740781",
+        "total_copies": 20,
+        "publication_date": "2021-08-19",
+        "available_copies": 1
+    },
+    {
+        "book_id": 5,
+        "library_id": 5,
+        "title": "Leg Nearly Assume Interview",
+        "isbn": "2983007268204",
+        "total_copies": 30,
+        "publication_date": "2013-01-04",
+        "available_copies": 29
+    },
+    {
+        "book_id": 8,
+        "library_id": 2,
+        "title": "Understand Since White As",
+        "isbn": "4318413405",
+        "total_copies": 64,
+        "publication_date": "2020-04-08",
+        "available_copies": 6
+    },
+    {
+        "book_id": 11,
+        "library_id": 3,
+        "title": "Scene",
+        "isbn": "3282169746661",
+        "total_copies": 100,
+        "publication_date": "2022-09-15",
+        "available_copies": 37
+    },
+    {
+        "book_id": 12,
+        "library_id": 5,
+        "title": "Few Method Despite Interview",
+        "isbn": "4384459516",
+        "total_copies": 46,
+        "publication_date": "2014-06-24",
+        "available_copies": 4
+    },
+    {
+        "book_id": 13,
+        "library_id": 2,
+        "title": "Traditional",
+        "isbn": "6533085531707",
+        "total_copies": 64,
+        "publication_date": "2021-04-03",
+        "available_copies": 13
+    },
+    {
+        "book_id": 16,
+        "library_id": 2,
+        "title": "Second Night Me",
+        "isbn": "4713557516",
+        "total_copies": 89,
+        "publication_date": "2021-06-06",
+        "available_copies": 28
+    },
+    {
+        "book_id": 17,
+        "library_id": 4,
+        "title": "Operation Himself",
+        "isbn": "9577627988",
+        "total_copies": 20,
+        "publication_date": "2017-02-23",
+        "available_copies": 19
+    },
+    {
+        "book_id": 20,
+        "library_id": 5,
+        "title": "Sort Material",
+        "isbn": "8535876463018",
+        "total_copies": 99,
+        "publication_date": "2017-08-22",
+        "available_copies": 23
+    },
+    {
+        "book_id": 21,
+        "library_id": 3,
+        "title": "Enough",
+        "isbn": "4018175119206",
+        "total_copies": 40,
+        "publication_date": "2011-12-06",
+        "available_copies": 40
+    },
+    {
+        "book_id": 24,
+        "library_id": 2,
+        "title": "Wrong Rule Type Record",
+        "isbn": "5813200959",
+        "total_copies": 28,
+        "publication_date": "2019-08-02",
+        "available_copies": 12
+    },
+    {
+        "book_id": 26,
+        "library_id": 4,
+        "title": "Pressure",
+        "isbn": "0133361867",
+        "total_copies": 93,
+        "publication_date": "2023-11-20",
+        "available_copies": 32
+    },
+    {
+        "book_id": 27,
+        "library_id": 3,
+        "title": "Writer Security",
+        "isbn": "5702928976225",
+        "total_copies": 98,
+        "publication_date": "2018-11-03",
+        "available_copies": 23
+    },
+    {
+        "book_id": 28,
+        "library_id": 1,
+        "title": "Trial Participant Suggest",
+        "isbn": "8874967026707",
+        "total_copies": 9,
+        "publication_date": "2013-10-23",
+        "available_copies": 40
+    },
+    {
+        "book_id": 29,
+        "library_id": 3,
+        "title": "Money Business Black",
+        "isbn": "4600787922675",
+        "total_copies": 28,
+        "publication_date": "2015-05-24",
+        "available_copies": 18
+    },
+    {
+        "book_id": 31,
+        "library_id": 2,
+        "title": "Process Around",
+        "isbn": "9589007602",
+        "total_copies": 6,
+        "publication_date": "2017-10-15",
+        "available_copies": 34
+    },
+    {
+        "book_id": 32,
+        "library_id": 1,
+        "title": "Sense Final Poor Doctor",
+        "isbn": "8680131019691",
+        "total_copies": 15,
+        "publication_date": "2018-03-27",
+        "available_copies": 16
+    },
+    {
+        "book_id": 36,
+        "library_id": 2,
+        "title": "Production Number Each",
+        "isbn": "5727737050",
+        "total_copies": 89,
+        "publication_date": "2020-10-20",
+        "available_copies": 1
+    },
+    {
+        "book_id": 39,
+        "library_id": 2,
+        "title": "Media",
+        "isbn": "7149718470",
+        "total_copies": 10,
+        "publication_date": "2021-09-12",
+        "available_copies": 33
+    },
+    {
+        "book_id": 40,
+        "library_id": 5,
+        "title": "Call Activity Away",
+        "isbn": "5964900266",
+        "total_copies": 35,
+        "publication_date": "2012-09-17",
+        "available_copies": 36
+    },
+    {
+        "book_id": 41,
+        "library_id": 5,
+        "title": "Production Another Eat Plan",
+        "isbn": "9953513071554",
+        "total_copies": 47,
+        "publication_date": "2012-11-19",
+        "available_copies": 25
+    },
+    {
+        "book_id": 42,
+        "library_id": 5,
+        "title": "Sound Decade Wait Have",
+        "isbn": "8987283600",
+        "total_copies": 48,
+        "publication_date": "2025-01-26",
+        "available_copies": 14
+    },
+    {
+        "book_id": 43,
+        "library_id": 2,
+        "title": "Cold Whether Minute Those",
+        "isbn": "5252327897",
+        "total_copies": 10,
+        "publication_date": "2013-08-26",
+        "available_copies": 27
+    },
+    {
+        "book_id": 47,
+        "library_id": 2,
+        "title": "Watch Sea Between Student",
+        "isbn": "1262933612817",
+        "total_copies": 24,
+        "publication_date": "2024-02-29",
+        "available_copies": 42
+    },
+    {
+        "book_id": 48,
+        "library_id": 3,
+        "title": "Key Increase",
+        "isbn": "0304756208167",
+        "total_copies": 80,
+        "publication_date": "2016-05-10",
+        "available_copies": 45
+    }
+]
