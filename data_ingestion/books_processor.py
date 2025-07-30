@@ -1,11 +1,22 @@
 import json
+import sys
+import logging
 from data_validation import Book
 from typing import List, Dict, Any
 
-file_path: str = "sample_data_of_book.json"
+file_path: str = sys.argv[1]
+logger = logging.getLogger(__name__)
+logging.basicConfig(level = logging.INFO)
+
+# logging.debug("This is a debug message")
+# logging.info("This is an info message")
+# logging.warning("This is a warning message")
+# logging.error("This is an error message")
+# logging.critical("This is a critical message")
 
 with open(file_path, 'r') as f:
     books_raw: List[Dict[str, Any]] = json.load(f)
+    logging.info("File open successfully")
 
 valid_books: List[Dict[str, Any]] = []
 invalid_books: List[Dict[str, Any]] = []
@@ -19,13 +30,17 @@ for book in books_raw:
             "record": book,
             "error": str(e)
         })
+        logging.warning(f"Record is not in specific format. Record no.{book}")
 
 valid_path: str = "validated_books.json"
 invalid_path: str = "invalid_books.json"
 
 with open(valid_path,"w") as f:
     json.dump(valid_books, f, indent = 4)
+    logging.info("This is an info message")
 
 with open(invalid_path, "w") as f:
     json.dump(invalid_books, f, indent = 4)
 
+# To run it we have to use
+# python data_ingestion\books_processor.py data_ingestion\book_records.json
