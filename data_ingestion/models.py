@@ -1,20 +1,19 @@
 import datetime
 import sqlalchemy as db
-from sqlalchemy.orm import sessionmaker, declarative_base, foreign
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 engine = db.create_engine("mysql+pymysql://root:root@127.0.0.1:3306/LMS_ORM")
 Base = declarative_base()
-# meta = db.MetaData()
 
 class Library(Base):
-    __table_name__ = "Library"
+    __tablename__ = "Library"
     library_id = db.Column(db.Integer, primary_key = True, autoincrement= True)
     name = db.Column(db.String)
     campus_location = db.Column(db.String)
     email = db.Column(db.String)
 
 class Book(Base):
-    __table_name__ = "Book"
+    __tablename__ = "Book"
     book_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     library_id = db.Column(db.Integer, db.ForeignKey('Library.library_id'))
     title = db.Column(db.String)
@@ -24,8 +23,8 @@ class Book(Base):
     available_copies = db.Column(db.Integer)
 
 class Author(Base):
-    __table_name__ = "Author"
-    author_id = db.Column(db.Integer, priamry_key = True, autoincrement = True)
+    __tablename__ = "Author"
+    author_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     birth_date = db.Column(db.Date)
@@ -33,23 +32,23 @@ class Author(Base):
     biography = db.Column(db.Text)
 
 class BookAuthor(Base):
-    __table_name__ = "BookAuthor"
+    __tablename__ = "BookAuthor"
     book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'), primary_key = True)
     author_id = db.Column(db.Integer, db.ForeignKey('Author.author_id') ,primary_key = True)
 
 class Category(Base):
-    __table_name = "Category"
+    __tablename = "Category"
     category_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     name = db.Column(db.String)
     description = db.Column(db.Text)
 
 class BookCategory(Base):
-    __table_name__ = "BookCategory"
+    __tablename__ = "BookCategory"
     book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'),primary_key=True)
     category_id = db.Column(db.Integer, db.ForeignKey('Category.category_id'),primary_key=True)
 
 class Borrowing(Base):
-    __table_name__ = "Borrowing"
+    __tablename__ = "Borrowing"
     borrowing_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'))
     member_id = db.Column(db.Integer, db.ForeignKey('Member.member_id'))
@@ -59,7 +58,7 @@ class Borrowing(Base):
     late_fee = db.Column(db.Integer)
 
 class Member(Base):
-    __table_name__ = "Member"
+    __tablename__ = "Member"
     member_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
@@ -69,7 +68,7 @@ class Member(Base):
     registration_date = db.Column(db.Date)
 
 class Review(Base):
-    __table_name__ = "Review"
+    __tablename__ = "Review"
     review_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'))
     member_id = db.Column(db.Integer, db.ForeignKey('Member.member_id'))
