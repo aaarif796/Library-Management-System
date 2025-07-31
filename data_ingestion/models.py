@@ -34,6 +34,8 @@ class Author(Base):
 
 class BookAuthor(Base):
     __table_name__ = "BookAuthor"
+    book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'), primary_key = True)
+    author_id = db.Column(db.Integer, db.ForeignKey('Author.author_id') ,primary_key = True)
 
 class Category(Base):
     __table_name = "Category"
@@ -43,7 +45,8 @@ class Category(Base):
 
 class BookCategory(Base):
     __table_name__ = "BookCategory"
-
+    book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'),primary_key=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('Category.category_id'),primary_key=True)
 
 class Borrowing(Base):
     __table_name__ = "Borrowing"
