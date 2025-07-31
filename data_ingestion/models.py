@@ -1,7 +1,6 @@
-import datetime
 import pymysql
 import sqlalchemy as db
-from sqlalchemy.orm import sessionmaker, declarative_base, relationship
+from sqlalchemy.orm import declarative_base, relationship
 
 connection = pymysql.connect(host='127.0.0.1', user='root', password='root')
 cursor = connection.cursor()

@@ -8,11 +8,6 @@ file_path: str = sys.argv[1]
 logger = logging.getLogger(__name__)
 logging.basicConfig(level = logging.INFO)
 
-# logging.debug("This is a debug message")
-# logging.info("This is an info message")
-# logging.warning("This is a warning message")
-# logging.error("This is an error message")
-# logging.critical("This is a critical message")
 
 with open(file_path, 'r') as f:
     books_raw: List[Dict[str, Any]] = json.load(f)
