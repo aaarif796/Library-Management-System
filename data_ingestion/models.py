@@ -23,6 +23,28 @@ class Book(Base):
     total_copies = db.Column(db.Integer)
     available_copies = db.Column(db.Integer)
 
+class Author(Base):
+    __table_name__ = "Author"
+    
+
+class BookAuthor(Base):
+    __table_name__ = "BookAuthor"
+
+class BookCategory(Base):
+    __table_name__ = "BookCategory"
+
+
+class Category(Base):
+    __table_name = "Category"
+
+class Borrowing(Base):
+    __table_name__ = "Borrowing"
+
+class Member(Base):
+    __table_name__ = "Member"
+
+class Review(Base):
+    __table_name__ = "Review"
 
 
 
