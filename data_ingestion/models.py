@@ -1,6 +1,12 @@
 import datetime
+import pymysql
 import sqlalchemy as db
 from sqlalchemy.orm import sessionmaker, declarative_base
+
+connection = pymysql.connect(host='127.0.0.1', user='root', password='root')
+cursor = connection.cursor()
+cursor.execute("CREATE DATABASE IF NOT EXISTS LMS_ORM")
+connection.close()
 
 engine = db.create_engine("mysql+pymysql://root:root@127.0.0.1:3306/LMS_ORM")
 Base = declarative_base()
@@ -37,7 +43,7 @@ class BookAuthor(Base):
     author_id = db.Column(db.Integer, db.ForeignKey('Author.author_id') ,primary_key = True)
 
 class Category(Base):
-    __tablename = "Category"
+    __tablename__ = "Category"
     category_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     name = db.Column(db.String)
     description = db.Column(db.Text)
@@ -76,5 +82,5 @@ class Review(Base):
     comment = db.Column(db.Text)
     review_date = db.Column(db.Date)
 
-
-
+# Creating tables
+Base.metadata.create_all(engine)
