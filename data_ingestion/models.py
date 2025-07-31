@@ -14,16 +14,16 @@ Base = declarative_base()
 class Library(Base):
     __tablename__ = "Library"
     library_id = db.Column(db.Integer, primary_key = True, autoincrement= True)
-    name = db.Column(db.String)
-    campus_location = db.Column(db.String)
-    email = db.Column(db.String)
+    name = db.Column(db.String(50))
+    campus_location = db.Column(db.String(80))
+    email = db.Column(db.String(40))
 
 class Book(Base):
     __tablename__ = "Book"
     book_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     library_id = db.Column(db.Integer, db.ForeignKey('Library.library_id'))
-    title = db.Column(db.String)
-    isbn = db.Column(db.String)
+    title = db.Column(db.String(50))
+    isbn = db.Column(db.String(13))
     publication_date = db.Column(db.Date)
     total_copies = db.Column(db.Integer)
     available_copies = db.Column(db.Integer)
@@ -31,10 +31,10 @@ class Book(Base):
 class Author(Base):
     __tablename__ = "Author"
     author_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    first_name = db.Column(db.String)
-    last_name = db.Column(db.String)
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(10))
     birth_date = db.Column(db.Date)
-    nationality = db.Column(db.String)
+    nationality = db.Column(db.String(30))
     biography = db.Column(db.Text)
 
 class BookAuthor(Base):
@@ -45,7 +45,7 @@ class BookAuthor(Base):
 class Category(Base):
     __tablename__ = "Category"
     category_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    name = db.Column(db.String)
+    name = db.Column(db.String(30))
     description = db.Column(db.Text)
 
 class BookCategory(Base):
@@ -66,11 +66,11 @@ class Borrowing(Base):
 class Member(Base):
     __tablename__ = "Member"
     member_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    first_name = db.Column(db.String)
-    last_name = db.Column(db.String)
-    email = db.Column(db.String)
-    phone = db.Column(db.String)
-    member_type = db.Column(db.String)
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(10))
+    email = db.Column(db.String(30))
+    phone = db.Column(db.String(15))
+    member_type = db.Column(db.String(10))
     registration_date = db.Column(db.Date)
 
 class Review(Base):
