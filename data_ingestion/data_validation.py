@@ -3,8 +3,9 @@ import json
 from typing import List, Dict, Any, Self
 from datetime import date
 import re
-import json
-
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level = logging.INFO)
 # Book Model
 class Book(BaseModel):
     book_id: int
@@ -62,9 +63,10 @@ class Book(BaseModel):
         """
         cleaned = re.sub(r"[-\s]", "",v)
         if len(cleaned) not in (10,13):
-            raise ValueError("ISBN must be 10 or 13 digits")
-        if not cleaned.isdigit():
-            raise ValueError("ISBN must contain number")
+            logging.exception("It's not in 10 or 13 digits")
+            cleaned = cleaned.zfill(13)
+        # if not cleaned.isdigit():
+        #     raise ValueError("ISBN must contain number")
         return cleaned
 
     @field_validator("available_copies")
@@ -75,7 +77,8 @@ class Book(BaseModel):
         :return:
         """
         if v <= 0:
-            raise ValueError("Available copies won't be less than 0")
+            logger.exception("Available copies won't be less than 0")
+            v = 100 # by default
         return v
 
     @field_validator("publication_date")
@@ -86,7 +89,8 @@ class Book(BaseModel):
         :return:
         """
         if v > date.today():
-            raise ValueError("It's not possible to give the future date")
+            logger.exception("It's not possible to give the future date")
+            v = "2010-10-10"
         return v
 
 
@@ -96,7 +100,7 @@ class Library(BaseModel):
     library_id: int
     Name: str
     campus_location: str
-    contact_email: str
+    contact_email: EmailStr
     phone_number: str
 
     @field_validator('library_id')
@@ -134,21 +138,31 @@ class Library(BaseModel):
         :return:
         """
         pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
         if not re.match(pattern, v):
             raise ValueError("Invalid Email Address")
         return str.lower(v)
 
     @field_validator('phone_number')
-    def validate_phone_number(cls, v:str) -> str:
+    def validate_phone_number(cls, data:str) -> str:
         """
             Validating the phone number
         :param v:
         :return:
         """
-        pattern = "^[+0-9]+[-\s]*[0-9]+$"
-        if not re.match(pattern, v) or len(v)<10:
-            raise ValueError("Invalid Phone number")
-        return v
+        data = re.sub(r'\D', '', data)
+        if data.startswith("00"):
+            data = data[2:]
+        if data.startswith("+"):
+            data = data[1:]
+        if len(data) > 10:
+            country_code = data[:-10]
+            national_number = data[-10:]
+        else:
+            country_code = 91
+            national_number = data.zfill(10)
+        formatted = f"+{country_code}-{national_number[:3]}-{national_number[3:6]}-{national_number[6:10]}"
+        return formatted
 
 
 # Author Model
@@ -285,7 +299,7 @@ class Member(BaseModel):
     member_id: int
     first_name: str
     last_name: str
-    email: str
+    email: EmailStr
     phone: str
     member_type: str
     registration_date: date
@@ -334,11 +348,20 @@ class Member(BaseModel):
         return str.lower(v)
 
     @field_validator('phone')
-    def validate_phone(cls, v: str) -> str:
-        pattern = "^[+0-9]+[-\s]*[0-9]+$"
-        if not re.match(pattern, v) or len(v) < 10:
-            raise ValueError("Invalid Phone number")
-        return v
+    def validate_phone(cls, data: str) -> str:
+        data = re.sub(r'\D', '', data)
+        if data.startswith("00"):
+            data = data[2:]
+        if data.startswith("+"):
+            data = data[1:]
+        if len(data) > 10:
+            country_code = data[:-10]
+            national_number = data[-10:]
+        else:
+            country_code = 91
+            national_number = data.zfill(10)
+        formatted = f"+{country_code}-{national_number[:3]}-{national_number[3:6]}-{national_number[6:10]}"
+        return formatted
 
     @field_validator('member_type')
     def validate_member_type(cls, v: str) -> str:

@@ -1,0 +1,146 @@
+[
+    {
+        "record": {
+            "book_id": 10,
+            "library_id": -1,
+            "title": "yourself right",
+            "isbn": "5091159879",
+            "total_copies": 75,
+            "publication_date": "2012-12-03",
+            "available_copies": 3
+        },
+        "error": "exceptions must derive from BaseException"
+    },
+    {
+        "record": {
+            "book_id": -18,
+            "library_id": 3,
+            "title": "democratic safe read",
+            "isbn": "8344697044411",
+            "total_copies": 63,
+            "publication_date": "2024-07-28",
+            "available_copies": 48
+        },
+        "error": "1 validation error for Book\nbook_id\n  Value error, Book id cannot be negative [type=value_error, input_value=-18, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"
+    },
+    {
+        "record": {
+            "book_id": 19,
+            "library_id": -1,
+            "title": "cold accept",
+            "isbn": "4812224333713",
+            "total_copies": 75,
+            "publication_date": "2022-07-09",
+            "available_copies": 0
+        },
+        "error": "exceptions must derive from BaseException"
+    },
+    {
+        "record": {
+            "book_id": -22,
+            "library_id": 3,
+            "title": "later candidate partner adult",
+            "isbn": "7667827319",
+            "total_copies": 48,
+            "publication_date": "2017-01-02",
+            "available_copies": 21
+        },
+        "error": "1 validation error for Book\nbook_id\n  Value error, Book id cannot be negative [type=value_error, input_value=-22, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"
+    },
+    {
+        "record": {
+            "book_id": -34,
+            "library_id": 4,
+            "title": "tv green your enter",
+            "isbn": "1236832643",
+            "total_copies": 49,
+            "publication_date": "2025-08-20",
+            "available_copies": 46
+        },
+        "error": "1 validation error for Book\nbook_id\n  Value error, Book id cannot be negative [type=value_error, input_value=-34, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"
+    },
+    {
+        "record": {
+            "book_id": 35,
+            "library_id": -1,
+            "title": "mouth",
+            "isbn": "0738382140018",
+            "total_copies": 38,
+            "publication_date": "2024-06-04",
+            "available_copies": 0
+        },
+        "error": "exceptions must derive from BaseException"
+    },
+    {
+        "record": {
+            "book_id": -37,
+            "library_id": 5,
+            "title": "event",
+            "isbn": "0010115955655",
+            "total_copies": 85,
+            "publication_date": "2022-05-30",
+            "available_copies": 18
+        },
+        "error": "1 validation error for Book\nbook_id\n  Value error, Book id cannot be negative [type=value_error, input_value=-37, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"
+    },
+    {
+        "record": {
+            "book_id": 38,
+            "library_id": -1,
+            "title": "north throw dark reason",
+            "isbn": "3196315192",
+            "total_copies": 61,
+            "publication_date": "2012-07-02",
+            "available_copies": 9
+        },
+        "error": "exceptions must derive from BaseException"
+    },
+    {
+        "record": {
+            "book_id": -44,
+            "library_id": 5,
+            "title": "land gun option",
+            "isbn": "bad-isbn",
+            "total_copies": 67,
+            "publication_date": "2014-09-28",
+            "available_copies": 25
+        },
+        "error": "1 validation error for Book\nbook_id\n  Value error, Book id cannot be negative [type=value_error, input_value=-44, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"
+    },
+    {
+        "record": {
+            "book_id": -46,
+            "library_id": 2,
+            "title": "Behavior   ",
+            "isbn": "3665559335",
+            "total_copies": 46,
+            "publication_date": "2020-10-01",
+            "available_copies": 27
+        },
+        "error": "1 validation error for Book\nbook_id\n  Value error, Book id cannot be negative [type=value_error, input_value=-46, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"
+    },
+    {
+        "record": {
+            "book_id": 49,
+            "library_id": -1,
+            "title": "find",
+            "isbn": "6467661390031",
+            "total_copies": 68,
+            "publication_date": "2011-12-20",
+            "available_copies": 0
+        },
+        "error": "exceptions must derive from BaseException"
+    },
+    {
+        "record": {
+            "book_id": -50,
+            "library_id": 4,
+            "title": "sister",
+            "isbn": "7405382979",
+            "total_copies": 46,
+            "publication_date": "2016-01-30",
+            "available_copies": 0
+        },
+        "error": "1 validation error for Book\nbook_id\n  Value error, Book id cannot be negative [type=value_error, input_value=-50, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"
+    }
+]
