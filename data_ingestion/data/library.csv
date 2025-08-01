@@ -1,0 +1,6 @@
+library_id,Name,campus_location,contact_email,phone_number
+1,main library,North Campus ,admin@lib.org,  (555)123-1567
+2,main library,North Campus ,admin2@lib.org,5551234567
+3,  west branch,South-Campus,bad-email@@lib.net,0044-20-7946-0958
+4,East Wing Library ,east campus,info@east.lib.co.uk, +1 212 555 9876
+5,,Central Campus,central@lib.edu,555-000-0000

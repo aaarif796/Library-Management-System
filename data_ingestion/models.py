@@ -10,27 +10,31 @@ connection.close()
 engine = db.create_engine("mysql+pymysql://root:root@127.0.0.1:3306/LMS_ORM")
 Base = declarative_base()
 
-class Library(Base):
-    __tablename__ = "Library"
+class Library1(Base):
+    __tablename__ = "Library1"
     library_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50))
+    Name = db.Column(db.String(50))
     campus_location = db.Column(db.String(80))
-    email = db.Column(db.String(40))
-    books = relationship("Book", back_populates="library")
-
+    contact_email = db.Column(db.String(40))
+    phone_number = db.Column(db.String(25))
+    books = relationship("Book", back_populates="library1")
+    __table_args__ = (
+        db.UniqueConstraint('contact_email', name='contact_email_unique'),
+        db.UniqueConstraint('phone_number', name='phone_number_unique'),
+    )
 
 
 class Book(Base):
     __tablename__ = "Book"
     book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    library_id = db.Column(db.Integer, db.ForeignKey('Library.library_id'))
+    library_id = db.Column(db.Integer, db.ForeignKey('Library1.library_id'))
     title = db.Column(db.String(50))
     isbn = db.Column(db.String(13))
     publication_date = db.Column(db.Date)
     total_copies = db.Column(db.Integer)
     available_copies = db.Column(db.Integer)
-
-    library = relationship("Library", back_populates="books")  # fixed
+    __table_args__ = (db.UniqueConstraint('isbn', name='uq_book_isbn'),)
+    library1 = relationship("Library1", back_populates="books")  # fixed
     borrowing_b = relationship("Borrowing", back_populates="book_b")  # fixed
     r_book = relationship("Review", back_populates="b_review")  # fixed
     ba_book = relationship("BookAuthor", back_populates="b_BookAuthor")  # fixed
@@ -57,6 +61,7 @@ class BookAuthor(Base):
     b_BookAuthor = relationship("Book",back_populates="ba_book")
     a_BookAuthor = relationship("Author", back_populates="ba_Author")
 
+    __table_args__ = (db.UniqueConstraint('book_id','author_id', name='uq_book_isbn'),)
 
 
 class Category(Base):
@@ -64,15 +69,16 @@ class Category(Base):
     category_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(30))
     description = db.Column(db.Text)
-    bc_Category = relationship("BookCategory", back_populates="c_BookCategory")  # fixed
+    bc_Category = relationship("BookCategory", back_populates="c_BookCategory")
+
 
 class BookCategory(Base):
     __tablename__ = "BookCategory"
     book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'), primary_key=True)
     category_id = db.Column(db.Integer, db.ForeignKey('Category.category_id'), primary_key=True)
-
-    b_BookCategory = relationship("Book", back_populates="bc_book")  # added
-    c_BookCategory = relationship("Category", back_populates="bc_Category")  # fixed
+    __table_args__ = (db.UniqueConstraint('book_id','category_id', name='uq_book_isbn'),)
+    b_BookCategory = relationship("Book", back_populates="bc_book")
+    c_BookCategory = relationship("Category", back_populates="bc_Category")
 
 
 
@@ -97,7 +103,7 @@ class Member(Base):
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(10))
     email = db.Column(db.String(30))
-    phone = db.Column(db.String(15))
+    phone = db.Column(db.String(25))
     member_type = db.Column(db.String(10))
     registration_date = db.Column(db.Date)
 
