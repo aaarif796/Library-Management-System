@@ -1,0 +1,6 @@
+member_id,first_name,last_name,email,phone,member_type,registration_date
+1,John,Doe,john.doe@example.com,+1 (555) 555-1234,student,2022-09-01
+2,Jane  ,Smith,jane.smith@invalid,555-987-6543,faculty,2021-08-15
+3,  alice,Johnson ,ALICE.JOHNSON@UNI.EDU,001-44-20-7946-0958,STUDENT,2023-01-10
+4,Bob,,bob@uni.edu,5550000000,faculty,2020-05-20
+5,John,Doe,john.doe@example.com,555-555-1234,student,2022-09-01
