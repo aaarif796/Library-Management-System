@@ -14,23 +14,32 @@ from logging.handlers import RotatingFileHandler
 
 # Logging
 def configure_logging(level: str, log_path: str = "etl.log") -> None:
-    numeric = getattr(logging, level.upper(), logging.INFO)
-    fmt = "%(asctime)s [%(levelname)s] %(message)s"
+    numeric_level = getattr(logging, level.upper(), logging.INFO)
+    log_format = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 
-    # console handler (INFO only)
-    console = logging.StreamHandler(sys.stdout)
-    console.setLevel(numeric)
-
-    # file handler (DEBUG and above, rotating 2 × 5 MB)
+    # Ensure the directory exists
     os.makedirs(os.path.dirname(log_path) or ".", exist_ok=True)
-    file = RotatingFileHandler(log_path, maxBytes=5_000_000, backupCount=2)
-    file.setLevel(logging.DEBUG)
 
+    # Clear existing handlers (avoids duplicate logs if reconfigured)
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+
+    # Console Handler
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setLevel(numeric_level)
+    console_handler.setFormatter(logging.Formatter(log_format))
+
+    # Rotating File Handler (DEBUG and above)
+    file_handler = RotatingFileHandler(log_path, maxBytes=5_000_000, backupCount=2)
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(logging.Formatter(log_format))
+
+    # Apply configuration
     logging.basicConfig(
-        level=logging.DEBUG,   # root level must be ≤ both handlers
-        format=fmt,
-        handlers=[console, file]
+        level=logging.DEBUG,  # Root logger level
+        handlers=[console_handler, file_handler]
     )
+
 # CLI
 def parse_cli():
     parser = argparse.ArgumentParser(description="Library ETL (CSV → MySQL)")
@@ -115,21 +124,21 @@ def main() -> None:
         os.path.join(args.directory, "library.csv"),
         LibrarySchema, Library1, session, "contact_email"
     )
-    #
-    # summary["books"] = process_file(
-    #     os.path.join(args.directory, "book.csv"),
-    #     BookSchema, Book, session, "isbn"
-    # )
-    #
-    # summary["authors"] = process_file(
-    #     os.path.join(args.directory, "author.csv"),
-    #     AuthorSchema, Author, session, None   # no single natural key
-    # )
-    #
-    # summary["members"] = process_file(
-    #     os.path.join(args.directory, "member.csv"),
-    #     MemberSchema, Member, session, "email"
-    # )
+
+    summary["books"] = process_file(
+        os.path.join(args.directory, "book.csv"),
+        BookSchema, Book, session, "isbn"
+    )
+
+    summary["authors"] = process_file(
+        os.path.join(args.directory, "author.csv"),
+        AuthorSchema, Author, session, None   # no single natural key
+    )
+
+    summary["members"] = process_file(
+        os.path.join(args.directory, "member.csv"),
+        MemberSchema, Member, session, "email"
+    )
 
     session.close()
     logging.info("=== ETL SUMMARY ===")

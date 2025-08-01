@@ -142,30 +142,24 @@ class Library1(BaseModel):
         return str.lower(v)
 
     @field_validator('phone_number')
-    def validate_phone_number(cls, data:str) -> str:
-        """
-            Validating the phone number
-        :param v:
-        :return:
-        """
-        if data is None:
+    def validate_phone_number(cls, data: str) -> str:
+        data = re.sub(r'\D', '', data)  # strips everything except digits
+        if not data:
             raise ValueError("Phone number is empty")
-        data = re.sub(r'\D', '', data)
-        data = re.sub(r'(', '', data)
-        data = re.sub(r')', '', data)
+
         if data.startswith("00"):
             data = data[2:]
         if data.startswith("+"):
             data = data[1:]
+
         if len(data) > 10:
             country_code = data[:-10]
             national_number = data[-10:]
         else:
-            country_code = 91
+            country_code = "91"
             national_number = data.zfill(10)
-        formatted = f"+{country_code}-{national_number[:3]}-{national_number[3:6]}-{national_number[6:10]}"
-        return formatted
 
+        return f"+{country_code}-{national_number[:3]}-{national_number[3:6]}-{national_number[6:10]}"
 
 # Author Model
 class Author(BaseModel):
@@ -352,6 +346,8 @@ class Member(BaseModel):
     @field_validator('phone')
     def validate_phone(cls, data: str) -> str:
         data = re.sub(r'\D', '', data)
+        if not data:
+            raise ValueError("Phone number is empty")
         if data.startswith("00"):
             data = data[2:]
         if data.startswith("+"):
@@ -360,10 +356,9 @@ class Member(BaseModel):
             country_code = data[:-10]
             national_number = data[-10:]
         else:
-            country_code = 91
+            country_code = "91"
             national_number = data.zfill(10)
-        formatted = f"+{country_code}-{national_number[:3]}-{national_number[3:6]}-{national_number[6:10]}"
-        return formatted
+        return f"+{country_code}-{national_number[:3]}-{national_number[3:6]}-{national_number[6:10]}"
 
     @field_validator('member_type')
     def validate_member_type(cls, v: str) -> str:
@@ -371,7 +366,12 @@ class Member(BaseModel):
             raise ValueError("Invalid Member type")
         return v
 
-
+    @field_validator('member_type')
+    def validate_member_type(cls, v: str) -> str:
+        v = v.lower()
+        if v not in {"student", "faculty"}:
+            raise ValueError("Invalid Member type")
+        return v
 
 # Review Model
 class Review(BaseModel):

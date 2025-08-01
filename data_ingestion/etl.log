@@ -1,0 +1,86 @@
+2025-08-01 15:03:49,799 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-01 15:03:49,800 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-01 15:03:49,800 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-01 15:03:49,802 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-01 15:03:49,803 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-01 15:03:49,808 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-01 15:03:49,808 [INFO] root: === ETL SUMMARY ===
+2025-08-01 15:03:49,808 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-01 15:04:52,345 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-01 15:04:52,345 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-01 15:04:52,354 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-01 15:04:52,357 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-01 15:04:52,370 [INFO] Book: Inserted=5 skipped=0 invalid=1
+2025-08-01 15:04:52,370 [INFO] root: === ETL SUMMARY ===
+2025-08-01 15:04:52,370 [INFO] root: books      : inserted=5   skipped=0   invalid=1  
+2025-08-01 15:05:58,123 [INFO] Author: Inserted=5 skipped=0 invalid=0
+2025-08-01 15:05:58,123 [INFO] root: === ETL SUMMARY ===
+2025-08-01 15:05:58,123 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
+2025-08-01 15:06:10,006 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-01 15:06:10,012 [WARNING] Member: Invalid row {'member_id': '4', 'first_name': 'Bob', 'last_name': '', 'email': 'bob@uni.edu', 'phone': '5550000000', 'member_type': 'teacher', 'registration_date': '2020-05-20'}: 1 validation error for Member
+member_type
+  Value error, Invalid Member type [type=value_error, input_value='teacher', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-01 15:06:10,012 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-01 15:06:10,022 [INFO] Member: Inserted=2 skipped=1 invalid=2
+2025-08-01 15:06:10,022 [INFO] root: === ETL SUMMARY ===
+2025-08-01 15:06:10,022 [INFO] root: members    : inserted=2   skipped=1   invalid=2  
+2025-08-01 15:10:19,237 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-01 15:10:19,237 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-01 15:10:19,237 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-01 15:10:19,237 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-01 15:10:19,249 [INFO] Member: Inserted=1 skipped=3 invalid=1
+2025-08-01 15:10:19,249 [INFO] root: === ETL SUMMARY ===
+2025-08-01 15:10:19,249 [INFO] root: members    : inserted=1   skipped=3   invalid=1  
+2025-08-01 15:11:44,342 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-01 15:11:44,342 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-01 15:11:44,342 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-01 15:11:44,342 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-01 15:11:44,342 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-01 15:11:44,342 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-01 15:11:44,342 [INFO] root: === ETL SUMMARY ===
+2025-08-01 15:11:44,342 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-01 15:13:06,471 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-01 15:13:06,471 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-01 15:13:06,476 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-01 15:13:06,477 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-01 15:13:06,477 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-01 15:13:06,477 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-01 15:13:06,477 [INFO] root: === ETL SUMMARY ===
+2025-08-01 15:13:06,477 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-01 15:14:14,829 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-01 15:14:14,845 [INFO] Library1: Inserted=4 skipped=0 invalid=1
+2025-08-01 15:14:14,852 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-01 15:14:14,854 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-01 15:14:14,854 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-01 15:14:14,863 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-01 15:14:14,863 [INFO] Book: Inserted=5 skipped=0 invalid=1
+2025-08-01 15:14:14,877 [INFO] Author: Inserted=5 skipped=0 invalid=0
+2025-08-01 15:14:14,877 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-01 15:14:14,893 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-01 15:14:14,893 [INFO] Member: Inserted=3 skipped=1 invalid=1
+2025-08-01 15:14:14,893 [INFO] root: === ETL SUMMARY ===
+2025-08-01 15:14:14,893 [INFO] root: libraries  : inserted=4   skipped=0   invalid=1  
+2025-08-01 15:14:14,893 [INFO] root: books      : inserted=5   skipped=0   invalid=1  
+2025-08-01 15:14:14,893 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
+2025-08-01 15:14:14,893 [INFO] root: members    : inserted=3   skipped=1   invalid=1  

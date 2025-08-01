@@ -16,10 +16,12 @@ class Library1(Base):
     Name = db.Column(db.String(50))
     campus_location = db.Column(db.String(80))
     contact_email = db.Column(db.String(40))
-    phone_number = db.Column(db.String(15))
+    phone_number = db.Column(db.String(25))
     books = relationship("Book", back_populates="library1")
-    __table_args__ = (db.UniqueConstraint('contact_email', name='contact_email_unique'),)
-    __table_args__ = (db.UniqueConstraint('phone_number', name='contact_email_unique'),)
+    __table_args__ = (
+        db.UniqueConstraint('contact_email', name='contact_email_unique'),
+        db.UniqueConstraint('phone_number', name='phone_number_unique'),
+    )
 
 
 class Book(Base):
@@ -101,7 +103,7 @@ class Member(Base):
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(10))
     email = db.Column(db.String(30))
-    phone = db.Column(db.String(15))
+    phone = db.Column(db.String(25))
     member_type = db.Column(db.String(10))
     registration_date = db.Column(db.Date)
 
