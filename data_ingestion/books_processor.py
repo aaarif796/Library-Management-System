@@ -1,7 +1,7 @@
 import json
 import sys
 import logging
-from data_validation import Book
+from schemas import Book
 from typing import List, Dict, Any
 
 file_path: str = sys.argv[1]
