@@ -148,3 +148,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# python data_processor.py -d ./data\ --db mysql+pymysql://root:root@127.0.0.1:3306/LMS_ORM --log-level INFO
