@@ -65,8 +65,7 @@ def process_file(
     schema_cls,
     model_cls,
     session: Session,
-    natural_key: str | None = None
-) -> Tuple[int, int, int]:
+    natural_key: str | None = None) -> Tuple[int, int, int]:
     inserted = skipped = invalid = 0
     logger = logging.getLogger(model_cls.__name__)
 
