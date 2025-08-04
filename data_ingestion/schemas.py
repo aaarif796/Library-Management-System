@@ -4,6 +4,7 @@ import re
 import logging
 logger = logging.getLogger(__name__)
 logging.basicConfig(level = logging.INFO)
+
 # Book Model
 class Book(BaseModel):
     book_id: int

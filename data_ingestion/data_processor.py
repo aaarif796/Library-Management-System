@@ -65,8 +65,7 @@ def process_file(
     schema_cls,
     model_cls,
     session: Session,
-    natural_key: str | None = None
-) -> Tuple[int, int, int]:
+    natural_key: str | None = None) -> Tuple[int, int, int]:
     inserted = skipped = invalid = 0
     logger = logging.getLogger(model_cls.__name__)
 
@@ -148,3 +147,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# python data_processor.py -d ./data\ --db mysql+pymysql://root:root@127.0.0.1:3306/LMS_ORM --log-level INFO
