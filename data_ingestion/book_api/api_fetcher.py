@@ -14,32 +14,32 @@ def main():
     client = OpenLibraryClient()
     collected_data = []
 
-    print(f"🔍 Searching for author: {args.author}")
+    print(f"Searching for author: {args.author}")
     search_result = client.search_author(args.author)
 
     if not search_result["docs"]:
-        print("❌ Author not found.")
+        print("Author not found.")
         return
 
     author_key = search_result["docs"][0]["key"]
-    print(f"✅ Author found: {author_key}")
+    print(f"Author found: {author_key}")
 
     works = client.get_author_works(author_key, args.limit)
-    print(f"📚 Found {len(works.get('entries', []))} works. Fetching details...")
+    print(f"Found {len(works.get('entries', []))} works. Fetching details...")
 
     for work in works.get("entries", []):
         work_key_path = work.get("key")
         try:
             detail = client.get_work_detail(work_key_path)
             collected_data.append(detail)
-            print(f"✅ Collected: {detail.get('title', 'No Title')}")
+            print(f"Collected: {detail.get('title', 'No Title')}")
         except Exception as e:
-            print(f"⚠️ Skipped: {work.get('title', 'Unknown')} | Error: {e}")
+            print(f"Skipped: {work.get('title', 'Unknown')} | Error: {e}")
 
     if args.output:
         with open(args.output, "w", encoding="utf-8") as f:
             json.dump(collected_data, f, indent=2, ensure_ascii=False)
-        print(f"\n📁 Saved {len(collected_data)} records to '{args.output}'")
+        print(f"\nSaved {len(collected_data)} records to '{args.output}'")
     else:
         print(json.dumps(collected_data, indent=2, ensure_ascii=False))
 

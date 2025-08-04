@@ -1,23 +1,20 @@
 from typing import Optional, List
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, field_validator
+from datetime import date
 
-class BookBase(BaseModel):
+
+class Author(BaseModel):
+    author_id: str
+    first_name: str
+    last_name: str
+    subjects: Optional[List[str]]
+
+
+class Book(BaseModel):
+    book_id: str
+    author_id: str
     title: str
-    author: str
-    isbn: Optional[str] = None
-    publish_year: Optional[int] = None
-    pages: Optional[int] = None
-    language: Optional[str] = "en"
-
-    @validator("isbn")
-    def normalise_isbn(cls, v):
-        return v.replace("-", "").replace(" ", "") if v else None
-
-class BookCreate(BookBase):
-    pass
-
-class Book(BookBase):
-    id: int
-
-    class Config:
-        from_attributes = True
+    publication_date: date
+    description: str
+    total_copies: int
+    available_copies: int
