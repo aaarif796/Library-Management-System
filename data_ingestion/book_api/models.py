@@ -23,11 +23,13 @@ class Author(Base):
 class Book(Base):
     __tablename__ = "Book"
     book_id = db.Column(db.String(15), primary_key= True)
-    author_id = db.Column(db.Integer, db.ForeignKey("Author.author_id"))
-    title = db.Column(db.String(20))
+    author_id = db.Column(db.String(15), db.ForeignKey("Author.author_id"))
+    title = db.Column(db.String(100))
     publication_date = db.Column(db.Date)
     description = db.Column(db.Text)
     total_copies = db.Column(db.Integer)
     available_copies = db.Column(db.Integer)
     a_book = relationship("Author", back_populates="b_author")
 
+if __name__ == "__main__":
+    Base.metadata.create_all(engine)
