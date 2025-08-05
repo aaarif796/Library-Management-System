@@ -97,6 +97,7 @@ def process_file(
                     session.add(model_cls(**clean))
                     session.flush()
                     inserted += 1
+                    logger.info("Value inserted")
                 except IntegrityError as e:
                     logger.warning("Skipping row: %s", e.orig)
                     session.rollback()   # only rolls back this row

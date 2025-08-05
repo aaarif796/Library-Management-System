@@ -37,9 +37,9 @@ class Book(BaseModel):
         if not v:
             return None
         clean = re.sub(r"[-\s]", "", v)
-        if len(clean) == 13 and clean.isdigit():
+        if (len(clean) == 13 or len(clean)==10) and clean.isdigit():
             return clean
-        raise ValueError("Invalid ISBN-13")
+        raise ValueError("Invalid ISBN-13 or ISBN-10")
 
     @field_validator("available_copies")
     def validate_available_copies(cls, v:int | None ) ->int | None:
@@ -50,10 +50,7 @@ class Book(BaseModel):
         """
         if v is None:
             return None
-        if v <= 0:
-            logger.exception("Available copies won't be less than 0")
-            v = 100 # by default
-        return v
+        return max(v, 0)
 
     @field_validator("publication_date")
     def validate_publication_date(cls, v: date) -> date:
