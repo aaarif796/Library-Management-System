@@ -115,9 +115,11 @@ def extract_book_info(work_detail, client):
 
     # Normalize ISBN
     isbn = None
-    print(edition.get("isbn_13", "")[0])
-    isbn = BookSchema.validate_and_clean_isbn(edition.get("isbn_13", "")[0])
-
+    isbn = None
+    if 'isbn_13' in edition and edition['isbn_13']:
+        isbn = edition['isbn_13'][0].strip()
+    elif 'isbn_10' in edition and edition['isbn_10']:
+        isbn = edition['isbn_10'][0].strip()
 
     return Book(
         book_id=book_id,

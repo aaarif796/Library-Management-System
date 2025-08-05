@@ -35,10 +35,10 @@ class Book(BaseModel):
     def validate_and_clean_isbn(cls, v):
         if not v:
             return None
-        clean = re.sub(r"[-\s]", "", v)
-        if (len(clean) == 13 or len(clean)==10) and clean.isdigit():
+        clean = re.sub(r"[-\s]", "", str(v))
+        if clean.isdigit() and len(clean) in (10, 13):
             return clean
-        raise ValueError("Invalid ISBN-13 or ISBN-10")
+        return None
 
     @field_validator("available_copies")
     def validate_available_copies(cls, v: int | None) -> int | None:

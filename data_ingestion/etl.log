@@ -1180,3 +1180,79 @@ email
 2025-08-05 16:51:00,407 [INFO] root: books      : inserted=5   skipped=1   invalid=0  
 2025-08-05 16:51:00,407 [INFO] root: authors    : inserted=0   skipped=5   invalid=0  
 2025-08-05 16:51:00,407 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 17:16:03,865 [INFO] Library1: Value inserted
+2025-08-05 17:16:03,875 [INFO] Library1: Value inserted
+2025-08-05 17:16:03,875 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 17:16:03,875 [INFO] Library1: Value inserted
+2025-08-05 17:16:03,875 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 17:16:03,881 [INFO] Library1: Inserted=3 skipped=0 invalid=2
+2025-08-05 17:16:03,889 [INFO] Book: Value inserted
+2025-08-05 17:16:03,889 [INFO] Book: Value inserted
+2025-08-05 17:16:03,896 [INFO] Book: Value inserted
+2025-08-05 17:16:03,896 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 17:16:03,906 [INFO] Book: Value inserted
+2025-08-05 17:16:03,906 [INFO] Book: Value inserted
+2025-08-05 17:16:03,915 [INFO] Book: Value inserted
+2025-08-05 17:16:03,915 [INFO] Book: Inserted=6 skipped=0 invalid=0
+2025-08-05 17:16:03,925 [INFO] Author: Value inserted
+2025-08-05 17:16:03,928 [INFO] Author: Value inserted
+2025-08-05 17:16:03,928 [INFO] Author: Value inserted
+2025-08-05 17:16:03,928 [INFO] Author: Value inserted
+2025-08-05 17:16:03,933 [INFO] Author: Value inserted
+2025-08-05 17:16:03,937 [INFO] Author: Inserted=5 skipped=0 invalid=0
+2025-08-05 17:16:03,945 [INFO] Member: Value inserted
+2025-08-05 17:16:03,945 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 17:16:03,945 [INFO] Member: Value inserted
+2025-08-05 17:16:03,956 [INFO] Member: Value inserted
+2025-08-05 17:16:03,958 [INFO] Member: Value inserted
+2025-08-05 17:16:03,965 [INFO] Member: Inserted=4 skipped=0 invalid=1
+2025-08-05 17:16:03,965 [INFO] root: === ETL SUMMARY ===
+2025-08-05 17:16:03,965 [INFO] root: libraries  : inserted=3   skipped=0   invalid=2  
+2025-08-05 17:16:03,965 [INFO] root: books      : inserted=6   skipped=0   invalid=0  
+2025-08-05 17:16:03,965 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
+2025-08-05 17:16:03,965 [INFO] root: members    : inserted=4   skipped=0   invalid=1  
+2025-08-05 17:31:20,533 [INFO] Library1: Value inserted
+2025-08-05 17:31:20,533 [INFO] Library1: Value inserted
+2025-08-05 17:31:20,533 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 17:31:20,546 [INFO] Library1: Value inserted
+2025-08-05 17:31:20,546 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 17:31:20,549 [INFO] Library1: Inserted=3 skipped=0 invalid=2
+2025-08-05 17:31:20,549 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,582 [INFO] Book: Inserted=6 skipped=0 invalid=0
+2025-08-05 17:31:20,586 [INFO] Author: Value inserted
+2025-08-05 17:31:20,586 [INFO] Author: Value inserted
+2025-08-05 17:31:20,586 [INFO] Author: Value inserted
+2025-08-05 17:31:20,596 [INFO] Author: Value inserted
+2025-08-05 17:31:20,596 [INFO] Author: Value inserted
+2025-08-05 17:31:20,603 [INFO] Author: Inserted=5 skipped=0 invalid=0
+2025-08-05 17:31:20,603 [INFO] Member: Value inserted
+2025-08-05 17:31:20,611 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 17:31:20,612 [INFO] Member: Value inserted
+2025-08-05 17:31:20,616 [INFO] Member: Value inserted
+2025-08-05 17:31:20,616 [INFO] Member: Value inserted
+2025-08-05 17:31:20,616 [INFO] Member: Inserted=4 skipped=0 invalid=1
+2025-08-05 17:31:20,616 [INFO] root: === ETL SUMMARY ===
+2025-08-05 17:31:20,616 [INFO] root: libraries  : inserted=3   skipped=0   invalid=2  
+2025-08-05 17:31:20,616 [INFO] root: books      : inserted=6   skipped=0   invalid=0  
+2025-08-05 17:31:20,616 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
+2025-08-05 17:31:20,616 [INFO] root: members    : inserted=4   skipped=0   invalid=1  
