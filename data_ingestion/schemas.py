@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, field_validator, model_validator
-from datetime import date
+from datetime import date, datetime
 import re
 import logging
 logger = logging.getLogger(__name__)
@@ -11,10 +11,9 @@ class Book(BaseModel):
     library_id: str
     title: str
     isbn: str
-    total_copies: int| None
     publication_date: date
+    total_copies: int| None
     available_copies: int | None
-
 
     @field_validator('title')
     def validate_title(cls, v:str) ->str:
@@ -42,28 +41,27 @@ class Book(BaseModel):
         raise ValueError("Invalid ISBN-13 or ISBN-10")
 
     @field_validator("available_copies")
-    def validate_available_copies(cls, v:int | None ) ->int | None:
-        """
-            Validation available copies which should not be less than 0 or 0
-        :param v:
-        :return:
-        """
+    def validate_available_copies(cls, v: int | None) -> int | None:
         if v is None:
             return None
+        if v < 0:
+            logger.warning("Available copies can't be less than 0. Resetting to 0.")
         return max(v, 0)
 
-    @field_validator("publication_date")
-    def validate_publication_date(cls, v: date) -> date:
-        """
-            Validation publication date which should not be more than present date
-        :param v:
-        :return:
-        """
-        if v > date.today():
-            logger.exception("It's not possible to give the future date")
-            v = date(2010, 10, 10)
-        return v
-
+    @field_validator('publication_date', mode="before")
+    def validate_date(cls, v):
+        if not v:
+            return None
+        try:
+            if isinstance(v, str):
+                if len(v) == 4:  # Only year
+                    return datetime(int(v), 1, 1).date()
+                return datetime.strptime(v, "%Y-%m-%d").date()
+            if isinstance(v, datetime):
+                return v.date()
+            return v
+        except Exception as e:
+            raise ValueError(f"Invalid date format: {v}")
 
 
 # Library Model
@@ -86,20 +84,15 @@ class Library1(BaseModel):
         return v
 
     @field_validator('Name')
-    def validate_name(cls, v:str) ->str:
-        """
-            In this function first trim the string,
-            split the string with the space
-            and add capitalization function before joining
-            after that join with the space
-        :param v:
-        :return:
-        """
+    def validate_name(cls, v: str) -> str:
+        if not v or not v.strip():
+            raise ValueError("Library name is empty")
         trimmed = v.strip()
         split_name = trimmed.split()
         capitalized = [name.capitalize() for name in split_name]
         library_name = ' '.join(capitalized)
         return library_name
+
 
     @field_validator('contact_email')
     def validate_contact_email(cls, v: str) -> str:

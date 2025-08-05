@@ -184,3 +184,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+ # python api_fetcher.py --author "Scott Fitzgerald" --limit 5 --db "mysql+pymysql://root:root@127.0.0.1:3306/lms_orm1"
