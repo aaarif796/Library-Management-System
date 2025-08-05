@@ -84,3 +84,34 @@ email
 2025-08-01 15:14:14,893 [INFO] root: books      : inserted=5   skipped=0   invalid=1  
 2025-08-01 15:14:14,893 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
 2025-08-01 15:14:14,893 [INFO] root: members    : inserted=3   skipped=1   invalid=1  
+2025-08-05 14:49:52,041 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 14:49:52,056 [INFO] Library1: Inserted=4 skipped=0 invalid=1
+2025-08-05 14:49:52,057 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0-316-76948-0', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: 1 validation error for Book
+isbn
+  Value error, Invalid ISBN-13 [type=value_error, input_value='0-316-76948-0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 14:49:52,057 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 14:49:52,057 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-05 14:49:52,057 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 14:49:52,072 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 14:49:52,074 [WARNING] Book: Invalid row {'book_id': '6', 'library_id': '1', 'title': '  the  GREAT gatsby  ', 'isbn': '0743273567', 'publication_date': '1925-04-10', 'total_copies': '8', 'available_copies': '8'}: 1 validation error for Book
+isbn
+  Value error, Invalid ISBN-13 [type=value_error, input_value='0743273567', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 14:49:52,074 [INFO] Book: Inserted=3 skipped=0 invalid=3
+2025-08-05 14:49:52,074 [INFO] Author: Inserted=5 skipped=0 invalid=0
+2025-08-05 14:49:52,089 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 14:49:52,089 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 14:49:52,098 [INFO] Member: Inserted=3 skipped=1 invalid=1
+2025-08-05 14:49:52,098 [INFO] root: === ETL SUMMARY ===
+2025-08-05 14:49:52,098 [INFO] root: libraries  : inserted=4   skipped=0   invalid=1  
+2025-08-05 14:49:52,098 [INFO] root: books      : inserted=3   skipped=0   invalid=3  
+2025-08-05 14:49:52,098 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
+2025-08-05 14:49:52,098 [INFO] root: members    : inserted=3   skipped=1   invalid=1  

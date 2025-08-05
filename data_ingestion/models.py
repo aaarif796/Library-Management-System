@@ -4,15 +4,15 @@ from sqlalchemy.orm import declarative_base, relationship
 
 connection = pymysql.connect(host='127.0.0.1', user='root', password='root')
 cursor = connection.cursor()
-cursor.execute("CREATE DATABASE IF NOT EXISTS LMS_ORM")
+cursor.execute("CREATE DATABASE IF NOT EXISTS LMS_ORM1")
 connection.close()
 
-engine = db.create_engine("mysql+pymysql://root:root@127.0.0.1:3306/LMS_ORM")
+engine = db.create_engine("mysql+pymysql://root:root@127.0.0.1:3306/LMS_ORM1")
 Base = declarative_base()
 
 class Library1(Base):
     __tablename__ = "Library1"
-    library_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    library_id = db.Column(db.String(15), primary_key=True)
     Name = db.Column(db.String(50))
     campus_location = db.Column(db.String(80))
     contact_email = db.Column(db.String(40))
@@ -26,13 +26,13 @@ class Library1(Base):
 
 class Book(Base):
     __tablename__ = "Book"
-    book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    library_id = db.Column(db.Integer, db.ForeignKey('Library1.library_id'))
-    title = db.Column(db.String(50))
-    isbn = db.Column(db.String(13))
-    publication_date = db.Column(db.Date)
-    total_copies = db.Column(db.Integer)
-    available_copies = db.Column(db.Integer)
+    book_id = db.Column(db.String(15), primary_key=True)
+    library_id = db.Column(db.String(15), db.ForeignKey('Library1.library_id'), nullable= True)
+    title = db.Column(db.String(512))
+    isbn = db.Column(db.String(20), nullable= True)
+    publication_date = db.Column(db.Date, nullable= True)
+    total_copies = db.Column(db.Integer, nullable= True)
+    available_copies = db.Column(db.Integer, nullable= True)
     __table_args__ = (db.UniqueConstraint('isbn', name='uq_book_isbn'),)
     library1 = relationship("Library1", back_populates="books")  # fixed
     borrowing_b = relationship("Borrowing", back_populates="book_b")  # fixed
@@ -44,20 +44,20 @@ class Book(Base):
 
 class Author(Base):
     __tablename__ = "Author"
-    author_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    author_id = db.Column(db.String(15), primary_key = True)
     first_name = db.Column(db.String(20))
-    last_name = db.Column(db.String(10))
-    birth_date = db.Column(db.Date)
-    nationality = db.Column(db.String(30))
-    biography = db.Column(db.Text)
+    last_name = db.Column(db.String(20), nullable= True)
+    birth_date = db.Column(db.Date, nullable= True)
+    nationality = db.Column(db.String(30), nullable= True)
+    biography = db.Column(db.Text, nullable= True)
     ba_Author = relationship("BookAuthor",back_populates="a_BookAuthor")
 
 
 
 class BookAuthor(Base):
     __tablename__ = "BookAuthor"
-    book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'), primary_key = True)
-    author_id = db.Column(db.Integer, db.ForeignKey('Author.author_id') ,primary_key = True)
+    book_id = db.Column(db.String(15), db.ForeignKey('Book.book_id'), primary_key = True)
+    author_id = db.Column(db.String(15), db.ForeignKey('Author.author_id') ,primary_key = True)
     b_BookAuthor = relationship("Book",back_populates="ba_book")
     a_BookAuthor = relationship("Author", back_populates="ba_Author")
 
@@ -66,7 +66,7 @@ class BookAuthor(Base):
 
 class Category(Base):
     __tablename__ = "Category"
-    category_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    category_id = db.Column(db.String(15), primary_key=True)
     name = db.Column(db.String(30))
     description = db.Column(db.Text)
     bc_Category = relationship("BookCategory", back_populates="c_BookCategory")
@@ -74,8 +74,8 @@ class Category(Base):
 
 class BookCategory(Base):
     __tablename__ = "BookCategory"
-    book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'), primary_key=True)
-    category_id = db.Column(db.Integer, db.ForeignKey('Category.category_id'), primary_key=True)
+    book_id = db.Column(db.String(15), db.ForeignKey('Book.book_id'), primary_key=True)
+    category_id = db.Column(db.String(15), db.ForeignKey('Category.category_id'), primary_key=True)
     __table_args__ = (db.UniqueConstraint('book_id','category_id', name='uq_book_isbn'),)
     b_BookCategory = relationship("Book", back_populates="bc_book")
     c_BookCategory = relationship("Category", back_populates="bc_Category")
@@ -84,9 +84,9 @@ class BookCategory(Base):
 
 class Borrowing(Base):
     __tablename__ = "Borrowing"
-    borrowing_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'))
-    member_id = db.Column(db.Integer, db.ForeignKey('Member.member_id'))
+    borrowing_id = db.Column(db.String(15), primary_key=True)
+    book_id = db.Column(db.String(15), db.ForeignKey('Book.book_id'))
+    member_id = db.Column(db.String(15), db.ForeignKey('Member.member_id'))
     borrow_date = db.Column(db.Date)
     due_date = db.Column(db.Date)
     return_date = db.Column(db.Date)
@@ -99,7 +99,7 @@ class Borrowing(Base):
 
 class Member(Base):
     __tablename__ = "Member"
-    member_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    member_id = db.Column(db.String(15), primary_key=True)
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(10))
     email = db.Column(db.String(30))
@@ -114,9 +114,9 @@ class Member(Base):
 
 class Review(Base):
     __tablename__ = "Review"
-    review_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    book_id = db.Column(db.Integer, db.ForeignKey('Book.book_id'))
-    member_id = db.Column(db.Integer, db.ForeignKey('Member.member_id'))
+    review_id = db.Column(db.String(15), primary_key=True)
+    book_id = db.Column(db.String(15), db.ForeignKey('Book.book_id'))
+    member_id = db.Column(db.String(15), db.ForeignKey('Member.member_id'))
     rating = db.Column(db.Integer)
     comment = db.Column(db.Text)
     review_date = db.Column(db.Date)
