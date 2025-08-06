@@ -4,7 +4,7 @@ import logging
 import os
 import sys
 from datetime import datetime
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Tuple
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.exc import IntegrityError
@@ -96,7 +96,9 @@ def process_file(
                 try:
                     session.add(model_cls(**clean))
                     session.flush()
+                    # session.info()
                     inserted += 1
+                    logger.info("Value inserted")
                 except IntegrityError as e:
                     logger.warning("Skipping row: %s", e.orig)
                     session.rollback()   # only rolls back this row
@@ -121,22 +123,22 @@ def main() -> None:
 
     summary["libraries"] = process_file(
         os.path.join(args.directory, "library.csv"),
-        LibrarySchema, Library1, session, "contact_email"
+        LibrarySchema, Library1, session, "library_id"
     )
 
     summary["books"] = process_file(
         os.path.join(args.directory, "book.csv"),
-        BookSchema, Book, session, "isbn"
+        BookSchema, Book, session, "book_id"
     )
 
     summary["authors"] = process_file(
         os.path.join(args.directory, "author.csv"),
-        AuthorSchema, Author, session, None   # no single natural key
+        AuthorSchema, Author, session, "author_id"   # no single natural key
     )
 
     summary["members"] = process_file(
         os.path.join(args.directory, "member.csv"),
-        MemberSchema, Member, session, "email"
+        MemberSchema, Member, session, "member_id"
     )
 
     session.close()
@@ -149,4 +151,4 @@ if __name__ == "__main__":
     main()
 
 
-# python data_processor.py -d ./data\ --db mysql+pymysql://root:root@127.0.0.1:3306/LMS_ORM --log-level INFO
+# python data_processor.py -d ./data\ --db mysql+pymysql://root:root@127.0.0.1:3306/LMS_ORM1 --log-level INFO

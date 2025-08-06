@@ -84,3 +84,1175 @@ email
 2025-08-01 15:14:14,893 [INFO] root: books      : inserted=5   skipped=0   invalid=1  
 2025-08-01 15:14:14,893 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
 2025-08-01 15:14:14,893 [INFO] root: members    : inserted=3   skipped=1   invalid=1  
+2025-08-05 14:49:52,041 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 14:49:52,056 [INFO] Library1: Inserted=4 skipped=0 invalid=1
+2025-08-05 14:49:52,057 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0-316-76948-0', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: 1 validation error for Book
+isbn
+  Value error, Invalid ISBN-13 [type=value_error, input_value='0-316-76948-0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 14:49:52,057 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 14:49:52,057 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-05 14:49:52,057 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 14:49:52,072 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 14:49:52,074 [WARNING] Book: Invalid row {'book_id': '6', 'library_id': '1', 'title': '  the  GREAT gatsby  ', 'isbn': '0743273567', 'publication_date': '1925-04-10', 'total_copies': '8', 'available_copies': '8'}: 1 validation error for Book
+isbn
+  Value error, Invalid ISBN-13 [type=value_error, input_value='0743273567', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 14:49:52,074 [INFO] Book: Inserted=3 skipped=0 invalid=3
+2025-08-05 14:49:52,074 [INFO] Author: Inserted=5 skipped=0 invalid=0
+2025-08-05 14:49:52,089 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 14:49:52,089 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 14:49:52,098 [INFO] Member: Inserted=3 skipped=1 invalid=1
+2025-08-05 14:49:52,098 [INFO] root: === ETL SUMMARY ===
+2025-08-05 14:49:52,098 [INFO] root: libraries  : inserted=4   skipped=0   invalid=1  
+2025-08-05 14:49:52,098 [INFO] root: books      : inserted=3   skipped=0   invalid=3  
+2025-08-05 14:49:52,098 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
+2025-08-05 14:49:52,098 [INFO] root: members    : inserted=3   skipped=1   invalid=1  
+2025-08-05 14:58:01,242 [WARNING] Library1: File data\book.csv\library.csv not found – skipping
+2025-08-05 14:58:01,242 [WARNING] Book: File data\book.csv\book.csv not found – skipping
+2025-08-05 14:58:01,242 [WARNING] Author: File data\book.csv\author.csv not found – skipping
+2025-08-05 14:58:01,242 [WARNING] Member: File data\book.csv\member.csv not found – skipping
+2025-08-05 14:58:01,242 [INFO] root: === ETL SUMMARY ===
+2025-08-05 14:58:01,242 [INFO] root: libraries  : inserted=0   skipped=0   invalid=0  
+2025-08-05 14:58:01,242 [INFO] root: books      : inserted=0   skipped=0   invalid=0  
+2025-08-05 14:58:01,242 [INFO] root: authors    : inserted=0   skipped=0   invalid=0  
+2025-08-05 14:58:01,242 [INFO] root: members    : inserted=0   skipped=0   invalid=0  
+2025-08-05 14:58:33,058 [WARNING] Library1: File .\data\book.csv\library.csv not found – skipping
+2025-08-05 14:58:33,059 [WARNING] Book: File .\data\book.csv\book.csv not found – skipping
+2025-08-05 14:58:33,059 [WARNING] Author: File .\data\book.csv\author.csv not found – skipping
+2025-08-05 14:58:33,059 [WARNING] Member: File .\data\book.csv\member.csv not found – skipping
+2025-08-05 14:58:33,059 [INFO] root: === ETL SUMMARY ===
+2025-08-05 14:58:33,059 [INFO] root: libraries  : inserted=0   skipped=0   invalid=0  
+2025-08-05 14:58:33,059 [INFO] root: books      : inserted=0   skipped=0   invalid=0  
+2025-08-05 14:58:33,059 [INFO] root: authors    : inserted=0   skipped=0   invalid=0  
+2025-08-05 14:58:33,059 [INFO] root: members    : inserted=0   skipped=0   invalid=0  
+2025-08-05 14:59:01,645 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 14:59:01,645 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 14:59:01,645 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 14:59:01,645 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 14:59:01,645 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 14:59:01,645 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 14:59:01,645 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0-316-76948-0', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: 1 validation error for Book
+isbn
+  Value error, Invalid ISBN-13 [type=value_error, input_value='0-316-76948-0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 14:59:01,645 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 14:59:01,661 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-05 14:59:01,661 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 14:59:01,677 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 14:59:01,677 [WARNING] Book: Invalid row {'book_id': '6', 'library_id': '1', 'title': '  the  GREAT gatsby  ', 'isbn': '0743273567', 'publication_date': '1925-04-10', 'total_copies': '8', 'available_copies': '8'}: 1 validation error for Book
+isbn
+  Value error, Invalid ISBN-13 [type=value_error, input_value='0743273567', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 14:59:01,677 [INFO] Book: Inserted=3 skipped=0 invalid=3
+2025-08-05 14:59:01,677 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 14:59:01,677 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 14:59:01,677 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 14:59:01,677 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 14:59:01,677 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 14:59:01,677 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 14:59:01,693 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 14:59:01,693 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 14:59:01,693 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 14:59:01,693 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 14:59:01,693 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 14:59:01,693 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 14:59:01,693 [INFO] root: === ETL SUMMARY ===
+2025-08-05 14:59:01,693 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 14:59:01,693 [INFO] root: books      : inserted=3   skipped=0   invalid=3  
+2025-08-05 14:59:01,693 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 14:59:01,693 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:01:19,369 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:01:19,369 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:01:19,369 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:01:19,369 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:01:19,381 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:01:19,381 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:01:19,381 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0316769480', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: 1 validation error for Book
+isbn
+  Value error, Invalid ISBN-13 [type=value_error, input_value='0316769480', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 15:01:19,381 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:01:19,381 [WARNING] Book: Invalid row {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '978-0-452-28423-4', 'publication_date': '19490608', 'total_copies': '5', 'available_copies': '0'}: 1 validation error for Book
+publication_date
+  Datetimes provided to dates should have zero time - e.g. be exact dates [type=date_from_datetime_inexact, input_value='19490608', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/date_from_datetime_inexact
+2025-08-05 15:01:19,381 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-05 15:01:19,381 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:01:19,397 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:01:19,403 [WARNING] Book: Invalid row {'book_id': '6', 'library_id': '1', 'title': '  the  GREAT gatsby  ', 'isbn': '0743273567', 'publication_date': '1925-04-10', 'total_copies': '8', 'available_copies': '8'}: 1 validation error for Book
+isbn
+  Value error, Invalid ISBN-13 [type=value_error, input_value='0743273567', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 15:01:19,403 [INFO] Book: Inserted=2 skipped=0 invalid=4
+2025-08-05 15:01:19,403 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:01:19,408 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:01:19,408 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:01:19,412 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:01:19,412 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:01:19,412 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:01:19,419 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:01:19,419 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:01:19,419 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:01:19,419 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:01:19,419 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:01:19,419 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:01:19,419 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:01:19,419 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:01:19,419 [INFO] root: books      : inserted=2   skipped=0   invalid=4  
+2025-08-05 15:01:19,419 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:01:19,419 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:04:34,158 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:04:34,174 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:04:34,175 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:04:34,176 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:04:34,176 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:04:34,176 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:04:34,176 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:04:34,189 [WARNING] Book: Invalid row {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '978-0-452-28423-4', 'publication_date': '19490608', 'total_copies': '5', 'available_copies': '0'}: 1 validation error for Book
+publication_date
+  Datetimes provided to dates should have zero time - e.g. be exact dates [type=date_from_datetime_inexact, input_value='19490608', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/date_from_datetime_inexact
+2025-08-05 15:04:34,189 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-05 15:04:34,189 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:04:34,189 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:04:34,211 [INFO] Book: Inserted=4 skipped=0 invalid=2
+2025-08-05 15:04:34,211 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:04:34,211 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:04:34,211 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:04:34,220 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:04:34,223 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:04:34,223 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:04:34,223 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:04:34,223 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:04:34,229 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:04:34,229 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:04:34,229 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:04:34,229 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:04:34,229 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:04:34,229 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:04:34,229 [INFO] root: books      : inserted=4   skipped=0   invalid=2  
+2025-08-05 15:04:34,229 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:04:34,229 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:06:11,636 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:06:11,636 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:06:11,636 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:06:11,642 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:06:11,642 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:06:11,642 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:06:11,642 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:06:11,642 [WARNING] Book: Invalid row {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '9780452284234', 'publication_date': '19490608', 'total_copies': '5', 'available_copies': '0'}: 1 validation error for Book
+publication_date
+  Datetimes provided to dates should have zero time - e.g. be exact dates [type=date_from_datetime_inexact, input_value='19490608', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/date_from_datetime_inexact
+2025-08-05 15:06:11,642 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-05 15:06:11,642 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:06:11,657 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:06:11,657 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:06:11,657 [INFO] Book: Inserted=3 skipped=1 invalid=2
+2025-08-05 15:06:11,657 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:06:11,673 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:06:11,677 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:06:11,677 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:06:11,677 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:06:11,677 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:06:11,677 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:06:11,677 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:06:11,677 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:06:11,689 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:06:11,689 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:06:11,689 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:06:11,689 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:06:11,689 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:06:11,689 [INFO] root: books      : inserted=3   skipped=1   invalid=2  
+2025-08-05 15:06:11,689 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:06:11,689 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:08:23,246 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:08:23,246 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:08:23,246 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:08:23,246 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:08:23,246 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:08:23,246 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:08:23,246 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:08:23,261 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-05 15:08:23,261 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:08:23,267 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:08:23,267 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:08:23,277 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 15:08:23,277 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:08:23,282 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:08:23,282 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:08:23,282 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:08:23,286 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:08:23,286 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:08:23,286 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:08:23,286 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:08:23,286 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:08:23,292 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:08:23,292 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:08:23,292 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:08:23,292 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:08:23,292 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:08:23,292 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 15:08:23,292 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:08:23,292 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:10:10,691 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:10:10,691 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:10:10,691 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:10:10,691 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:10:10,691 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:10:10,697 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:10:10,701 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:10:10,701 [ERROR] schemas: It's not possible to give the future date
+NoneType: None
+2025-08-05 15:10:10,707 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:10:10,716 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:10:10,719 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:10:10,719 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 15:10:10,719 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:10:10,723 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:10:10,723 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:10:10,723 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:10:10,723 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:10:10,723 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:10:10,723 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:10:10,723 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:10:10,723 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:10:10,723 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:10:10,723 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:10:10,737 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:10:10,737 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:10:10,737 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:10:10,737 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 15:10:10,737 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:10:10,739 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:10:31,507 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:10:31,507 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:10:31,507 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:10:31,507 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:10:31,507 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:10:31,507 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:10:31,522 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:10:31,522 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:10:31,538 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:10:31,540 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:10:31,540 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 15:10:31,543 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:10:31,543 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:10:31,543 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:10:31,543 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:10:31,552 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:10:31,552 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:10:31,556 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:10:31,556 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:10:31,556 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:10:31,556 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:10:31,556 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:10:31,556 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:10:31,556 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:10:31,561 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:10:31,561 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 15:10:31,561 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:10:31,561 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:18:40,614 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:18:40,614 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:18:40,614 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:18:40,614 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:18:40,614 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:18:40,614 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:18:40,630 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:18:40,630 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:18:40,630 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:18:40,630 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 15:18:40,647 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:18:40,647 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:18:40,647 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:18:40,647 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:18:40,647 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:18:40,647 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:18:40,647 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:18:40,647 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:18:40,647 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:18:40,647 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:18:40,647 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:18:40,660 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:18:40,660 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:18:40,660 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:18:40,660 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 15:18:40,660 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:18:40,660 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:21:20,096 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:21:20,096 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:21:20,096 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:21:20,096 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:21:20,096 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:21:20,096 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:21:20,096 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0316769480', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: Logger.info() missing 1 required positional argument: 'msg'
+2025-08-05 15:21:20,096 [WARNING] Book: Invalid row {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '9780452284234', 'publication_date': '1949-06-08', 'total_copies': '5', 'available_copies': '2'}: Logger.info() missing 1 required positional argument: 'msg'
+2025-08-05 15:21:20,111 [WARNING] Book: Invalid row {'book_id': '3', 'library_id': '2', 'title': 'invalid isbn demo', 'isbn': '1234567890123', 'publication_date': '2024-12-25', 'total_copies': '2', 'available_copies': '1'}: Logger.info() missing 1 required positional argument: 'msg'
+2025-08-05 15:21:20,111 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:21:20,111 [WARNING] Book: Invalid row {'book_id': '4', 'library_id': '2', 'title': 'To Kill a Mockingbird', 'isbn': '9780061120084', 'publication_date': '1960-07-11', 'total_copies': '7', 'available_copies': '-2'}: Logger.info() missing 1 required positional argument: 'msg'
+2025-08-05 15:21:20,120 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:21:20,120 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:21:20,120 [INFO] Book: Inserted=4 skipped=1 invalid=5
+2025-08-05 15:21:20,120 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:21:20,127 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:21:20,127 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:21:20,127 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:21:20,127 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:21:20,127 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:21:20,127 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:21:20,127 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:21:20,127 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:21:20,127 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:21:20,143 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:21:20,143 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:21:20,143 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:21:20,143 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:21:20,143 [INFO] root: books      : inserted=4   skipped=1   invalid=5  
+2025-08-05 15:21:20,143 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:21:20,143 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:23:41,315 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:23:41,329 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:23:41,329 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:23:41,329 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:23:41,329 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:23:41,329 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:23:41,329 [INFO] Book: Value inserted
+2025-08-05 15:23:41,329 [INFO] Book: Value inserted
+2025-08-05 15:23:41,329 [INFO] Book: Value inserted
+2025-08-05 15:23:41,329 [ERROR] schemas: Available copies won't be less than 0
+NoneType: None
+2025-08-05 15:23:41,345 [INFO] Book: Value inserted
+2025-08-05 15:23:41,353 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:23:41,353 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:23:41,353 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 15:23:41,353 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:23:41,361 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:23:41,361 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:23:41,361 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:23:41,361 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:23:41,361 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:23:41,361 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:23:41,361 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:23:41,361 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:23:41,361 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:23:41,361 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:23:41,377 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:23:41,377 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:23:41,377 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:23:41,377 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 15:23:41,377 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:23:41,377 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:30:07,221 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:30:07,221 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:30:07,221 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:30:07,221 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:30:07,221 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:30:07,221 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:30:07,221 [DEBUG] Book: Prepared clean data: {'book_id': '1', 'library_id': '1', 'title': 'The Catcher In The Rye', 'isbn': '0316769480', 'total_copies': 10, 'publication_date': datetime.date(1951, 7, 16), 'available_copies': 3}
+2025-08-05 15:30:07,230 [INFO] Book: Value inserted
+2025-08-05 15:30:07,230 [DEBUG] Book: Prepared clean data: {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '9780452284234', 'total_copies': 5, 'publication_date': datetime.date(1949, 6, 8), 'available_copies': 2}
+2025-08-05 15:30:07,230 [INFO] Book: Value inserted
+2025-08-05 15:30:07,230 [DEBUG] Book: Prepared clean data: {'book_id': '3', 'library_id': '2', 'title': 'Invalid Isbn Demo', 'isbn': '1234567890123', 'total_copies': 2, 'publication_date': datetime.date(2024, 12, 25), 'available_copies': 1}
+2025-08-05 15:30:07,238 [INFO] Book: Value inserted
+2025-08-05 15:30:07,238 [DEBUG] Book: Prepared clean data: {'book_id': '4', 'library_id': '2', 'title': 'To Kill A Mockingbird', 'isbn': '9780061120084', 'total_copies': 7, 'publication_date': datetime.date(1960, 7, 11), 'available_copies': 0}
+2025-08-05 15:30:07,238 [INFO] Book: Value inserted
+2025-08-05 15:30:07,238 [DEBUG] Book: Prepared clean data: {'book_id': '5', 'library_id': '3', 'title': 'Harry Potter', 'isbn': '9780747532699', 'total_copies': 20, 'publication_date': datetime.date(1997, 6, 26), 'available_copies': 100}
+2025-08-05 15:30:07,242 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:30:07,249 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:30:07,249 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 15:30:07,249 [DEBUG] Author: Prepared clean data: {'author_id': '1', 'first_name': 'George', 'last_name': 'Orwell', 'birth_date': datetime.date(1903, 6, 25), 'nationality': 'British', 'biography': 'Eric Arthur Blair known as George Orwell'}
+2025-08-05 15:30:07,253 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:30:07,253 [DEBUG] Author: Prepared clean data: {'author_id': '2', 'first_name': 'Harper', 'last_name': 'Lee', 'birth_date': datetime.date(1926, 4, 28), 'nationality': 'American', 'biography': 'wrote to kill a mockingbird'}
+2025-08-05 15:30:07,253 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:30:07,253 [DEBUG] Author: Prepared clean data: {'author_id': '3', 'first_name': 'J.k.', 'last_name': 'Rowling', 'birth_date': datetime.date(2025, 7, 31), 'nationality': 'British', 'biography': 'Harry Potter creator'}
+2025-08-05 15:30:07,253 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:30:07,253 [DEBUG] Author: Prepared clean data: {'author_id': '4', 'first_name': 'F.  scott', 'last_name': 'Fitzgerald', 'birth_date': datetime.date(1896, 9, 24), 'nationality': 'American', 'biography': 'Author of The Great Gatsby'}
+2025-08-05 15:30:07,260 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:30:07,260 [DEBUG] Author: Prepared clean data: {'author_id': '5', 'first_name': '', 'last_name': 'Anonymous', 'birth_date': datetime.date(1990, 1, 1), 'nationality': 'Unknown', 'biography': 'No bio provided'}
+2025-08-05 15:30:07,260 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:30:07,260 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:30:07,260 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:30:07,260 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:30:07,260 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:30:07,269 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:30:07,269 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:30:07,269 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:30:07,269 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:30:07,269 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:30:07,269 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 15:30:07,269 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:30:07,269 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:32:59,602 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:32:59,602 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:32:59,602 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:32:59,606 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:32:59,606 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:32:59,606 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:32:59,606 [INFO] Book: Prepared clean data: {'book_id': '1', 'library_id': '1', 'title': 'The Catcher In The Rye', 'isbn': '0316769480', 'total_copies': 10, 'publication_date': datetime.date(1951, 7, 16), 'available_copies': 3}
+2025-08-05 15:32:59,618 [INFO] Book: Value inserted
+2025-08-05 15:32:59,622 [INFO] Book: Prepared clean data: {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '9780452284234', 'total_copies': 5, 'publication_date': datetime.date(1949, 6, 8), 'available_copies': 2}
+2025-08-05 15:32:59,622 [INFO] Book: Value inserted
+2025-08-05 15:32:59,622 [INFO] Book: Prepared clean data: {'book_id': '3', 'library_id': '2', 'title': 'Invalid Isbn Demo', 'isbn': '1234567890123', 'total_copies': 2, 'publication_date': datetime.date(2024, 12, 25), 'available_copies': 1}
+2025-08-05 15:32:59,622 [INFO] Book: Value inserted
+2025-08-05 15:32:59,622 [INFO] Book: Prepared clean data: {'book_id': '4', 'library_id': '2', 'title': 'To Kill A Mockingbird', 'isbn': '9780061120084', 'total_copies': 7, 'publication_date': datetime.date(1960, 7, 11), 'available_copies': 0}
+2025-08-05 15:32:59,622 [INFO] Book: Value inserted
+2025-08-05 15:32:59,634 [INFO] Book: Prepared clean data: {'book_id': '5', 'library_id': '3', 'title': 'Harry Potter', 'isbn': '9780747532699', 'total_copies': 20, 'publication_date': datetime.date(1997, 6, 26), 'available_copies': 100}
+2025-08-05 15:32:59,638 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:32:59,641 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:32:59,641 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 15:32:59,641 [INFO] Author: Prepared clean data: {'author_id': '1', 'first_name': 'George', 'last_name': 'Orwell', 'birth_date': datetime.date(1903, 6, 25), 'nationality': 'British', 'biography': 'Eric Arthur Blair known as George Orwell'}
+2025-08-05 15:32:59,641 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:32:59,649 [INFO] Author: Prepared clean data: {'author_id': '2', 'first_name': 'Harper', 'last_name': 'Lee', 'birth_date': datetime.date(1926, 4, 28), 'nationality': 'American', 'biography': 'wrote to kill a mockingbird'}
+2025-08-05 15:32:59,651 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:32:59,651 [INFO] Author: Prepared clean data: {'author_id': '3', 'first_name': 'J.k.', 'last_name': 'Rowling', 'birth_date': datetime.date(2025, 7, 31), 'nationality': 'British', 'biography': 'Harry Potter creator'}
+2025-08-05 15:32:59,651 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:32:59,651 [INFO] Author: Prepared clean data: {'author_id': '4', 'first_name': 'F.  scott', 'last_name': 'Fitzgerald', 'birth_date': datetime.date(1896, 9, 24), 'nationality': 'American', 'biography': 'Author of The Great Gatsby'}
+2025-08-05 15:32:59,651 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:32:59,651 [INFO] Author: Prepared clean data: {'author_id': '5', 'first_name': '', 'last_name': 'Anonymous', 'birth_date': datetime.date(1990, 1, 1), 'nationality': 'Unknown', 'biography': 'No bio provided'}
+2025-08-05 15:32:59,651 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:32:59,651 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:32:59,651 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:32:59,651 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:32:59,665 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:32:59,665 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:32:59,665 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:32:59,665 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:32:59,665 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:32:59,665 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:32:59,665 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 15:32:59,665 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:32:59,665 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:37:27,720 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:37:27,720 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:37:27,720 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:37:27,720 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:37:27,720 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:37:27,720 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:37:27,720 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0316769480', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: 'dict' object is not callable
+2025-08-05 15:37:27,736 [WARNING] Book: Invalid row {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '9780452284234', 'publication_date': '1949-06-08', 'total_copies': '5', 'available_copies': '2'}: 'dict' object is not callable
+2025-08-05 15:37:27,736 [WARNING] Book: Invalid row {'book_id': '3', 'library_id': '2', 'title': 'invalid isbn demo', 'isbn': '1234567890123', 'publication_date': '2024-12-25', 'total_copies': '2', 'available_copies': '1'}: 'dict' object is not callable
+2025-08-05 15:37:27,736 [WARNING] Book: Invalid row {'book_id': '4', 'library_id': '2', 'title': 'To Kill a Mockingbird', 'isbn': '9780061120084', 'publication_date': '1960-07-11', 'total_copies': '7', 'available_copies': '-2'}: 'dict' object is not callable
+2025-08-05 15:37:27,736 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:37:27,736 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:37:27,736 [INFO] Book: Inserted=0 skipped=1 invalid=5
+2025-08-05 15:37:27,736 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:37:27,753 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:37:27,753 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:37:27,757 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:37:27,757 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:37:27,757 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:37:27,757 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:37:27,757 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:37:27,757 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:37:27,757 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:37:27,757 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:37:27,757 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:37:27,757 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:37:27,757 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:37:27,757 [INFO] root: books      : inserted=0   skipped=1   invalid=5  
+2025-08-05 15:37:27,767 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:37:27,767 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:47:27,260 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:47:27,273 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:47:27,273 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:47:27,273 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:47:27,273 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:47:27,273 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:47:27,289 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0316769480', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: 'dict' object is not callable
+2025-08-05 15:47:27,289 [WARNING] Book: Invalid row {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '9780452284234', 'publication_date': '1949-06-08', 'total_copies': '5', 'available_copies': '2'}: 'dict' object is not callable
+2025-08-05 15:47:27,289 [WARNING] Book: Invalid row {'book_id': '3', 'library_id': '2', 'title': 'invalid isbn demo', 'isbn': '1234567890123', 'publication_date': '2024-12-25', 'total_copies': '2', 'available_copies': '1'}: 'dict' object is not callable
+2025-08-05 15:47:27,289 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 15:47:27,289 [WARNING] Book: Invalid row {'book_id': '4', 'library_id': '2', 'title': 'To Kill a Mockingbird', 'isbn': '9780061120084', 'publication_date': '1960-07-11', 'total_copies': '7', 'available_copies': '-2'}: 'dict' object is not callable
+2025-08-05 15:47:27,304 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:47:27,304 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:47:27,304 [INFO] Book: Inserted=0 skipped=1 invalid=5
+2025-08-05 15:47:27,304 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:47:27,304 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:47:27,304 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:47:27,304 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:47:27,304 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:47:27,304 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:47:27,320 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:47:27,320 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:47:27,323 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:47:27,323 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:47:27,323 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:47:27,323 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:47:27,323 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:47:27,323 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:47:27,323 [INFO] root: books      : inserted=0   skipped=1   invalid=5  
+2025-08-05 15:47:27,323 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:47:27,323 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:51:15,260 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:51:15,260 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:51:15,260 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:51:15,275 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:51:15,275 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 15:51:15,275 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:51:15,275 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0316769480', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: 'dict' object is not callable
+2025-08-05 15:51:15,286 [WARNING] Book: Invalid row {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '9780452284234', 'publication_date': '1949-06-08', 'total_copies': '5', 'available_copies': '2'}: 'dict' object is not callable
+2025-08-05 15:51:15,286 [WARNING] Book: Invalid row {'book_id': '3', 'library_id': '2', 'title': 'invalid isbn demo', 'isbn': '1234567890123', 'publication_date': '2024-12-25', 'total_copies': '2', 'available_copies': '1'}: 'dict' object is not callable
+2025-08-05 15:51:15,286 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 15:51:15,291 [WARNING] Book: Invalid row {'book_id': '4', 'library_id': '2', 'title': 'To Kill a Mockingbird', 'isbn': '9780061120084', 'publication_date': '1960-07-11', 'total_copies': '7', 'available_copies': '-2'}: 'dict' object is not callable
+2025-08-05 15:51:15,291 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:51:15,291 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:51:15,291 [INFO] Book: Inserted=0 skipped=1 invalid=5
+2025-08-05 15:51:15,291 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:51:15,291 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:51:15,307 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:51:15,307 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:51:15,307 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:51:15,307 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:51:15,307 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:51:15,307 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:51:15,307 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:51:15,307 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:51:15,307 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:51:15,307 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:51:15,307 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:51:15,307 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:51:15,307 [INFO] root: books      : inserted=0   skipped=1   invalid=5  
+2025-08-05 15:51:15,307 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:51:15,307 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:51:54,704 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:51:54,707 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:51:54,707 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:51:54,709 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:51:54,709 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 'dict' object is not callable
+2025-08-05 15:51:54,723 [INFO] Library1: Inserted=0 skipped=3 invalid=2
+2025-08-05 15:51:54,723 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0316769480', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: 'dict' object is not callable
+2025-08-05 15:51:54,736 [WARNING] Book: Invalid row {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '9780452284234', 'publication_date': '1949-06-08', 'total_copies': '5', 'available_copies': '2'}: 'dict' object is not callable
+2025-08-05 15:51:54,736 [WARNING] Book: Invalid row {'book_id': '3', 'library_id': '2', 'title': 'invalid isbn demo', 'isbn': '1234567890123', 'publication_date': '2024-12-25', 'total_copies': '2', 'available_copies': '1'}: 'dict' object is not callable
+2025-08-05 15:51:54,736 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 15:51:54,742 [WARNING] Book: Invalid row {'book_id': '4', 'library_id': '2', 'title': 'To Kill a Mockingbird', 'isbn': '9780061120084', 'publication_date': '1960-07-11', 'total_copies': '7', 'available_copies': '-2'}: 'dict' object is not callable
+2025-08-05 15:51:54,742 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:51:54,753 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:51:54,753 [INFO] Book: Inserted=0 skipped=1 invalid=5
+2025-08-05 15:51:54,753 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:51:54,753 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:51:54,753 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:51:54,753 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:51:54,753 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:51:54,753 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:51:54,753 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:51:54,753 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:51:54,768 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:51:54,768 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:51:54,768 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:51:54,768 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:51:54,768 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:51:54,768 [INFO] root: libraries  : inserted=0   skipped=3   invalid=2  
+2025-08-05 15:51:54,768 [INFO] root: books      : inserted=0   skipped=1   invalid=5  
+2025-08-05 15:51:54,768 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:51:54,768 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 15:53:38,967 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 15:53:38,968 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 15:53:38,968 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 15:53:38,968 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 15:53:38,968 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 'dict' object is not callable
+2025-08-05 15:53:38,981 [INFO] Library1: Inserted=0 skipped=3 invalid=2
+2025-08-05 15:53:38,983 [WARNING] Book: Invalid row {'book_id': '1', 'library_id': '1', 'title': 'the catcher in the rye', 'isbn': '0316769480', 'publication_date': '1951-07-16', 'total_copies': '10', 'available_copies': '3'}: 'dict' object is not callable
+2025-08-05 15:53:38,983 [WARNING] Book: Invalid row {'book_id': '2', 'library_id': '1', 'title': '1984', 'isbn': '9780452284234', 'publication_date': '1949-06-08', 'total_copies': '5', 'available_copies': '2'}: 'dict' object is not callable
+2025-08-05 15:53:38,997 [WARNING] Book: Invalid row {'book_id': '3', 'library_id': '2', 'title': 'invalid isbn demo', 'isbn': '1234567890123', 'publication_date': '2024-12-25', 'total_copies': '2', 'available_copies': '1'}: 'dict' object is not callable
+2025-08-05 15:53:38,997 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 15:53:38,997 [WARNING] Book: Invalid row {'book_id': '4', 'library_id': '2', 'title': 'To Kill a Mockingbird', 'isbn': '9780061120084', 'publication_date': '1960-07-11', 'total_copies': '7', 'available_copies': '-2'}: 'dict' object is not callable
+2025-08-05 15:53:39,003 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 15:53:39,006 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 15:53:39,006 [INFO] Book: Inserted=0 skipped=1 invalid=5
+2025-08-05 15:53:39,006 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 15:53:39,013 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 15:53:39,013 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 15:53:39,013 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 15:53:39,013 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 15:53:39,013 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 15:53:39,013 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:53:39,013 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 15:53:39,013 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 15:53:39,013 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 15:53:39,013 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 15:53:39,013 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 15:53:39,013 [INFO] root: === ETL SUMMARY ===
+2025-08-05 15:53:39,013 [INFO] root: libraries  : inserted=0   skipped=3   invalid=2  
+2025-08-05 15:53:39,013 [INFO] root: books      : inserted=0   skipped=1   invalid=5  
+2025-08-05 15:53:39,013 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 15:53:39,013 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:01:39,852 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 16:01:39,853 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 16:01:39,853 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:01:39,855 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 16:01:39,855 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 16:01:39,856 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:01:39,860 [INFO] Book: Value inserted
+2025-08-05 16:01:39,863 [INFO] Book: Value inserted
+2025-08-05 16:01:39,864 [INFO] Book: Value inserted
+2025-08-05 16:01:39,865 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:01:39,866 [INFO] Book: Value inserted
+2025-08-05 16:01:39,878 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:01:39,880 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 16:01:39,880 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 16:01:39,883 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 16:01:39,884 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 16:01:39,886 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 16:01:39,887 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 16:01:39,890 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 16:01:39,890 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 16:01:39,894 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 16:01:39,895 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:01:39,896 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 16:01:39,897 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 16:01:39,898 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 16:01:39,899 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:01:39,899 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:01:39,900 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:01:39,900 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 16:01:39,900 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 16:01:39,900 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:10:05,947 [DEBUG] Library1: Duplicate contact_email=admin@lib.org – skipping
+2025-08-05 16:10:05,947 [DEBUG] Library1: Duplicate contact_email=admin2@lib.org – skipping
+2025-08-05 16:10:05,947 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:10:05,951 [DEBUG] Library1: Duplicate contact_email=info@east.lib.co.uk – skipping
+2025-08-05 16:10:05,951 [DEBUG] Library1: Duplicate contact_email=central@lib.edu – skipping
+2025-08-05 16:10:05,951 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:10:05,963 [INFO] Book: Value inserted
+2025-08-05 16:10:05,963 [INFO] Book: Value inserted
+2025-08-05 16:10:05,963 [INFO] Book: Value inserted
+2025-08-05 16:10:05,963 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:10:05,963 [INFO] Book: Value inserted
+2025-08-05 16:10:05,963 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:10:05,981 [DEBUG] Book: Duplicate isbn=0743273567 – skipping
+2025-08-05 16:10:05,981 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 16:10:05,981 [WARNING] Author: Skipping row: (1062, "Duplicate entry '1' for key 'author.PRIMARY'")
+2025-08-05 16:10:05,981 [WARNING] Author: Skipping row: (1062, "Duplicate entry '2' for key 'author.PRIMARY'")
+2025-08-05 16:10:05,981 [WARNING] Author: Skipping row: (1062, "Duplicate entry '3' for key 'author.PRIMARY'")
+2025-08-05 16:10:05,981 [WARNING] Author: Skipping row: (1062, "Duplicate entry '4' for key 'author.PRIMARY'")
+2025-08-05 16:10:05,993 [WARNING] Author: Skipping row: (1062, "Duplicate entry '5' for key 'author.PRIMARY'")
+2025-08-05 16:10:05,994 [INFO] Author: Inserted=0 skipped=0 invalid=5
+2025-08-05 16:10:05,995 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 16:10:05,995 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:10:05,995 [DEBUG] Member: Duplicate email=alice.johnson@uni.edu – skipping
+2025-08-05 16:10:05,995 [DEBUG] Member: Duplicate email=bob@uni.edu – skipping
+2025-08-05 16:10:05,995 [DEBUG] Member: Duplicate email=john.doe@example.com – skipping
+2025-08-05 16:10:05,995 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:10:05,995 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:10:05,995 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:10:05,995 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 16:10:05,995 [INFO] root: authors    : inserted=0   skipped=0   invalid=5  
+2025-08-05 16:10:05,995 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:21:02,010 [DEBUG] Library1: Duplicate library_id=1 – skipping
+2025-08-05 16:21:02,010 [DEBUG] Library1: Duplicate library_id=2 – skipping
+2025-08-05 16:21:02,010 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:21:02,010 [DEBUG] Library1: Duplicate library_id=4 – skipping
+2025-08-05 16:21:02,010 [DEBUG] Library1: Duplicate library_id=5 – skipping
+2025-08-05 16:21:02,020 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:21:02,020 [INFO] Book: Value inserted
+2025-08-05 16:21:02,020 [INFO] Book: Value inserted
+2025-08-05 16:21:02,020 [INFO] Book: Value inserted
+2025-08-05 16:21:02,020 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:21:02,020 [INFO] Book: Value inserted
+2025-08-05 16:21:02,036 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:21:02,036 [DEBUG] Book: Duplicate book_id=6 – skipping
+2025-08-05 16:21:02,036 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 16:21:02,036 [DEBUG] Author: Duplicate author_id=1 – skipping
+2025-08-05 16:21:02,036 [DEBUG] Author: Duplicate author_id=2 – skipping
+2025-08-05 16:21:02,036 [DEBUG] Author: Duplicate author_id=3 – skipping
+2025-08-05 16:21:02,036 [DEBUG] Author: Duplicate author_id=4 – skipping
+2025-08-05 16:21:02,036 [DEBUG] Author: Duplicate author_id=5 – skipping
+2025-08-05 16:21:02,036 [INFO] Author: Inserted=0 skipped=5 invalid=0
+2025-08-05 16:21:02,051 [DEBUG] Member: Duplicate member_id=1 – skipping
+2025-08-05 16:21:02,051 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:21:02,051 [DEBUG] Member: Duplicate member_id=3 – skipping
+2025-08-05 16:21:02,051 [DEBUG] Member: Duplicate member_id=4 – skipping
+2025-08-05 16:21:02,051 [INFO] Member: Value inserted
+2025-08-05 16:21:02,051 [INFO] Member: Inserted=1 skipped=3 invalid=1
+2025-08-05 16:21:02,051 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:21:02,051 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:21:02,051 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 16:21:02,051 [INFO] root: authors    : inserted=0   skipped=5   invalid=0  
+2025-08-05 16:21:02,051 [INFO] root: members    : inserted=1   skipped=3   invalid=1  
+2025-08-05 16:22:18,270 [DEBUG] Library1: Duplicate library_id=1 – skipping
+2025-08-05 16:22:18,270 [DEBUG] Library1: Duplicate library_id=2 – skipping
+2025-08-05 16:22:18,282 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:22:18,282 [DEBUG] Library1: Duplicate library_id=4 – skipping
+2025-08-05 16:22:18,282 [DEBUG] Library1: Duplicate library_id=5 – skipping
+2025-08-05 16:22:18,282 [INFO] Library1: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:22:18,282 [INFO] Book: Value inserted
+2025-08-05 16:22:18,282 [INFO] Book: Value inserted
+2025-08-05 16:22:18,282 [INFO] Book: Value inserted
+2025-08-05 16:22:18,298 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:22:18,300 [INFO] Book: Value inserted
+2025-08-05 16:22:18,300 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:22:18,300 [DEBUG] Book: Duplicate book_id=6 – skipping
+2025-08-05 16:22:18,300 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 16:22:18,300 [DEBUG] Author: Duplicate author_id=1 – skipping
+2025-08-05 16:22:18,313 [DEBUG] Author: Duplicate author_id=2 – skipping
+2025-08-05 16:22:18,313 [DEBUG] Author: Duplicate author_id=3 – skipping
+2025-08-05 16:22:18,313 [DEBUG] Author: Duplicate author_id=4 – skipping
+2025-08-05 16:22:18,317 [DEBUG] Author: Duplicate author_id=5 – skipping
+2025-08-05 16:22:18,317 [INFO] Author: Inserted=0 skipped=5 invalid=0
+2025-08-05 16:22:18,317 [DEBUG] Member: Duplicate member_id=1 – skipping
+2025-08-05 16:22:18,317 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:22:18,317 [DEBUG] Member: Duplicate member_id=3 – skipping
+2025-08-05 16:22:18,317 [DEBUG] Member: Duplicate member_id=4 – skipping
+2025-08-05 16:22:18,317 [DEBUG] Member: Duplicate member_id=5 – skipping
+2025-08-05 16:22:18,317 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:22:18,317 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:22:18,317 [INFO] root: libraries  : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:22:18,317 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 16:22:18,317 [INFO] root: authors    : inserted=0   skipped=5   invalid=0  
+2025-08-05 16:22:18,317 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:31:15,344 [DEBUG] Library1: Duplicate library_id=1 – skipping
+2025-08-05 16:31:15,344 [DEBUG] Library1: Duplicate library_id=2 – skipping
+2025-08-05 16:31:15,344 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:31:15,358 [DEBUG] Library1: Duplicate library_id=4 – skipping
+2025-08-05 16:31:15,358 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 16:31:15,358 [INFO] Library1: Inserted=0 skipped=3 invalid=2
+2025-08-05 16:31:15,364 [INFO] Book: Value inserted
+2025-08-05 16:31:15,364 [INFO] Book: Value inserted
+2025-08-05 16:31:15,364 [INFO] Book: Value inserted
+2025-08-05 16:31:15,374 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:31:15,375 [INFO] Book: Value inserted
+2025-08-05 16:31:15,380 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:31:15,380 [DEBUG] Book: Duplicate book_id=6 – skipping
+2025-08-05 16:31:15,380 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 16:31:15,380 [DEBUG] Author: Duplicate author_id=1 – skipping
+2025-08-05 16:31:15,390 [DEBUG] Author: Duplicate author_id=2 – skipping
+2025-08-05 16:31:15,390 [DEBUG] Author: Duplicate author_id=3 – skipping
+2025-08-05 16:31:15,390 [DEBUG] Author: Duplicate author_id=4 – skipping
+2025-08-05 16:31:15,390 [DEBUG] Author: Duplicate author_id=5 – skipping
+2025-08-05 16:31:15,390 [INFO] Author: Inserted=0 skipped=5 invalid=0
+2025-08-05 16:31:15,397 [DEBUG] Member: Duplicate member_id=1 – skipping
+2025-08-05 16:31:15,397 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:31:15,397 [DEBUG] Member: Duplicate member_id=3 – skipping
+2025-08-05 16:31:15,397 [DEBUG] Member: Duplicate member_id=4 – skipping
+2025-08-05 16:31:15,397 [DEBUG] Member: Duplicate member_id=5 – skipping
+2025-08-05 16:31:15,397 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:31:15,397 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:31:15,397 [INFO] root: libraries  : inserted=0   skipped=3   invalid=2  
+2025-08-05 16:31:15,397 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 16:31:15,397 [INFO] root: authors    : inserted=0   skipped=5   invalid=0  
+2025-08-05 16:31:15,397 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:37:38,848 [DEBUG] Library1: Duplicate library_id=1 – skipping
+2025-08-05 16:37:38,858 [DEBUG] Library1: Duplicate library_id=2 – skipping
+2025-08-05 16:37:38,858 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:37:38,861 [DEBUG] Library1: Duplicate library_id=4 – skipping
+2025-08-05 16:37:38,861 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 16:37:38,861 [INFO] Library1: Inserted=0 skipped=3 invalid=2
+2025-08-05 16:37:38,861 [DEBUG] Book: Duplicate book_id=1 – skipping
+2025-08-05 16:37:38,861 [INFO] Book: Value inserted
+2025-08-05 16:37:38,874 [INFO] Book: Value inserted
+2025-08-05 16:37:38,874 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:37:38,876 [INFO] Book: Value inserted
+2025-08-05 16:37:38,876 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:37:38,876 [DEBUG] Book: Duplicate book_id=6 – skipping
+2025-08-05 16:37:38,876 [INFO] Book: Inserted=3 skipped=2 invalid=1
+2025-08-05 16:37:38,876 [DEBUG] Author: Duplicate author_id=1 – skipping
+2025-08-05 16:37:38,890 [DEBUG] Author: Duplicate author_id=2 – skipping
+2025-08-05 16:37:38,890 [DEBUG] Author: Duplicate author_id=3 – skipping
+2025-08-05 16:37:38,890 [DEBUG] Author: Duplicate author_id=4 – skipping
+2025-08-05 16:37:38,890 [DEBUG] Author: Duplicate author_id=5 – skipping
+2025-08-05 16:37:38,890 [INFO] Author: Inserted=0 skipped=5 invalid=0
+2025-08-05 16:37:38,890 [DEBUG] Member: Duplicate member_id=1 – skipping
+2025-08-05 16:37:38,890 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:37:38,890 [DEBUG] Member: Duplicate member_id=3 – skipping
+2025-08-05 16:37:38,901 [DEBUG] Member: Duplicate member_id=4 – skipping
+2025-08-05 16:37:38,903 [DEBUG] Member: Duplicate member_id=5 – skipping
+2025-08-05 16:37:38,903 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:37:38,903 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:37:38,903 [INFO] root: libraries  : inserted=0   skipped=3   invalid=2  
+2025-08-05 16:37:38,903 [INFO] root: books      : inserted=3   skipped=2   invalid=1  
+2025-08-05 16:37:38,903 [INFO] root: authors    : inserted=0   skipped=5   invalid=0  
+2025-08-05 16:37:38,903 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:42:20,496 [DEBUG] Library1: Duplicate library_id=1 – skipping
+2025-08-05 16:42:20,496 [DEBUG] Library1: Duplicate library_id=2 – skipping
+2025-08-05 16:42:20,496 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:42:20,496 [DEBUG] Library1: Duplicate library_id=4 – skipping
+2025-08-05 16:42:20,496 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 16:42:20,496 [INFO] Library1: Inserted=0 skipped=3 invalid=2
+2025-08-05 16:42:20,508 [DEBUG] Book: Duplicate book_id=1 – skipping
+2025-08-05 16:42:20,508 [INFO] Book: Value inserted
+2025-08-05 16:42:20,508 [INFO] Book: Value inserted
+2025-08-05 16:42:20,508 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:42:20,508 [INFO] Book: Value inserted
+2025-08-05 16:42:20,529 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:42:20,531 [DEBUG] Book: Duplicate book_id=6 – skipping
+2025-08-05 16:42:20,531 [INFO] Book: Inserted=3 skipped=2 invalid=1
+2025-08-05 16:42:20,534 [DEBUG] Author: Duplicate author_id=1 – skipping
+2025-08-05 16:42:20,534 [DEBUG] Author: Duplicate author_id=2 – skipping
+2025-08-05 16:42:20,534 [DEBUG] Author: Duplicate author_id=3 – skipping
+2025-08-05 16:42:20,534 [DEBUG] Author: Duplicate author_id=4 – skipping
+2025-08-05 16:42:20,534 [DEBUG] Author: Duplicate author_id=5 – skipping
+2025-08-05 16:42:20,540 [INFO] Author: Inserted=0 skipped=5 invalid=0
+2025-08-05 16:42:20,541 [DEBUG] Member: Duplicate member_id=1 – skipping
+2025-08-05 16:42:20,543 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:42:20,543 [DEBUG] Member: Duplicate member_id=3 – skipping
+2025-08-05 16:42:20,545 [DEBUG] Member: Duplicate member_id=4 – skipping
+2025-08-05 16:42:20,545 [DEBUG] Member: Duplicate member_id=5 – skipping
+2025-08-05 16:42:20,545 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:42:20,545 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:42:20,548 [INFO] root: libraries  : inserted=0   skipped=3   invalid=2  
+2025-08-05 16:42:20,548 [INFO] root: books      : inserted=3   skipped=2   invalid=1  
+2025-08-05 16:42:20,548 [INFO] root: authors    : inserted=0   skipped=5   invalid=0  
+2025-08-05 16:42:20,548 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:47:19,050 [DEBUG] Library1: Duplicate library_id=1 – skipping
+2025-08-05 16:47:19,050 [DEBUG] Library1: Duplicate library_id=2 – skipping
+2025-08-05 16:47:19,050 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:47:19,063 [DEBUG] Library1: Duplicate library_id=4 – skipping
+2025-08-05 16:47:19,063 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 16:47:19,065 [INFO] Library1: Inserted=0 skipped=3 invalid=2
+2025-08-05 16:47:19,065 [DEBUG] Book: Duplicate book_id=1 – skipping
+2025-08-05 16:47:19,065 [INFO] Book: Value inserted
+2025-08-05 16:47:19,078 [INFO] Book: Value inserted
+2025-08-05 16:47:19,078 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:47:19,078 [INFO] Book: Value inserted
+2025-08-05 16:47:19,078 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:47:19,096 [DEBUG] Book: Duplicate book_id=6 – skipping
+2025-08-05 16:47:19,098 [INFO] Book: Inserted=3 skipped=2 invalid=1
+2025-08-05 16:47:19,098 [DEBUG] Author: Duplicate author_id=1 – skipping
+2025-08-05 16:47:19,101 [DEBUG] Author: Duplicate author_id=2 – skipping
+2025-08-05 16:47:19,101 [DEBUG] Author: Duplicate author_id=3 – skipping
+2025-08-05 16:47:19,101 [DEBUG] Author: Duplicate author_id=4 – skipping
+2025-08-05 16:47:19,101 [DEBUG] Author: Duplicate author_id=5 – skipping
+2025-08-05 16:47:19,101 [INFO] Author: Inserted=0 skipped=5 invalid=0
+2025-08-05 16:47:19,101 [DEBUG] Member: Duplicate member_id=1 – skipping
+2025-08-05 16:47:19,101 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:47:19,110 [DEBUG] Member: Duplicate member_id=3 – skipping
+2025-08-05 16:47:19,110 [DEBUG] Member: Duplicate member_id=4 – skipping
+2025-08-05 16:47:19,110 [DEBUG] Member: Duplicate member_id=5 – skipping
+2025-08-05 16:47:19,110 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:47:19,110 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:47:19,110 [INFO] root: libraries  : inserted=0   skipped=3   invalid=2  
+2025-08-05 16:47:19,110 [INFO] root: books      : inserted=3   skipped=2   invalid=1  
+2025-08-05 16:47:19,110 [INFO] root: authors    : inserted=0   skipped=5   invalid=0  
+2025-08-05 16:47:19,110 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:48:39,912 [INFO] Library1: Value inserted
+2025-08-05 16:48:39,912 [INFO] Library1: Value inserted
+2025-08-05 16:48:39,912 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:48:39,912 [INFO] Library1: Value inserted
+2025-08-05 16:48:39,912 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 16:48:39,928 [INFO] Library1: Inserted=3 skipped=0 invalid=2
+2025-08-05 16:48:39,930 [INFO] Book: Value inserted
+2025-08-05 16:48:39,930 [INFO] Book: Value inserted
+2025-08-05 16:48:39,930 [INFO] Book: Value inserted
+2025-08-05 16:48:39,930 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:48:39,930 [INFO] Book: Value inserted
+2025-08-05 16:48:39,944 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:48:39,951 [INFO] Book: Value inserted
+2025-08-05 16:48:39,960 [INFO] Book: Inserted=5 skipped=0 invalid=1
+2025-08-05 16:48:39,964 [INFO] Author: Value inserted
+2025-08-05 16:48:39,966 [INFO] Author: Value inserted
+2025-08-05 16:48:39,966 [INFO] Author: Value inserted
+2025-08-05 16:48:39,966 [INFO] Author: Value inserted
+2025-08-05 16:48:39,966 [INFO] Author: Value inserted
+2025-08-05 16:48:39,976 [INFO] Author: Inserted=5 skipped=0 invalid=0
+2025-08-05 16:48:39,976 [INFO] Member: Value inserted
+2025-08-05 16:48:39,976 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:48:39,976 [INFO] Member: Value inserted
+2025-08-05 16:48:39,992 [INFO] Member: Value inserted
+2025-08-05 16:48:39,992 [INFO] Member: Value inserted
+2025-08-05 16:48:39,992 [INFO] Member: Inserted=4 skipped=0 invalid=1
+2025-08-05 16:48:39,992 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:48:39,992 [INFO] root: libraries  : inserted=3   skipped=0   invalid=2  
+2025-08-05 16:48:40,004 [INFO] root: books      : inserted=5   skipped=0   invalid=1  
+2025-08-05 16:48:40,004 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
+2025-08-05 16:48:40,004 [INFO] root: members    : inserted=4   skipped=0   invalid=1  
+2025-08-05 16:49:28,536 [DEBUG] Library1: Duplicate library_id=1 – skipping
+2025-08-05 16:49:28,536 [DEBUG] Library1: Duplicate library_id=2 – skipping
+2025-08-05 16:49:28,536 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:49:28,536 [DEBUG] Library1: Duplicate library_id=4 – skipping
+2025-08-05 16:49:28,536 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 16:49:28,536 [INFO] Library1: Inserted=0 skipped=3 invalid=2
+2025-08-05 16:49:28,536 [INFO] Book: Value inserted
+2025-08-05 16:49:28,552 [INFO] Book: Value inserted
+2025-08-05 16:49:28,552 [INFO] Book: Value inserted
+2025-08-05 16:49:28,552 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:49:28,552 [INFO] Book: Value inserted
+2025-08-05 16:49:28,552 [WARNING] Book: Skipping row: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_orm1`.`book`, CONSTRAINT `book_ibfk_1` FOREIGN KEY (`library_id`) REFERENCES `library1` (`library_id`))')
+2025-08-05 16:49:28,552 [DEBUG] Book: Duplicate book_id=6 – skipping
+2025-08-05 16:49:28,552 [INFO] Book: Inserted=4 skipped=1 invalid=1
+2025-08-05 16:49:28,568 [DEBUG] Author: Duplicate author_id=1 – skipping
+2025-08-05 16:49:28,570 [DEBUG] Author: Duplicate author_id=2 – skipping
+2025-08-05 16:49:28,570 [DEBUG] Author: Duplicate author_id=3 – skipping
+2025-08-05 16:49:28,570 [DEBUG] Author: Duplicate author_id=4 – skipping
+2025-08-05 16:49:28,570 [DEBUG] Author: Duplicate author_id=5 – skipping
+2025-08-05 16:49:28,570 [INFO] Author: Inserted=0 skipped=5 invalid=0
+2025-08-05 16:49:28,570 [DEBUG] Member: Duplicate member_id=1 – skipping
+2025-08-05 16:49:28,570 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:49:28,570 [DEBUG] Member: Duplicate member_id=3 – skipping
+2025-08-05 16:49:28,570 [DEBUG] Member: Duplicate member_id=4 – skipping
+2025-08-05 16:49:28,570 [DEBUG] Member: Duplicate member_id=5 – skipping
+2025-08-05 16:49:28,570 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:49:28,570 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:49:28,570 [INFO] root: libraries  : inserted=0   skipped=3   invalid=2  
+2025-08-05 16:49:28,581 [INFO] root: books      : inserted=4   skipped=1   invalid=1  
+2025-08-05 16:49:28,581 [INFO] root: authors    : inserted=0   skipped=5   invalid=0  
+2025-08-05 16:49:28,581 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 16:51:00,356 [DEBUG] Library1: Duplicate library_id=1 – skipping
+2025-08-05 16:51:00,356 [DEBUG] Library1: Duplicate library_id=2 – skipping
+2025-08-05 16:51:00,356 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 16:51:00,372 [DEBUG] Library1: Duplicate library_id=4 – skipping
+2025-08-05 16:51:00,372 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 16:51:00,374 [INFO] Library1: Inserted=0 skipped=3 invalid=2
+2025-08-05 16:51:00,380 [INFO] Book: Value inserted
+2025-08-05 16:51:00,380 [INFO] Book: Value inserted
+2025-08-05 16:51:00,380 [INFO] Book: Value inserted
+2025-08-05 16:51:00,380 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 16:51:00,388 [INFO] Book: Value inserted
+2025-08-05 16:51:00,388 [INFO] Book: Value inserted
+2025-08-05 16:51:00,388 [DEBUG] Book: Duplicate book_id=6 – skipping
+2025-08-05 16:51:00,388 [INFO] Book: Inserted=5 skipped=1 invalid=0
+2025-08-05 16:51:00,388 [DEBUG] Author: Duplicate author_id=1 – skipping
+2025-08-05 16:51:00,388 [DEBUG] Author: Duplicate author_id=2 – skipping
+2025-08-05 16:51:00,388 [DEBUG] Author: Duplicate author_id=3 – skipping
+2025-08-05 16:51:00,388 [DEBUG] Author: Duplicate author_id=4 – skipping
+2025-08-05 16:51:00,404 [DEBUG] Author: Duplicate author_id=5 – skipping
+2025-08-05 16:51:00,405 [INFO] Author: Inserted=0 skipped=5 invalid=0
+2025-08-05 16:51:00,407 [DEBUG] Member: Duplicate member_id=1 – skipping
+2025-08-05 16:51:00,407 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 16:51:00,407 [DEBUG] Member: Duplicate member_id=3 – skipping
+2025-08-05 16:51:00,407 [DEBUG] Member: Duplicate member_id=4 – skipping
+2025-08-05 16:51:00,407 [DEBUG] Member: Duplicate member_id=5 – skipping
+2025-08-05 16:51:00,407 [INFO] Member: Inserted=0 skipped=4 invalid=1
+2025-08-05 16:51:00,407 [INFO] root: === ETL SUMMARY ===
+2025-08-05 16:51:00,407 [INFO] root: libraries  : inserted=0   skipped=3   invalid=2  
+2025-08-05 16:51:00,407 [INFO] root: books      : inserted=5   skipped=1   invalid=0  
+2025-08-05 16:51:00,407 [INFO] root: authors    : inserted=0   skipped=5   invalid=0  
+2025-08-05 16:51:00,407 [INFO] root: members    : inserted=0   skipped=4   invalid=1  
+2025-08-05 17:16:03,865 [INFO] Library1: Value inserted
+2025-08-05 17:16:03,875 [INFO] Library1: Value inserted
+2025-08-05 17:16:03,875 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 17:16:03,875 [INFO] Library1: Value inserted
+2025-08-05 17:16:03,875 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 17:16:03,881 [INFO] Library1: Inserted=3 skipped=0 invalid=2
+2025-08-05 17:16:03,889 [INFO] Book: Value inserted
+2025-08-05 17:16:03,889 [INFO] Book: Value inserted
+2025-08-05 17:16:03,896 [INFO] Book: Value inserted
+2025-08-05 17:16:03,896 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 17:16:03,906 [INFO] Book: Value inserted
+2025-08-05 17:16:03,906 [INFO] Book: Value inserted
+2025-08-05 17:16:03,915 [INFO] Book: Value inserted
+2025-08-05 17:16:03,915 [INFO] Book: Inserted=6 skipped=0 invalid=0
+2025-08-05 17:16:03,925 [INFO] Author: Value inserted
+2025-08-05 17:16:03,928 [INFO] Author: Value inserted
+2025-08-05 17:16:03,928 [INFO] Author: Value inserted
+2025-08-05 17:16:03,928 [INFO] Author: Value inserted
+2025-08-05 17:16:03,933 [INFO] Author: Value inserted
+2025-08-05 17:16:03,937 [INFO] Author: Inserted=5 skipped=0 invalid=0
+2025-08-05 17:16:03,945 [INFO] Member: Value inserted
+2025-08-05 17:16:03,945 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 17:16:03,945 [INFO] Member: Value inserted
+2025-08-05 17:16:03,956 [INFO] Member: Value inserted
+2025-08-05 17:16:03,958 [INFO] Member: Value inserted
+2025-08-05 17:16:03,965 [INFO] Member: Inserted=4 skipped=0 invalid=1
+2025-08-05 17:16:03,965 [INFO] root: === ETL SUMMARY ===
+2025-08-05 17:16:03,965 [INFO] root: libraries  : inserted=3   skipped=0   invalid=2  
+2025-08-05 17:16:03,965 [INFO] root: books      : inserted=6   skipped=0   invalid=0  
+2025-08-05 17:16:03,965 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
+2025-08-05 17:16:03,965 [INFO] root: members    : inserted=4   skipped=0   invalid=1  
+2025-08-05 17:31:20,533 [INFO] Library1: Value inserted
+2025-08-05 17:31:20,533 [INFO] Library1: Value inserted
+2025-08-05 17:31:20,533 [WARNING] Library1: Invalid row {'library_id': '3', 'Name': '  west branch', 'campus_location': 'South-Campus', 'contact_email': 'bad-email@@lib.net', 'phone_number': '0044-20-7946-0958'}: 1 validation error for Library1
+contact_email
+  value is not a valid email address: The part after the @-sign contains invalid characters: '@'. [type=value_error, input_value='bad-email@@lib.net', input_type=str]
+2025-08-05 17:31:20,546 [INFO] Library1: Value inserted
+2025-08-05 17:31:20,546 [WARNING] Library1: Invalid row {'library_id': '5', 'Name': '', 'campus_location': 'Central Campus', 'contact_email': 'central@lib.edu', 'phone_number': '555-000-0000'}: 1 validation error for Library1
+Name
+  Value error, Library name is empty [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-08-05 17:31:20,549 [INFO] Library1: Inserted=3 skipped=0 invalid=2
+2025-08-05 17:31:20,549 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [WARNING] schemas: Available copies can't be less than 0. Resetting to 0.
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,565 [INFO] Book: Value inserted
+2025-08-05 17:31:20,582 [INFO] Book: Inserted=6 skipped=0 invalid=0
+2025-08-05 17:31:20,586 [INFO] Author: Value inserted
+2025-08-05 17:31:20,586 [INFO] Author: Value inserted
+2025-08-05 17:31:20,586 [INFO] Author: Value inserted
+2025-08-05 17:31:20,596 [INFO] Author: Value inserted
+2025-08-05 17:31:20,596 [INFO] Author: Value inserted
+2025-08-05 17:31:20,603 [INFO] Author: Inserted=5 skipped=0 invalid=0
+2025-08-05 17:31:20,603 [INFO] Member: Value inserted
+2025-08-05 17:31:20,611 [WARNING] Member: Invalid row {'member_id': '2', 'first_name': 'Jane  ', 'last_name': 'Smith', 'email': 'jane.smith@invalid', 'phone': '555-987-6543', 'member_type': 'faculty', 'registration_date': '2021-08-15'}: 1 validation error for Member
+email
+  value is not a valid email address: The part after the @-sign is not valid. It should have a period. [type=value_error, input_value='jane.smith@invalid', input_type=str]
+2025-08-05 17:31:20,612 [INFO] Member: Value inserted
+2025-08-05 17:31:20,616 [INFO] Member: Value inserted
+2025-08-05 17:31:20,616 [INFO] Member: Value inserted
+2025-08-05 17:31:20,616 [INFO] Member: Inserted=4 skipped=0 invalid=1
+2025-08-05 17:31:20,616 [INFO] root: === ETL SUMMARY ===
+2025-08-05 17:31:20,616 [INFO] root: libraries  : inserted=3   skipped=0   invalid=2  
+2025-08-05 17:31:20,616 [INFO] root: books      : inserted=6   skipped=0   invalid=0  
+2025-08-05 17:31:20,616 [INFO] root: authors    : inserted=5   skipped=0   invalid=0  
+2025-08-05 17:31:20,616 [INFO] root: members    : inserted=4   skipped=0   invalid=1  

@@ -1,7 +1,7 @@
 book_id,library_id,title,isbn,publication_date,total_copies,available_copies
-1,1,the catcher in the rye,0-316-76948-0,1951-07-16,10,3
-2,1,1984,978-0-452-28423-4,1949-06-08,5,0
-3,2,invalid isbn demo,123-4-56-789012-3,2025-12-25,2,1
-4,2,To Kill a Mockingbird,978-0-06-112008-4,1960-07-11,7,-2
-5,3,Harry potter,978074753269-9,1997-06-26,20,100
-6,1,  the  GREAT gatsby  ,0743273567,1925-04-10,8,8
+1,1,the catcher in the rye,0316769480,1951-07-16,10,10
+2,1,1984,9780452284234,1949-06-08,5,2
+3,2,invalid isbn demo,1234567890123,2024-12-25,2,1
+4,2,To Kill a Mockingbird,9780061120084,1960-07-11,7,-2
+8,1,Harry potter,9780747532699,1997-06-26,100,100
+6,2,  the  GREAT gatsby  ,0743273567,1925-04-10,8,8
