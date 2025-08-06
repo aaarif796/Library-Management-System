@@ -4,3 +4,4 @@ api_spec
 .idea
 __pycache__
 *.pyc
+.env
