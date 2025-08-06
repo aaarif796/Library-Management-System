@@ -7,8 +7,11 @@ router = DefaultRouter()
 router.register(r'books', BookViewSet, basename='book')
 router.register(r'libraries', LibraryViewSet, basename = 'library')
 router.register(r'authors', AuthorViewSet, basename='author')
+router.register(r'categories', CategoryViewSet, basename='category')
+router.register(r'members',MemberViewSet, basename='member')
+router.register(r'reviews',ReviewViewSet, basename='review')
+router.register(r'borrowing',BorrowingViewSet, basename='borrowing')
 
 urlpatterns = [
-    path('health/', health_check),
     path('', include(router.urls)),
 ]

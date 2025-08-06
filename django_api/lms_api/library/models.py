@@ -1,5 +1,4 @@
 from django.db import models
-from pydantic.v1.main import Model
 
 class Library_Col(models.Model):
     library_id = models.AutoField(primary_key= True)
@@ -17,12 +16,12 @@ class Library_Col(models.Model):
 
 class Book(models.Model):
     book_id = models.AutoField(primary_key=True)
+    library = models.ForeignKey(Library_Col,on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=30)
     isbn = models.CharField(max_length=20)
     publication_date = models.DateTimeField()
     total_copies = models.PositiveSmallIntegerField(null=True, blank=True)
     available_copies = models.PositiveIntegerField(null=True, blank=True)
-    library_id = models.IntegerField(null=True, blank=True)
 
     class Meta:
         db_table = 'book'
@@ -30,6 +29,15 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BookAuthor(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    author = models.ForeignKey('Author', on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'bookauthor'
+        managed = False
+        unique_together = ('book', 'author')
 
 
 class Author(models.Model):
@@ -66,8 +74,8 @@ class Member(models.Model):
 
 class Borrowing(models.Model):
     borrowing_id = models.AutoField(primary_key = True)
-    member_id = models.ForeignKey(Member, on_delete= models.SET_NULL, null = True)
-    book_id = models.ForeignKey(Book,on_delete= models.SET_NULL, null = True)
+    member = models.ForeignKey(Member, on_delete= models.SET_NULL, null = True)
+    book = models.ForeignKey(Book,on_delete= models.SET_NULL, null = True)
     borrow_date = models.DateTimeField()
     due_date = models.DateTimeField()
     return_date = models.DateTimeField()
@@ -78,13 +86,13 @@ class Borrowing(models.Model):
         managed = False
 
     def __str__(self):
-        return self.borrowing_id
+        return str(self.borrowing_id)
 
 
 class Review(models.Model):
     review_id = models.AutoField(primary_key= True)
-    member_id = models.ForeignKey(Member, on_delete= models.SET_NULL)
-    book_id = models.ForeignKey(Book , on_delete= models.SET_NULL)
+    member = models.ForeignKey(Member, on_delete= models.SET_NULL, null = True)
+    book = models.ForeignKey(Book , on_delete= models.SET_NULL, null = True)
     rating = models.SmallIntegerField(null = True)
     comments = models.TextField(null = True)
     review_data = models.TextField(null = True)
@@ -94,7 +102,7 @@ class Review(models.Model):
         managed = False
 
     def __str__(self):
-        return self.review_id
+        return str(self.review_id)
 
 
 class Category(models.Model):
@@ -108,4 +116,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+class BookCategory(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'bookcategory'
+        managed = False
+        unique_together = ('book', 'category')
 
