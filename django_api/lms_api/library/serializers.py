@@ -1,11 +1,6 @@
 from rest_framework import serializers
 from .models import Book, Library_Col, Author, BookAuthor, BookCategory, Category, Member, Review, Borrowing
 
-class BookSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Book
-        fields = '__all__'
-
 class LibrarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Library_Col
@@ -14,6 +9,13 @@ class LibrarySerializer(serializers.ModelSerializer):
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
+        fields = '__all__'
+
+class BookSerializer(serializers.ModelSerializer):
+    library_name = serializers.CharField(source='library.l_name', read_only=True)
+    class Meta:
+        model = Book
+        # fields = ["book_id","library_name", 'title','isbn','publication_date','total_copies','available_copies', 'library_id']
         fields = '__all__'
 
 class BookAuthorSerializer(serializers.ModelSerializer):
