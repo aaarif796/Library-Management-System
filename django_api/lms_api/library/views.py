@@ -11,8 +11,8 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["book_id", "title", "publication_date"]
-    search_fields = ["bookcategory__category__name", "bookauthor__author__first_name","title"]
+    filterset_fields = ["title", "publication_date"]
+    # search_fields = ["bookcategory__category__name", "bookauthor__author__first_name","title"]
     ordering_fields = ["title", "total_copies", "publication_date"]
     ordering = ["title"]
 
@@ -20,7 +20,7 @@ class LibraryViewSet(viewsets.ModelViewSet):
     queryset = Library_Col.objects.all()
     serializer_class = LibrarySerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["library_id", "campus_location"]
+    filterset_fields = ["campus_location"]
     search_fields = ["l_name", "campus_location"]
     ordering_fields = ["l_name", "campus_location"]
     ordering = ["l_name"]
