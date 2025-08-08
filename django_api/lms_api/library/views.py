@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets, filters, status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from .models import Book, Library_Col, Author, Member, Borrowing, Review, Category
 from .serializers import BookSerializer, LibrarySerializer, AuthorSerializer, MemberSerializer, BorrowingSerializer, ReviewSerializer, CategorySerializer
@@ -12,9 +12,11 @@ class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ["title", "publication_date"]
-    # search_fields = ["bookcategory__category__name", "bookauthor__author__first_name","title"]
     ordering_fields = ["title", "total_copies", "publication_date"]
     ordering = ["title"]
+
+
+
 
 class LibraryViewSet(viewsets.ModelViewSet):
     queryset = Library_Col.objects.all()
@@ -43,6 +45,23 @@ class MemberViewSet(viewsets.ModelViewSet):
     search_fields = ["first_name", "member_type"]
     ordering_fields = ["first_name"]
     ordering = ["first_name"]
+
+    @action(detail=True, methods=["get"], url_path="borrowings")
+    def borrowings(self, request, pk=None):
+        """
+        GET /api/members/{id}/borrowings/
+        Returns all borrowing records for this member.
+        """
+        member = self.get_object()  # ensures 404 if not found
+        borrow_qs = Borrowing.objects.filter(member=member)
+        page = self.paginate_queryset(borrow_qs)
+        if page is not None:
+            serializer = BorrowingSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = BorrowingSerializer(borrow_qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 
 class BorrowingViewSet(viewsets.ModelViewSet):

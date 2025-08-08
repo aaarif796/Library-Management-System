@@ -12,24 +12,9 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BookSerializer(serializers.ModelSerializer):
-    # library_name = serializers.CharField(source='library.l_name', read_only=True)
-    categories = serializers.SerializerMethodField()
     class Meta:
         model = Book
-        # fields = ['library_name','categories']
-        # fields = ["book_id","library_name", 'title','isbn','publication_date','total_copies','available_copies', 'library_id']
         fields = '__all__'
-
-    # def get_categories(self, obj):
-    #     try:
-    #         # Filter BookCategory objects directly
-    #         book_categories = BookCategory.objects.filter(book_id=obj.book_id)
-    #         return [bc.category.name for bc in book_categories]
-    #     except:
-    #         return []
-    # def get_categories(self, obj):
-    #     return [bc.category.name for bc in obj.bookcategory_set.all()]
-
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

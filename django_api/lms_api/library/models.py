@@ -73,9 +73,9 @@ class Borrowing(models.Model):
     member = models.ForeignKey(Member, on_delete= models.SET_NULL, null = True)
     book = models.ForeignKey(Book,on_delete= models.SET_NULL, null = True)
     borrow_date = models.DateTimeField()
-    due_date = models.DateTimeField()
-    return_date = models.DateTimeField()
-    late_fee = models.IntegerField()
+    due_date = models.DateTimeField(null = True)
+    return_date = models.DateTimeField(null = True)
+    late_fee = models.IntegerField(null = True)
 
     class Meta:
         db_table = 'borrowing'
