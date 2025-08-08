@@ -15,8 +15,20 @@ class BookViewSet(viewsets.ModelViewSet):
     ordering_fields = ["title", "total_copies", "publication_date"]
     ordering = ["title"]
 
+    @action(detail=True, methods=["get"], url_path= "availability")
+    def availability(self, request, pk= None):
+        availability_qs = self.get_queryset().filter(available_copies__gt=0)
+        page = self.paginate_queryset(availability_qs)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(availability_qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
-
+    @action(detail=True, methods = ['get'], url_path="category")
+    def categories(self, request, pk = None):
+        category = self.get_object()
+        
 
 class LibraryViewSet(viewsets.ModelViewSet):
     queryset = Library_Col.objects.all()
@@ -52,7 +64,7 @@ class MemberViewSet(viewsets.ModelViewSet):
         GET /api/members/{id}/borrowings/
         Returns all borrowing records for this member.
         """
-        member = self.get_object()  # ensures 404 if not found
+        member = self.get_object()
         borrow_qs = Borrowing.objects.filter(member=member)
         page = self.paginate_queryset(borrow_qs)
         if page is not None:
@@ -79,7 +91,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = []
-    search_fields = []
+    search_fields = ['member__first_name']
     ordering_fields = []
     ordering = []
 

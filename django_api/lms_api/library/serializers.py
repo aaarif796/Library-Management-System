@@ -12,6 +12,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BookSerializer(serializers.ModelSerializer):
+    library_name = serializers.CharField(source="library.l_name", read_only = True)
     class Meta:
         model = Book
         fields = '__all__'
@@ -22,6 +23,8 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
+    reviewer = serializers.CharField(source = "member.first_name")
+    book_title = serializers.CharField(source= "book.title")
     class Meta:
         model = Review
         fields = '__all__'
