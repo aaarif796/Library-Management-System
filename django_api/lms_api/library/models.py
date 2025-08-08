@@ -1,7 +1,6 @@
 from django.db import models
 
 class Library_Col(models.Model):
-    library_id = models.AutoField(primary_key= True)
     l_name = models.CharField(max_length=30)
     campus_location = models.CharField(max_length=100)
     contact_email = models.CharField(max_length=30, null=True, blank= True)
@@ -9,36 +8,9 @@ class Library_Col(models.Model):
 
     class Meta:
         db_table = 'library_col'
-        managed = False
 
     def __str__(self):
         return self.l_name
-
-class Book(models.Model):
-    book_id = models.AutoField(primary_key=True)
-    library = models.ForeignKey(Library_Col,on_delete=models.SET_NULL, null=True)
-    title = models.CharField(max_length=30)
-    isbn = models.CharField(max_length=20)
-    publication_date = models.DateTimeField()
-    total_copies = models.PositiveSmallIntegerField(null=True, blank=True)
-    available_copies = models.PositiveIntegerField(null=True, blank=True)
-
-    class Meta:
-        db_table = 'book'
-        managed = False
-
-    def __str__(self):
-        return self.title
-
-
-class BookAuthor(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    author = models.ForeignKey('Author', on_delete=models.CASCADE)
-    class Meta:
-        db_table = 'bookauthor'
-        managed = False
-        unique_together = ('book', 'author')
-
 
 class Author(models.Model):
     author_id = models.AutoField(primary_key= True)
@@ -50,10 +22,26 @@ class Author(models.Model):
 
     class Meta:
         db_table = 'author'
-        managed = False
 
     def __str__(self):
         return self.first_name
+
+    
+class Book(models.Model):
+    library = models.ForeignKey(Library_Col,on_delete=models.SET_NULL, null=True)
+    title = models.CharField(max_length=30)
+    isbn = models.CharField(max_length=20)
+    publication_date = models.DateTimeField()
+    total_copies = models.PositiveSmallIntegerField(null=True, blank=True)
+    available_copies = models.PositiveIntegerField(null=True, blank=True)
+    authors = models.ManyToManyField(Author, related_name='books')
+    class Meta:
+        db_table = 'book'
+
+    def __str__(self):
+        return self.title
+
+
 
 class Member(models.Model):
     member_id = models.AutoField(primary_key= True)
@@ -66,7 +54,6 @@ class Member(models.Model):
 
     class Meta:
         db_table = 'members'
-        managed = False
 
     def __str__(self):
         return self.first_name
@@ -83,7 +70,6 @@ class Borrowing(models.Model):
 
     class Meta:
         db_table = 'borrowing'
-        managed = False
 
     def __str__(self):
         return str(self.borrowing_id)
@@ -99,7 +85,6 @@ class Review(models.Model):
 
     class Meta:
         db_table = 'review'
-        managed = False
 
     def __str__(self):
         return str(self.review_id)
@@ -112,17 +97,24 @@ class Category(models.Model):
 
     class Meta:
         db_table = 'category'
-        managed = False
 
     def __str__(self):
         return self.name
 
-class BookCategory(models.Model):
-    id = models.AutoField(primary_key=True)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    class Meta:
-        db_table = 'bookcategory'
-        managed = False
-        unique_together = ('book', 'category')
-
+# class BookCategory(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     book = models.ForeignKey(Book, on_delete=models.CASCADE)
+#     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+#     class Meta:
+#         db_table = 'bookcategory'
+#         managed = False
+#         unique_together = ('book', 'category')
+#
+#
+# class BookAuthor(models.Model):
+#     book = models.ForeignKey(Book, on_delete=models.CASCADE)
+#     author = models.ForeignKey('Author', on_delete=models.CASCADE)
+#     class Meta:
+#         db_table = 'bookauthor'
+#         managed = False
+#         unique_together = ('book', 'author')
