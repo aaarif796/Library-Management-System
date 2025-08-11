@@ -1,6 +1,5 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-
 from .views import *
 
 router = DefaultRouter()
@@ -12,6 +11,8 @@ router.register(r'members',MemberViewSet, basename='member')
 router.register(r'reviews',ReviewViewSet, basename='review')
 router.register(r'borrowings',BorrowingViewSet, basename='borrowing')
 
+
 urlpatterns = [
     path('', include(router.urls)),
+    path('statistics/', StatisticsView.as_view(), name='statistics'),
 ]
