@@ -69,6 +69,7 @@ class BookViewSet(viewsets.ModelViewSet):
     def serach_book(self, request):
         """
         It's used to serach the book with the help of title, author name or category
+        api/books/search/?search=clean%20code
         :param request:
         :return:
         """
