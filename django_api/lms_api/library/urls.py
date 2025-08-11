@@ -14,4 +14,5 @@ router.register(r'borrowings',BorrowingViewSet, basename='borrowing')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('statistics/', StatisticsView.as_view(), name='statistics'),
 ]

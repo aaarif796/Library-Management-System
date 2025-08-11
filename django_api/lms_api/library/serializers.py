@@ -35,6 +35,7 @@ class MemberSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BorrowingSerializer(serializers.ModelSerializer):
+    book_title = serializers.CharField(source='book.title', read_only=True)
     class Meta:
         model = Borrowing
         fields = '__all__'
