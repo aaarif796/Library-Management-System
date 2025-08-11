@@ -40,5 +40,11 @@ class BorrowingSerializer(serializers.ModelSerializer):
         model = Borrowing
         fields = '__all__'
 
-
-
+class SearchBookSerializer(serializers.ModelSerializer):
+    author_fname = serializers.CharField(source='authors.first_name', read_only= True)
+    author_lname = serializers.CharField(source='authors.last_name', read_only= True)
+    b_category = serializers.CharField(source='categories.name', read_only= True)
+    l_name = serializers.CharField(source= 'library.l_name',read_only= True)
+    class Meta:
+        model = Book
+        fields = ['title','isbn','l_name','author_fname','author_lname', 'b_category']
