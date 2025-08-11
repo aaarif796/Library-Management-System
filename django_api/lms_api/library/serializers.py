@@ -41,10 +41,15 @@ class BorrowingSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SearchBookSerializer(serializers.ModelSerializer):
-    author_fname = serializers.CharField(source='authors.first_name', read_only= True)
-    author_lname = serializers.CharField(source='authors.last_name', read_only= True)
-    b_category = serializers.CharField(source='categories.name', read_only= True)
+    author_names = serializers.SerializerMethodField()
+    category_names = serializers.SerializerMethodField()
     l_name = serializers.CharField(source= 'library.l_name',read_only= True)
     class Meta:
         model = Book
-        fields = ['title','isbn','l_name','author_fname','author_lname', 'b_category']
+        fields = ['title','isbn','l_name','author_names','category_names']
+    def get_author_names(self, obj):
+        # returns list of first names
+        return [a.first_name+" "+a.last_name for a in obj.authors.all()]
+
+    def get_category_names(self, obj):
+        return [c.name for c in obj.categories.all()]

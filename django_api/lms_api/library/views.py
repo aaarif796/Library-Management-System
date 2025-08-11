@@ -1,11 +1,12 @@
 from django.shortcuts import render
+from django.db import models
 from rest_framework import viewsets, filters, status
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Book, Library_Col, Author, Member, Borrowing, Review, Category
-from .serializers import BookSerializer, LibrarySerializer, AuthorSerializer, MemberSerializer, BorrowingSerializer, ReviewSerializer, CategorySerializer
+from .serializers import BookSerializer, LibrarySerializer, AuthorSerializer, MemberSerializer, BorrowingSerializer, ReviewSerializer, CategorySerializer, SearchBookSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -63,6 +64,37 @@ class BookViewSet(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
         serializer = BorrowingSerializer(return_books, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["get"], url_path="search")
+    def serach_book(self, request):
+        """
+        It's used to serach the book with the help of title, author name or category
+        :param request:
+        :return:
+        """
+        search_query = request.query_params.get('search', '')
+        if not search_query:
+            return Response(
+                {"error": "Please provide a search query parameter"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Use the existing search functionality
+        books_qs = (self.get_queryset()
+                   .filter(
+                       models.Q(title__icontains=search_query) |
+                       models.Q(authors__first_name__icontains=search_query) |
+                       models.Q(authors__last_name__icontains=search_query) |
+                       models.Q(categories__name__icontains=search_query)
+                   ).distinct())
+        page = self.paginate_queryset(books_qs)
+        if page is not None:
+            serializer = SearchBookSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        
+        serializer = SearchBookSerializer(books_qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class LibraryViewSet(viewsets.ModelViewSet):
     queryset = Library_Col.objects.all()
@@ -140,6 +172,12 @@ class CategoryViewSet(viewsets.ModelViewSet):
     ordering_fields = ["name"]
     ordering = ["name"]
 
+# class SearchBookView(viewsets.ModelViewSet):
+#     queryset = Book.objects.all()
+#     serializer_class = SearchBookSerializer
+#     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+#     search_fields = ['title', 'authors__first_name', 'authors__last_name','categories__name']
+
 
 class StatisticsView(APIView):
     def get(self, request):
@@ -150,3 +188,4 @@ class StatisticsView(APIView):
             "books_available": Book.objects.filter(available_copies__gt=0).count(),
         }
         return Response(data, status=status.HTTP_200_OK)
+
