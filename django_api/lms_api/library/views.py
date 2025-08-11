@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets, filters, status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from .models import Book, Library_Col, Author, Member, Borrowing, Review, Category
 from .serializers import BookSerializer, LibrarySerializer, AuthorSerializer, MemberSerializer, BorrowingSerializer, ReviewSerializer, CategorySerializer
@@ -11,16 +11,30 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["book_id", "title", "publication_date"]
-    search_fields = ["bookcategory__category__name", "bookauthor__author__first_name","title"]
+    filterset_fields = ["title", "publication_date"]
     ordering_fields = ["title", "total_copies", "publication_date"]
     ordering = ["title"]
+
+    @action(detail=True, methods=["get"], url_path= "availability")
+    def availability(self, request, pk= None):
+        availability_qs = self.get_queryset().filter(available_copies__gt=0)
+        page = self.paginate_queryset(availability_qs)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(availability_qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods = ['get'], url_path="category")
+    def categories(self, request, pk = None):
+        category = self.get_object()
+        
 
 class LibraryViewSet(viewsets.ModelViewSet):
     queryset = Library_Col.objects.all()
     serializer_class = LibrarySerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["library_id", "campus_location"]
+    filterset_fields = ["campus_location"]
     search_fields = ["l_name", "campus_location"]
     ordering_fields = ["l_name", "campus_location"]
     ordering = ["l_name"]
@@ -44,6 +58,23 @@ class MemberViewSet(viewsets.ModelViewSet):
     ordering_fields = ["first_name"]
     ordering = ["first_name"]
 
+    @action(detail=True, methods=["get"], url_path="borrowings")
+    def borrowings(self, request, pk=None):
+        """
+        GET /api/members/{id}/borrowings/
+        Returns all borrowing records for this member.
+        """
+        member = self.get_object()
+        borrow_qs = Borrowing.objects.filter(member=member)
+        page = self.paginate_queryset(borrow_qs)
+        if page is not None:
+            serializer = BorrowingSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = BorrowingSerializer(borrow_qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 
 class BorrowingViewSet(viewsets.ModelViewSet):
     queryset = Borrowing.objects.all()
@@ -60,7 +91,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = []
-    search_fields = []
+    search_fields = ['member__first_name']
     ordering_fields = []
     ordering = []
 
