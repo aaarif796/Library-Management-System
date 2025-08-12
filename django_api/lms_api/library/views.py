@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from django.db import models
 from rest_framework import viewsets, filters, status
 from rest_framework.decorators import api_view, action
@@ -17,7 +19,6 @@ class BookViewSet(viewsets.ModelViewSet):
     filterset_fields = ["title", "publication_date"]
     ordering_fields = ["title", "total_copies", "publication_date"]
     ordering = ["title"]
-
     @action(detail=True, methods=["get"], url_path= "availability")
     def availability(self, request, pk= None):
         availability_qs = self.get_queryset().filter(available_copies__gt=0)
@@ -106,6 +107,7 @@ class LibraryViewSet(viewsets.ModelViewSet):
     ordering_fields = ["l_name", "campus_location"]
     ordering = ["l_name"]
 
+
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
@@ -114,6 +116,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
     search_fields = ["first_name", "nationality"]
     ordering_fields = ["first_name","nationality"]
     ordering = ["first_name"]
+
 
 class BorrowingViewSet(viewsets.ModelViewSet):
     queryset = Borrowing.objects.all()
