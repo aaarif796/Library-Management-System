@@ -10,7 +10,8 @@ from rest_framework.views import APIView
 from .models import Book, Library_Col, Author, Member, Borrowing, Review, Category
 from .serializers import BookSerializer, LibrarySerializer, AuthorSerializer, MemberSerializer, BorrowingSerializer, ReviewSerializer, CategorySerializer, SearchBookSerializer, BookMemberSerializer
 from django_filters.rest_framework import DjangoFilterBackend
-
+from datetime import timedelta
+from django.utils import timezone
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
@@ -124,6 +125,108 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer = SearchBookSerializer(books_qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    # ---------------------- BORROW BOOK API ----------------------
+    @action(detail=True, methods=["post"], url_path="borrow-book")
+    def borrow_book(self, request, pk=None):
+        """
+        API to borrow a book.
+        Decreases available_copies by 1.
+        Expects: member_id (required), due_date (optional, default 14 days)
+        """
+        try:
+            book = self.get_object()
+        except Book.DoesNotExist:
+            return Response({"error": "Book not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Check available copies
+        if book.available_copies <= 0:
+            return Response({"error": "No available copies for this book"}, status=status.HTTP_400_BAD_REQUEST)
+
+        member_id = request.data.get("member_id")
+        if not member_id:
+            return Response({"error": "member_id is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            member = Member.objects.get(id=member_id)
+        except Member.DoesNotExist:
+            return Response({"error": "Member not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Reduce available copies
+        book.available_copies -= 1
+        book.save()
+
+        # Borrow date
+        borrow_date = timezone.now()
+        due_date = request.data.get("due_date")
+        if due_date:
+            due_date = timezone.datetime.fromisoformat(due_date)
+        else:
+            due_date = borrow_date + timedelta(days=14)  # Default 14-day borrow period
+
+        borrowing = Borrowing.objects.create(
+            member=member,
+            book=book,
+            borrow_date=borrow_date,
+            due_date=due_date,
+            late_fee=0,
+            return_date=None
+        )
+
+        return Response({
+            "message": "Book borrowed successfully",
+            "book": book.title,
+            "borrow_id": borrowing.id,
+            "due_date": due_date
+        }, status=status.HTTP_201_CREATED)
+
+    # ---------------------- RETURN BOOK API ----------------------
+    @action(detail=True, methods=["post"], url_path="return-book")
+    def return_book_action(self, request, pk=None):
+        """
+        API to return a borrowed book.
+        Increases available_copies by 1.
+        Calculates late fee if returned after due_date.
+        Expects: member_id (required)
+        """
+        member_id = request.data.get("member_id")
+        if not member_id:
+            return Response({"error": "member_id is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            member = Member.objects.get(id=member_id)
+        except Member.DoesNotExist:
+            return Response({"error": "Member not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            borrowing = Borrowing.objects.get(
+                member=member, 
+                book_id=pk,
+                return_date__isnull=True
+            )
+        except Borrowing.DoesNotExist:
+            return Response({"error": "No active borrowing record found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Return date
+        return_date = timezone.now()
+        borrowing.return_date = return_date
+
+        # Calculate late fee
+        late_days = (return_date.date() - borrowing.due_date.date()).days
+        if late_days > 0:
+            borrowing.late_fee = late_days * 10  # ₹10 per day late
+        else:
+            borrowing.late_fee = 0
+
+        borrowing.save()
+
+        # Increase available copies
+        borrowing.book.available_copies += 1
+        borrowing.book.save()
+
+        return Response({
+            "message": "Book returned successfully",
+            "late_fee": borrowing.late_fee
+        }, status=status.HTTP_200_OK)
 
 
 class LibraryViewSet(viewsets.ModelViewSet):
