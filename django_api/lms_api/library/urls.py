@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import *
+from .views import BookViewSet, LibraryViewSet, AuthorViewSet, CategoryViewSet, MemberViewSet, ReviewViewSet, BorrowingViewSet, StatisticsView
 
 router = DefaultRouter()
 router.register(r'books', BookViewSet, basename='book')

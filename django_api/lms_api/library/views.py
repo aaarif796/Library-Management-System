@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Book, Library_Col, Author, Member, Borrowing, Review, Category
-from .serializers import BookSerializer, LibrarySerializer, AuthorSerializer, MemberSerializer, BorrowingSerializer, ReviewSerializer, CategorySerializer, SearchBookSerializer
+from .serializers import BookSerializer, LibrarySerializer, AuthorSerializer, MemberSerializer, BorrowingSerializer, ReviewSerializer, CategorySerializer, SearchBookSerializer, BookMemberSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -19,9 +19,13 @@ class BookViewSet(viewsets.ModelViewSet):
     filterset_fields = ["title", "publication_date"]
     ordering_fields = ["title", "total_copies", "publication_date"]
     ordering = ["title"]
+
     @action(detail=True, methods=["get"], url_path= "availability")
     def availability(self, request, pk= None):
-        availability_qs = self.get_queryset().filter(available_copies__gt=0)
+        """
+            Check the book availability with are available or not by passing the book id
+        """
+        availability_qs = self.get_queryset().filter(id = pk, available_copies__gt=0)
         page = self.paginate_queryset(availability_qs)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
@@ -31,7 +35,12 @@ class BookViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods = ['get'], url_path="category")
     def categories(self, request, pk = None):
-        category = self.get_object()
+        """
+            Retrive the book of specific category
+        """
+        category = self.get_queryset().filter(categories__name = pk)
+
+
 
     @action(detail= False, methods= ['get'], url_path= 'borrow')
     def borrow(self, request):
@@ -98,6 +107,7 @@ class BookViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
 class LibraryViewSet(viewsets.ModelViewSet):
     queryset = Library_Col.objects.all()
     serializer_class = LibrarySerializer
@@ -121,11 +131,11 @@ class AuthorViewSet(viewsets.ModelViewSet):
 class BorrowingViewSet(viewsets.ModelViewSet):
     queryset = Borrowing.objects.all()
     serializer_class = BorrowingSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = []
-    search_fields = []
-    ordering_fields = []
-    ordering = []
+    # filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    # filterset_fields = []
+    # search_fields = []
+    # ordering_fields = []
+    # ordering = []
 
 
 class MemberViewSet(viewsets.ModelViewSet):
@@ -147,10 +157,10 @@ class MemberViewSet(viewsets.ModelViewSet):
         borrow_qs = Borrowing.objects.filter(member=member)
         page = self.paginate_queryset(borrow_qs)
         if page is not None:
-            serializer = BorrowingSerializer(page, many=True)
+            serializer = BookMemberSerializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
-        serializer = BorrowingSerializer(borrow_qs, many=True)
+        serializer = BookMemberSerializer(borrow_qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -182,8 +192,49 @@ class CategoryViewSet(viewsets.ModelViewSet):
 #     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
 #     search_fields = ['title', 'authors__first_name', 'authors__last_name','categories__name']
 
-
 class StatisticsView(APIView):
+    @swagger_auto_schema(
+        operation_summary="Retrieve library statistics",
+        operation_description=(
+            "Returns statistical information about the library, "
+            "including total number of books, members, borrowed books, "
+            "and books currently available."
+        ),
+        responses={
+            200: openapi.Response(
+                description="Statistics retrieved successfully",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "total_books": openapi.Schema(
+                            type=openapi.TYPE_INTEGER,
+                            description="Total number of books in the library"
+                        ),
+                        "total_members": openapi.Schema(
+                            type=openapi.TYPE_INTEGER,
+                            description="Total registered members"
+                        ),
+                        "books_borrowed": openapi.Schema(
+                            type=openapi.TYPE_INTEGER,
+                            description="Number of borrowed books"
+                        ),
+                        "books_available": openapi.Schema(
+                            type=openapi.TYPE_INTEGER,
+                            description="Number of books currently available"
+                        )
+                    }
+                ),
+                examples={
+                    "application/json": {
+                        "total_books": 120,
+                        "total_members": 45,
+                        "books_borrowed": 30,
+                        "books_available": 90
+                    }
+                }
+            )
+        }
+    )
     def get(self, request):
         data = {
             "total_books": Book.objects.count(),
@@ -192,4 +243,3 @@ class StatisticsView(APIView):
             "books_available": Book.objects.filter(available_copies__gt=0).count(),
         }
         return Response(data, status=status.HTTP_200_OK)
-
