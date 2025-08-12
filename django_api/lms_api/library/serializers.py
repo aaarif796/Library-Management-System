@@ -6,6 +6,12 @@ class LibrarySerializer(serializers.ModelSerializer):
         model = Library_Col
         fields = '__all__'
 
+    def validate_l_name(self, value):
+        return value.strip().title()
+
+    def validate_contact_email(self):
+        
+
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
