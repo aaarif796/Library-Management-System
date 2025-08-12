@@ -33,13 +33,31 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(availability_qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @action(detail=True, methods = ['get'], url_path="category")
-    def categories(self, request, pk = None):
+    @action(detail=False, methods=['get'], url_path="category")
+    def categories(self, request):
         """
-            Retrive the book of specific category
+        Retrieve books of a specific category that are available.
+        Example: /api/books/category/?name=Programming
         """
-        category = self.get_queryset().filter(categories__name = pk)
+        category_name = request.query_params.get("name")
+        if not category_name:
+            return Response(
+                {"error": "Category name is required in query param ?name="},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
+        books = self.get_queryset().filter(
+            categories__name__iexact=category_name,
+            available_copies__gt=0
+        )
+
+        page = self.paginate_queryset(books)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(books, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
     @action(detail= False, methods= ['get'], url_path= 'borrow')
