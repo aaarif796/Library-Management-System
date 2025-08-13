@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils.dateparse import parse_datetime
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from django.db import models
@@ -94,6 +95,7 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer = BorrowingSerializer(return_books, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
     @action(detail=False, methods=["get"], url_path="search")
     def serach_book(self, request):
         """
@@ -125,44 +127,50 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer = SearchBookSerializer(books_qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # ---------------------- BORROW BOOK API ----------------------
+
     @action(detail=True, methods=["post"], url_path="borrow-book")
     def borrow_book(self, request, pk=None):
         """
         API to borrow a book.
-        Decreases available_copies by 1.
-        Expects: member_id (required), due_date (optional, default 14 days)
+        Expects: member_id (required), due_date (optional, ISO string, default 14 days)
         """
-        try:
-            book = self.get_object()
-        except Book.DoesNotExist:
-            return Response({"error": "Book not found"}, status=status.HTTP_404_NOT_FOUND)
+        # Get book (DRF will 404 automatically if not found)
+        book = self.get_object()
 
         # Check available copies
         if book.available_copies <= 0:
             return Response({"error": "No available copies for this book"}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Get member id from request
         member_id = request.data.get("member_id")
         if not member_id:
             return Response({"error": "member_id is required"}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Check member exists
         try:
             member = Member.objects.get(id=member_id)
         except Member.DoesNotExist:
             return Response({"error": "Member not found"}, status=status.HTTP_404_NOT_FOUND)
 
+        # Check if this member already has this book borrowed and not returned
+        if Borrowing.objects.filter(member=member, book=book, return_date__isnull=True).exists():
+            return Response({"error": "Book is already borrowed by this member"}, status=status.HTTP_400_BAD_REQUEST)
+
         # Reduce available copies
         book.available_copies -= 1
         book.save()
 
-        # Borrow date
+        # Set borrow and due date
         borrow_date = timezone.now()
-        due_date = request.data.get("due_date")
-        if due_date:
-            due_date = timezone.datetime.fromisoformat(due_date)
+        due_date_str = request.data.get("due_date")
+        if due_date_str:
+            due_date = parse_datetime(due_date_str)
+            if timezone.is_naive(due_date):
+                due_date = timezone.make_aware(due_date)
         else:
-            due_date = borrow_date + timedelta(days=14)  # Default 14-day borrow period
+            due_date = borrow_date + timedelta(days=14)
 
+        # Create borrowing record
         borrowing = Borrowing.objects.create(
             member=member,
             book=book,
@@ -179,7 +187,7 @@ class BookViewSet(viewsets.ModelViewSet):
             "due_date": due_date
         }, status=status.HTTP_201_CREATED)
 
-    # ---------------------- RETURN BOOK API ----------------------
+    # Return book api
     @action(detail=True, methods=["post"], url_path="return-book")
     def return_book_action(self, request, pk=None):
         """
@@ -213,7 +221,7 @@ class BookViewSet(viewsets.ModelViewSet):
         # Calculate late fee
         late_days = (return_date.date() - borrowing.due_date.date()).days
         if late_days > 0:
-            borrowing.late_fee = late_days * 10  # ₹10 per day late
+            borrowing.late_fee = late_days * 10  # Rs 10 per day late
         else:
             borrowing.late_fee = 0
 
