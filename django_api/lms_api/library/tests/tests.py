@@ -1,9 +1,7 @@
 from datetime import datetime
-
 from django.test import TestCase
 from rest_framework.test import APIRequestFactory
-
-from .models import Library_Col, Book
+from library.models import Library_Col, Book
 
 class LibraryTestCase(TestCase):
     def setUp(self):
