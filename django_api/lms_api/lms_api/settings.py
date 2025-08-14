@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django_filters',
     'library',
     'drf_yasg',
+    'pytest_django', 
+    'pytest',
 ]
 
 MIDDLEWARE = [
