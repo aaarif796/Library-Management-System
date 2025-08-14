@@ -97,7 +97,13 @@ class MemberSerializer(serializers.ModelSerializer):
     def validate_email(self, value):
         value = value.strip().lower()
         EmailValidator()(value)
-        return value.strip()
+        return value.strip().lower()
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if "email" in data and data["email"]:
+            data["email"] = data["email"].lower()
+        return data
 
     def validate_phone(self, value):
         phone = value.strip().replace(" ", "").replace("-", "")
