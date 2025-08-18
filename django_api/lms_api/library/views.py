@@ -95,6 +95,31 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(availability_qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(
+        operation_summary="Retrieve books of a specific category that are available",
+        operation_description="Returns only books in the given category with available copies.",
+        manual_parameters=[
+            openapi.Parameter(
+                name="name",
+                in_=openapi.IN_QUERY,
+                description="Category name (case-insensitive)",
+                type=openapi.TYPE_STRING,
+                required=True
+            )
+        ],
+        responses={
+            200: openapi.Response(
+                description="List of available books in category",
+                schema=BookSerializer(many=True)
+            ),
+            400: openapi.Response(
+                description="Bad Request (missing or invalid category name)"
+            ),
+            404: openapi.Response(
+                description="Category not found"
+            )
+        }
+    )
     @action(detail=False, methods=['get'], url_path="category")
     def categories(self, request):
         """
@@ -122,6 +147,10 @@ class BookViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+    @swagger_auto_schema(
+        operation_summary="It display all the books which are borrowed",
+        operation_description="Returns only books which are borrowed"
+    )
     @action(detail= False, methods= ['get'], url_path= 'borrow')
     def borrow(self, request):
         """
@@ -139,6 +168,10 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer = BorrowingSerializer(borrow_books, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(
+        operation_summary="It's return the book which are already returned back to library",
+        operation_description="It's show the books which are borrowed and return back"
+    )
     @action(detail=False, methods= ['get'], url_path= 'return')
     def return_book(self,request):
         """
@@ -155,7 +188,10 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer = BorrowingSerializer(return_books, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
+    @swagger_auto_schema(
+        operation_summary="It's used to serach the book with the help of title, author name or category",
+        operation_description="It search book with it's title, author name or category"
+    )
     @action(detail=False, methods=["get"], url_path="search")
     def serach_book(self, request):
         """
@@ -187,7 +223,10 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer = SearchBookSerializer(books_qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
+    @swagger_auto_schema(
+        operation_summary="It's used to borrow a book",
+        operation_description="It borrow the book and reduce the availabilty by 1 in books data"
+    )
     @action(detail=True, methods=["post"], url_path="borrow-book")
     def borrow_book(self, request, pk=None):
         """
@@ -247,7 +286,11 @@ class BookViewSet(viewsets.ModelViewSet):
             "due_date": due_date
         }, status=status.HTTP_201_CREATED)
 
-    # Return book api
+
+    @swagger_auto_schema(
+        operation_summary="It's returned back the book to library",
+        operation_description="It's return the back the book and update the availability copies by 1"
+    )
     @action(detail=True, methods=["post"], url_path="return-book")
     def return_book_action(self, request, pk=None):
         """
