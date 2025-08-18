@@ -7,13 +7,61 @@ from rest_framework import viewsets, filters, status
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from django.utils.decorators import method_decorator
 from .models import Book, Library_Col, Author, Member, Borrowing, Review, Category
 from .serializers import BookSerializer, LibrarySerializer, AuthorSerializer, MemberSerializer, BorrowingSerializer, ReviewSerializer, CategorySerializer, SearchBookSerializer, BookMemberSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from datetime import timedelta
 from django.utils import timezone
 
+
+@method_decorator(
+    name='list',
+    decorator=swagger_auto_schema(
+        operation_summary="List all books",
+        operation_description="Returns a paginated list of books.",
+        responses={200: BookSerializer(many=True)}
+    )
+)
+@method_decorator(
+    name='retrieve',
+    decorator=swagger_auto_schema(
+        operation_summary="Get a single book",
+        operation_description="Retrieve detailed information about a single book by ID.",
+        responses={200: BookSerializer()}
+    )
+)
+@method_decorator(
+    name='create',
+    decorator=swagger_auto_schema(
+        operation_summary="Create a new book",
+        request_body=BookSerializer,
+        responses={201: BookSerializer()}
+    )
+)
+@method_decorator(
+    name='update',
+    decorator=swagger_auto_schema(
+        operation_summary="Update a book",
+        request_body=BookSerializer,
+        responses={200: BookSerializer()}
+    )
+)
+@method_decorator(
+    name='partial_update',
+    decorator=swagger_auto_schema(
+        operation_summary="Partially update a book",
+        request_body=BookSerializer,
+        responses={200: BookSerializer()}
+    )
+)
+@method_decorator(
+    name='destroy',
+    decorator=swagger_auto_schema(
+        operation_summary="Delete a book",
+        responses={204: 'No Content'}
+    )
+)
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -22,6 +70,18 @@ class BookViewSet(viewsets.ModelViewSet):
     ordering_fields = ["title", "total_copies", "publication_date"]
     ordering = ["title"]
 
+    @swagger_auto_schema(
+        operation_summary="Check book availability",
+        operation_description="Check if the book with the specified ID has available copies.",
+        responses={
+            200: openapi.Response(
+                description="Available copies info",
+                schema=BookSerializer(many=True)
+            ),
+            404: "Not Found",
+            400: "Bad Request"
+        }
+    )
     @action(detail=True, methods=["get"], url_path= "availability")
     def availability(self, request, pk= None):
         """
@@ -237,6 +297,54 @@ class BookViewSet(viewsets.ModelViewSet):
         }, status=status.HTTP_200_OK)
 
 
+
+@method_decorator(
+    name='list',
+    decorator=swagger_auto_schema(
+        operation_summary="List all libraries",
+        operation_description="Returns a paginated list of libraries.",
+        responses={200: LibrarySerializer(many=True)}
+    )
+)
+@method_decorator(
+    name='retrieve',
+    decorator=swagger_auto_schema(
+        operation_summary="Get a single library",
+        operation_description="Retrieve detailed information about a single library by ID.",
+        responses={200: LibrarySerializer()}
+    )
+)
+@method_decorator(
+    name='create',
+    decorator=swagger_auto_schema(
+        operation_summary="Create a new library",
+        request_body=LibrarySerializer,
+        responses={201: LibrarySerializer()}
+    )
+)
+@method_decorator(
+    name='update',
+    decorator=swagger_auto_schema(
+        operation_summary="Update a library",
+        request_body=LibrarySerializer,
+        responses={200: LibrarySerializer()}
+    )
+)
+@method_decorator(
+    name='partial_update',
+    decorator=swagger_auto_schema(
+        operation_summary="Partially update a library",
+        request_body=LibrarySerializer,
+        responses={200: LibrarySerializer()}
+    )
+)
+@method_decorator(
+    name='destroy',
+    decorator=swagger_auto_schema(
+        operation_summary="Delete a library",
+        responses={204: 'No Content'}
+    )
+)
 class LibraryViewSet(viewsets.ModelViewSet):
     queryset = Library_Col.objects.all()
     serializer_class = LibrarySerializer
@@ -247,6 +355,53 @@ class LibraryViewSet(viewsets.ModelViewSet):
     ordering = ["l_name"]
 
 
+@method_decorator(
+    name='list',
+    decorator=swagger_auto_schema(
+        operation_summary="List all author",
+        operation_description="Returns a paginated list of authors.",
+        responses={200: AuthorSerializer(many=True)}
+    )
+)
+@method_decorator(
+    name='retrieve',
+    decorator=swagger_auto_schema(
+        operation_summary="Get a single author",
+        operation_description="Retrieve detailed information about a single author by ID.",
+        responses={200: AuthorSerializer()}
+    )
+)
+@method_decorator(
+    name='create',
+    decorator=swagger_auto_schema(
+        operation_summary="Create a new author",
+        request_body=AuthorSerializer,
+        responses={201: AuthorSerializer()}
+    )
+)
+@method_decorator(
+    name='update',
+    decorator=swagger_auto_schema(
+        operation_summary="Update a author",
+        request_body=AuthorSerializer,
+        responses={200: AuthorSerializer()}
+    )
+)
+@method_decorator(
+    name='partial_update',
+    decorator=swagger_auto_schema(
+        operation_summary="Partially update a author",
+        request_body=AuthorSerializer,
+        responses={200: AuthorSerializer()}
+    )
+)
+@method_decorator(
+    name='destroy',
+    decorator=swagger_auto_schema(
+        operation_summary="Delete a author",
+        responses={204: 'No Content'}
+    )
+)
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
@@ -257,6 +412,53 @@ class AuthorViewSet(viewsets.ModelViewSet):
     ordering = ["first_name"]
 
 
+@method_decorator(
+    name='list',
+    decorator=swagger_auto_schema(
+        operation_summary="List all borrowers",
+        operation_description="Returns a paginated list of borrowers.",
+        responses={200: BorrowingSerializer(many=True)}
+    )
+)
+@method_decorator(
+    name='retrieve',
+    decorator=swagger_auto_schema(
+        operation_summary="Get a single borrower",
+        operation_description="Retrieve detailed information about a single borrower by ID.",
+        responses={200: BorrowingSerializer()}
+    )
+)
+@method_decorator(
+    name='create',
+    decorator=swagger_auto_schema(
+        operation_summary="Create a new borrower",
+        request_body=BorrowingSerializer,
+        responses={201: BorrowingSerializer()}
+    )
+)
+@method_decorator(
+    name='update',
+    decorator=swagger_auto_schema(
+        operation_summary="Update a borrower",
+        request_body=BorrowingSerializer,
+        responses={200: BorrowingSerializer()}
+    )
+)
+@method_decorator(
+    name='partial_update',
+    decorator=swagger_auto_schema(
+        operation_summary="Partially update a borrower",
+        request_body=BorrowingSerializer,
+        responses={200: BorrowingSerializer()}
+    )
+)
+@method_decorator(
+    name='destroy',
+    decorator=swagger_auto_schema(
+        operation_summary="Delete a borrower",
+        responses={204: 'No Content'}
+    )
+)
 class BorrowingViewSet(viewsets.ModelViewSet):
     queryset = Borrowing.objects.all()
     serializer_class = BorrowingSerializer
@@ -267,6 +469,54 @@ class BorrowingViewSet(viewsets.ModelViewSet):
     # ordering = []
 
 
+
+@method_decorator(
+    name='list',
+    decorator=swagger_auto_schema(
+        operation_summary="List all members",
+        operation_description="Returns a paginated list of members.",
+        responses={200: MemberSerializer(many=True)}
+    )
+)
+@method_decorator(
+    name='retrieve',
+    decorator=swagger_auto_schema(
+        operation_summary="Get a single member",
+        operation_description="Retrieve detailed information about a single member by ID.",
+        responses={200: MemberSerializer()}
+    )
+)
+@method_decorator(
+    name='create',
+    decorator=swagger_auto_schema(
+        operation_summary="Create a new member",
+        request_body=MemberSerializer,
+        responses={201: MemberSerializer()}
+    )
+)
+@method_decorator(
+    name='update',
+    decorator=swagger_auto_schema(
+        operation_summary="Update a member",
+        request_body=MemberSerializer,
+        responses={200: MemberSerializer()}
+    )
+)
+@method_decorator(
+    name='partial_update',
+    decorator=swagger_auto_schema(
+        operation_summary="Partially update a member",
+        request_body=MemberSerializer,
+        responses={200: MemberSerializer()}
+    )
+)
+@method_decorator(
+    name='destroy',
+    decorator=swagger_auto_schema(
+        operation_summary="Delete a member",
+        responses={204: 'No Content'}
+    )
+)
 class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
@@ -295,7 +545,53 @@ class MemberViewSet(viewsets.ModelViewSet):
 
 
 
-
+@method_decorator(
+    name='list',
+    decorator=swagger_auto_schema(
+        operation_summary="List all reviews",
+        operation_description="Returns a paginated list of reviews.",
+        responses={200: ReviewSerializer(many=True)}
+    )
+)
+@method_decorator(
+    name='retrieve',
+    decorator=swagger_auto_schema(
+        operation_summary="Get a single review",
+        operation_description="Retrieve detailed information about a single review by ID.",
+        responses={200: ReviewSerializer()}
+    )
+)
+@method_decorator(
+    name='create',
+    decorator=swagger_auto_schema(
+        operation_summary="Create a new review",
+        request_body=ReviewSerializer,
+        responses={201: ReviewSerializer()}
+    )
+)
+@method_decorator(
+    name='update',
+    decorator=swagger_auto_schema(
+        operation_summary="Update a review",
+        request_body=ReviewSerializer,
+        responses={200: ReviewSerializer()}
+    )
+)
+@method_decorator(
+    name='partial_update',
+    decorator=swagger_auto_schema(
+        operation_summary="Partially update a review",
+        request_body=ReviewSerializer,
+        responses={200: ReviewSerializer()}
+    )
+)
+@method_decorator(
+    name='destroy',
+    decorator=swagger_auto_schema(
+        operation_summary="Delete a Review",
+        responses={204: 'No Content'}
+    )
+)
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
@@ -306,6 +602,54 @@ class ReviewViewSet(viewsets.ModelViewSet):
     ordering = []
 
 
+
+@method_decorator(
+    name='list',
+    decorator=swagger_auto_schema(
+        operation_summary="List all categories",
+        operation_description="Returns a paginated list of categories.",
+        responses={200: CategorySerializer(many=True)}
+    )
+)
+@method_decorator(
+    name='retrieve',
+    decorator=swagger_auto_schema(
+        operation_summary="Get a single category",
+        operation_description="Retrieve detailed information about a single category by ID.",
+        responses={200: CategorySerializer()}
+    )
+)
+@method_decorator(
+    name='create',
+    decorator=swagger_auto_schema(
+        operation_summary="Create a new category",
+        request_body=CategorySerializer,
+        responses={201: CategorySerializer()}
+    )
+)
+@method_decorator(
+    name='update',
+    decorator=swagger_auto_schema(
+        operation_summary="Update a category",
+        request_body=CategorySerializer,
+        responses={200: CategorySerializer()}
+    )
+)
+@method_decorator(
+    name='partial_update',
+    decorator=swagger_auto_schema(
+        operation_summary="Partially update a category",
+        request_body=CategorySerializer,
+        responses={200: CategorySerializer()}
+    )
+)
+@method_decorator(
+    name='destroy',
+    decorator=swagger_auto_schema(
+        operation_summary="Delete a category",
+        responses={204: 'No Content'}
+    )
+)
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
