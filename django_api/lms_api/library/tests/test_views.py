@@ -1,6 +1,6 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
-from library.tests.factories import BookFactory, MemberFactory, BorrowingFactory, CategoryFactory
+from .factories import BookFactory, MemberFactory, BorrowingFactory, CategoryFactory
 
 class BookViewTests(TestCase):
     def setUp(self):
@@ -20,6 +20,13 @@ class BookViewTests(TestCase):
         }, format="json")
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json()["message"], "Book borrowed successfully")
+
+    def test_borrowed_books_list(self):
+        borrowing = BorrowingFactory()  # Creates active borrowing
+        response = self.client.get("/api/books/borrow/")
+        self.assertEqual(response.status_code, 200)
+        self.assertGreater(len(response.json()), 0)
+
 
     def test_return_book(self):
         borrowing = BorrowingFactory()
@@ -62,4 +69,7 @@ class StatisticsViewTests(TestCase):
     def test_statistics_endpoint(self):
         response = self.client.get("/api/statistics/")
         self.assertEqual(response.status_code, 200)
+        self.assertIn("total_members", response.json())
+        self.assertIn("books_borrowed", response.json())
+        self.assertIn("books_available", response.json())
         self.assertIn("total_books", response.json())
