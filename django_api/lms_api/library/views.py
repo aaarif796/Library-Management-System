@@ -397,6 +397,21 @@ class LibraryViewSet(viewsets.ModelViewSet):
     ordering_fields = ["l_name", "campus_location"]
     ordering = ["l_name"]
 
+    @action(detail=False, methods = ['get'], url_path= "detail")
+    def get_detail(self, request):
+        """
+            It's list the details that how many books are present in each library
+        """
+        library = Library_Col.objects.all()
+        book = Book.objects.filter(library = library)
+        page = self.paginate_queryset(book)
+        if page is not None:
+
+        data = {
+            "library_name": book.l_name,
+            "no_of_book": book.count()
+        }
+        return Response(data, status = status.HTTP_200_OK)
 
 @method_decorator(
     name='list',
