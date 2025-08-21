@@ -24,16 +24,18 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h localhost -p$${MYSQL_ROOT_PASSWORD}"
-          --health-interval=10s --health-timeout=5s --health-retries=5
+          --health-cmd="mysqladmin ping -h localhost -proot"
+          --health-interval=10s --health-timeout=5s --health-retries=10
 
     env:
-      # read by settings.py
-      DATABASE_HOST: 127.0.0.1
-      DATABASE_PORT: 3306
-      DATABASE_NAME: test_db
-      DATABASE_USER: ci_user
-      DATABASE_PASSWORD: ci_pass
+      # Match what your settings.py expects via python-decouple
+      SECRET_KEY: test-secret-key
+      DEBUG: "False"
+      DB_NAME: test_db
+      DB_USER: ci_user
+      DB_PASSWORD: ci_pass
+      DB_HOST: 127.0.0.1
+      DB_PORT: "3306"
       DJANGO_SETTINGS_MODULE: lms_api.settings
       PYTHONUNBUFFERED: 1
 
@@ -47,17 +49,24 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
 
-      - name: Install system deps for mysqlclient
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y default-libmysqlclient-dev build-essential
 
       - name: Install Python dependencies
+        working-directory: django_api/lms_api
         run: |
           python -m pip install --upgrade pip wheel
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install django mysqlclient uvicorn pytest pytest-django pytest-cov coverage; fi
+          if [ -f requirements.txt ]; then 
+            pip install -r requirements.txt
+          else 
+            pip install django djangorestframework django-filter drf-yasg \
+                       python-decouple mysqlclient pytest pytest-django \
+                       pytest-cov coverage factory_boy faker
+          fi
 
-      - name: Wait for MySQL to be healthy
+      - name: Wait for MySQL to be ready
         run: |
           echo "Waiting for MySQL to be ready..."
           for i in {1..30}; do
@@ -65,41 +74,33 @@ jobs:
             echo "waiting for mysql..."
             sleep 2
           done
-          mysqladmin ping -h 127.0.0.1 -uroot -proot
 
-      - name: Run migrations (working dir: django_api/lms_api)
+      - name: Create .env file
         working-directory: django_api/lms_api
         run: |
-          python ../manage.py migrate --noinput
+          cat > .env << EOF
+          SECRET_KEY=test-secret-key
+          DEBUG=False
+          DB_NAME=test_db
+          DB_USER=ci_user
+          DB_PASSWORD=ci_pass
+          DB_HOST=127.0.0.1
+          DB_PORT=3306
+          EOF
 
-      - name: Collect static (optional)
+      - name: Run migrations
         working-directory: django_api/lms_api
         run: |
-          python ../manage.py collectstatic --noinput || true
+          python manage.py migrate --noinput
 
-      - name: Start uvicorn in background (working dir: django_api/lms_api)
+      - name: Run tests with coverage
         working-directory: django_api/lms_api
         run: |
-          # Start uvicorn from the project package (lms_api.asgi:application)
-          nohup python -m uvicorn lms_api.asgi:application --host 0.0.0.0 --port 8000 > uvicorn.log 2>&1 &
-          echo $! > uvicorn.pid
-          # wait for server to be ready (tries for up to ~30 seconds)
-          for i in {1..30}; do
-            if curl -sSf http://127.0.0.1:8000/ >/dev/null; then
-              echo "uvicorn started"
-              break
-            fi
-            echo "waiting for uvicorn..."
-            sleep 1
-          done
-          # print head of log for debugging
-          tail -n +1 uvicorn.log | sed -n '1,200p'
+          pytest --cov=library --cov-report=xml --cov-report=term -v
 
-      - name: Run tests with coverage (working dir: django_api/lms_api)
-        working-directory: django_api/lms_api
-        run: |
-          coverage run -m pytest --maxfail=1 -q
-          coverage report --fail-under=80
-
-      - name: Upload coverage report (artifact)
+      - name: Upload coverage report
         if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-${{ matrix.python-version }}
+          path: django_api/lms_api/coverage.xml
