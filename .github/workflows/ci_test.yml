@@ -28,7 +28,6 @@ jobs:
           --health-interval=10s --health-timeout=5s --health-retries=10
 
     env:
-      # Match what your settings.py expects via python-decouple
       SECRET_KEY: test-secret-key
       DEBUG: "False"
       DB_NAME: test_db
@@ -61,9 +60,7 @@ jobs:
           if [ -f requirements.txt ]; then 
             pip install -r requirements.txt
           else 
-            pip install django djangorestframework django-filter drf-yasg \
-                       python-decouple mysqlclient pytest pytest-django \
-                       pytest-cov coverage factory_boy faker
+            pip install django djangorestframework django-filter drf-yasg python-decouple mysqlclient pytest pytest-django pytest-cov coverage factory_boy faker
           fi
 
       - name: Wait for MySQL to be ready
@@ -78,25 +75,21 @@ jobs:
       - name: Create .env file
         working-directory: django_api/lms_api
         run: |
-          cat > .env << EOF
-          SECRET_KEY=test-secret-key
-          DEBUG=False
-          DB_NAME=test_db
-          DB_USER=ci_user
-          DB_PASSWORD=ci_pass
-          DB_HOST=127.0.0.1
-          DB_PORT=3306
-          EOF
+          echo "SECRET_KEY=test-secret-key" > .env
+          echo "DEBUG=False" >> .env
+          echo "DB_NAME=test_db" >> .env
+          echo "DB_USER=ci_user" >> .env
+          echo "DB_PASSWORD=ci_pass" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
+          echo "DB_PORT=3306" >> .env
 
       - name: Run migrations
         working-directory: django_api/lms_api
-        run: |
-          python manage.py migrate --noinput
+        run: python manage.py migrate --noinput
 
       - name: Run tests with coverage
         working-directory: django_api/lms_api
-        run: |
-          pytest --cov=library --cov-report=xml --cov-report=term -v
+        run: pytest --cov=library --cov-report=xml --cov-report=term -v
 
       - name: Upload coverage report
         if: always()
