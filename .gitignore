@@ -4,3 +4,11 @@ api_spec
 __pycache__
 *.pyc
 .env
+
+# Django migrations (keep __init__.py)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Alternative pattern (more specific)
+# */migrations/[0-9]*.py
+# */migrations/__pycache__/
