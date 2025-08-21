@@ -31,8 +31,8 @@ jobs:
       SECRET_KEY: test-secret-key
       DEBUG: "False"
       DB_NAME: test_db
-      DB_USER: ci_user
-      DB_PASSWORD: ci_pass
+      DB_USER: root
+      DB_PASSWORD: root
       DB_HOST: 127.0.0.1
       DB_PORT: "3306"
       DJANGO_SETTINGS_MODULE: lms_api.settings
